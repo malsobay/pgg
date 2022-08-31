@@ -23,7 +23,7 @@ export default class OutcomeStage extends React.Component {
 
     return (
       <body className="outcome-body">
-          <h4 className="outcome-heading">Round Outcome</h4>
+          {/* <h4 className="outcome-heading">Round Outcome</h4> */}
           <Table 
             players={game.players}
             game={game}
