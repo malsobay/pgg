@@ -1,0 +1,297 @@
+.tabs-navbar {
+  display: flex;
+  flex-direction: row;
+  background: #cccccc;
+  font-size: 18px;
+}
+
+.tabs-button {
+  display: block;
+  padding: 10px;
+  width: 50%;
+  outline: none;
+  cursor: pointer;
+}
+
+.tabs-button:active {
+  background: #dddddd;
+}
+
+.tabs-button--true {
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  width: 50%;
+}
+.tabs-button--false {
+  font-weight: bold;
+  background-color: white;
+  width: 50%;
+}
+
+.tabs-content--true {
+  padding: 15px;
+  display: block;
+}
+
+.tabs-content--false {
+  display: none;
+}
+
+.total-left {
+  padding: 0rem 9rem;
+}
+
+.total-right {
+  padding: 0rem 9rem;
+}
+
+.punishment-display-container {
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(221, 64, 64);
+}
+.outcome-heading {
+  font-size: 30px;
+  text-align: center;
+  margin: 0px;
+  padding: 10px;
+}
+.right-justify {
+  justify-self: flex-start;
+  display: flex;
+}
+.player-avatar-allview {
+  width: 20%;
+  height: auto;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.player-avatar-listview {
+  width: 40px;
+  height: auto;
+  margin-right: 8px;
+  text-align: center;
+  padding: 0px;
+}
+
+.no-spacing {
+  margin: 0px;
+  padding: 0px;
+}
+
+.outcome-row {
+  display: flex;
+  width: 200px;
+  height: 100px;
+  flex-direction: row;
+  justify-content: center;
+}
+.center {
+  text-align: center;
+}
+
+.summary {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-start;
+  line-height: 1;
+  gap: 0px;
+  margin: 100px 0px 5px 0px;
+  background-color: rgb(255, 255, 255);
+}
+
+.payoff-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.payoff-container-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.payoff-text {
+  display: grid;
+  justify-items: start;
+  justify-content: start;
+  padding: 0px 30px;
+  line-height: 0.7;
+}
+
+.payoff-numbers {
+  display: grid;
+  justify-items: end;
+  justify-content: end;
+  padding: 0px 30px;
+  line-height: 0.7;
+}
+
+.payoff-total {
+  display: grid;
+  justify-self: end;
+}
+
+.punishment-social-view {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 240px;
+}
+
+.punishment-all-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.outcome-body {
+  padding: 36px;
+  width: calc(100% - 600px);
+  overflow-x: auto;
+}
+
+.none {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.outcome-players {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0px;
+  padding: 0px;
+  align-content: flex-start;
+}
+
+.outcome-subheading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px 0px 0px 0px;
+  font-size: 16px;
+}
+.outcome-costs {
+  color: red;
+}
+
+.net-negative {
+  color: red;
+}
+
+.net-positive {
+  color: green;
+}
+
+.split-child {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 1rem 1rem;
+}
+
+.left-div {
+  width: 50%;
+  float: left;
+  margin-top: 0px;
+  border-right: 5px solid black;
+  vertical-align: bottom;
+}
+.right-div {
+  width: 50%;
+  float: left;
+  margin-top: 0px;
+  vertical-align: top;
+}
+
+.vertical-spacing {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.vertical-line {
+  height: 200px;
+  border-right: 5px solid black;
+  position: relative;
+  align-self: center;
+}
+.flex-item {
+  flex-basis: 300px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.payoff-line {
+  width: 100%;
+  height: 1px;
+  padding: 0;
+  border: 1px solid black;
+  margin: 0px;
+  text-align: center;
+  justify-self: center;
+  display: block;
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active,
+.collapsible:hover {
+  background-color: #ccc;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.next-round {
+  margin-top: 24px;
+}
+.next-button {
+  font-size: 18px;
+  background-color: rgb(53, 48, 48);
+  color: white;
+  margin: 10px;
+}
+
+.next-button:hover {
+  background-color: black;
+}
+
+.left-div-social {
+  width: 30%;
+  float: left;
+  margin-top: 0px;
+  border-right: 5px solid black;
+  vertical-align: bottom;
+}
+.right-div-social {
+  width: 30%;
+  float: left;
+  margin-top: 0px;
+  vertical-align: top;
+}

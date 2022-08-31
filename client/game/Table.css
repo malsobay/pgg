@@ -1,0 +1,41 @@
+.TableWrapper {
+  overflow-x: scroll;
+  width:100%;
+  margin-top:24px;
+}
+.Wrapper {
+  width:100%;
+  border-collapse: collapse;
+}
+
+.back-gray { 
+  background: #EBE9E9; 
+}
+
+.Tr {
+  border-bottom:2px solid #EBE9E9;
+}
+.Th {
+  text-align:left;
+  background:#D8D9DA;
+  color:black;
+  padding-top:8px;
+  padding-bottom: 8px;
+  padding-left: 30px;
+  font-size:15px;
+  font-weight:500;
+}
+.Td {
+  padding-left:0px;
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-left: 30px;
+  text-align: left;
+}
+.Img {
+  height:30;
+}
+
+.avatar{
+  width: 70px;
+}
