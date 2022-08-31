@@ -38,16 +38,15 @@ Empirica.gameInit((game) => {
       durationInSeconds: game.treatment.contributionDuration,
     });
 
-    if (game.treatment.punishment > 0) {
-      round.addStage({
-        name: "punishment",
-        displayName: "Punishment",
-        durationInSeconds: game.treatment.punishmentDuration,
-      });
-    }
     round.addStage({
       name: "outcome",
-      displayName: "Outcome",
+      displayName: game.treatment.punishment > 0 ? "Outcome/Punishment" : "Outcome",
+      durationInSeconds: game.treatment.punishmentDuration,
+    })
+
+    round.addStage({
+      name: "summary",
+      displayName: "Summary",
       durationInSeconds: game.treatment.outcomeDuration,
     });
   });

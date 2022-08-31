@@ -34,7 +34,7 @@ export default class Round extends React.Component {
               />
             ) : null}
           </div>
-          {stage.name == "punishment" ? (
+          {stage.name == "outcome" ? (
             <PunishmentStage
               game={game}
               round={round}
@@ -42,7 +42,7 @@ export default class Round extends React.Component {
               player={player}
             />
           ) : null}
-          {stage.name == "outcome" ? (
+          {stage.name == "summary" ? (
             <OutcomeStage
               stage={stage}
               player={player}
