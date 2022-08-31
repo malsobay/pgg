@@ -57,7 +57,7 @@ export default class Quiz extends React.Component {
               <label htmlFor="horse">
                 {" "}
                 Imagine that in a given round, you have a starting fund of 10
-                MU. If you contribute 4 MU, how much of your starting funds do
+                coins. If you contribute 4 coins, how much of your starting funds do
                 you keep?
               </label>
               <input
@@ -97,8 +97,8 @@ export default class Quiz extends React.Component {
             <p>
               <label htmlFor="horse">
                 Each money unit you spend to punish someone deducts{" "}
-                {punishmentRate} Coins from them. If you spend 2 Coins to punish
-                someone, how many Coins will be deducted from them?
+                {punishmentRate} coins from them. If you spend 2 coins to punish
+                someone, how many coins will be deducted from them?
               </label>
               <input
                 type="text"

@@ -26,7 +26,7 @@ export default class GroupView extends React.Component {
     return (
       <div className="alter" key={otherPlayer._id}>
         <img src={otherPlayer.get("avatar")} className="profile-avatar-other" />
-        {transparency ? <div> Total MU: {cumulativePayoff}</div> : null}
+        {transparency ? <div> Total coins: {cumulativePayoff}</div> : null}
       </div>
     );
   }

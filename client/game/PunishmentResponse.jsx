@@ -43,7 +43,7 @@ export default class PunishmentResponse extends React.Component {
 
     if (totalPunishmentCost > cumulativePayoff) {
       this.setState({
-        formError: "Error: punishment cost exceeds your total MU",
+        formError: "Error: punishment cost exceeds your total coins",
       });
     } else if (negatives > 0) {
       this.setState({ formError: "Error: punishment cannot be negative" });
@@ -101,7 +101,7 @@ export default class PunishmentResponse extends React.Component {
         <button onClick={(event) => this.handleClick(event, player)}>
           Player: {player._id}
           {<img src={player.get("avatar")} className="player-avatar" />}
-          <div>Contribution: {contribution} MU</div>
+          <div>Contribution: {contribution} coins</div>
         </button>
         {showInput ? this.renderInput(player) : null}
       </div>
@@ -133,7 +133,7 @@ export default class PunishmentResponse extends React.Component {
         <div>
           <div className="instructions-text">
               <p>
-                It will cost you 1 coin to impose a punishment of {punishment} MU.
+                It will cost you 1 coin to impose a punishment of {punishment} coins.
                 The costs will be taken directly from your cumulative payoff, so
                 you cannot exceed {cumulativePayoff} punishments.
               </p>
