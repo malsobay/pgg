@@ -96,7 +96,7 @@ export default class Quiz extends React.Component {
 
             <p>
               <label htmlFor="horse">
-                Each money unit you spend to punish someone deducts{" "}
+                Each coin you spend to punish someone deducts{" "}
                 {punishmentRate} coins from them. If you spend 2 coins to punish
                 someone, how many coins will be deducted from them?
               </label>
