@@ -1,18 +1,4 @@
-.contribution-container {
-  display: flex;
-  justify-content: start;
-  text-align: center;
-  flex-direction: column;
-  column-gap: 0px;
-  align-items: center;
-  align-self: center;
-  line-height: 0px;
-  margin: 0px;
-  background-color: rgb(255, 255, 255);
-  width: 100%;
-  height: auto;
-  padding: 0px 0px 0px 0px;
-}
+
 .contribution-heading {
   font-size: 3rem;
   margin: 30px;

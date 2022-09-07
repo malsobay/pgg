@@ -1,6 +1,5 @@
 import React from "react";
 import Table from "../common/Table.jsx";
-import "./OutcomeStage.css";
 
 export default class OutcomeStage extends React.Component {
   
@@ -30,7 +29,7 @@ export default class OutcomeStage extends React.Component {
           me={player}
           punishment={game.treatment.punishment !== 0}
         />
-        <div className="next-round">
+        <div className="center">
           {player.stage.submitted ? (
             this.renderSubmitted()
           ) : (
