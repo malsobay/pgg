@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "./Table.jsx";
+import Table from "../common/Table.jsx";
 import "./OutcomeStage.css";
 
 export default class OutcomeStage extends React.Component {
@@ -22,15 +22,15 @@ export default class OutcomeStage extends React.Component {
     const { game, player } = this.props;
 
     return (
-      <body className="outcome-body">
-          {/* <h4 className="outcome-heading">Round Outcome</h4> */}
-          <Table 
-            players={game.players}
-            game={game}
-            me={player}
-            punishment={game.treatment.punishment !== 0}
-          />
-        <div className="next-round center">
+      <>
+        {/* <h4>Round Outcome</h4> */}
+        <Table 
+          players={game.players}
+          game={game}
+          me={player}
+          punishment={game.treatment.punishment !== 0}
+        />
+        <div className="next-round">
           {player.stage.submitted ? (
             this.renderSubmitted()
           ) : (
@@ -39,7 +39,7 @@ export default class OutcomeStage extends React.Component {
             </button>
           )}
         </div>
-      </body>
+      </>
     );
   }
 }

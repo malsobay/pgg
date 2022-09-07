@@ -76,8 +76,25 @@ main {
   background-color: #9BD89C;
 }
 
+.body-wrapper {
+  padding: 36px;
+  width: calc(100% - 600px);
+  overflow-x: auto;
+  min-width: 400px;
+}
+
+h4{
+  font-size: 25px;
+  margin-bottom: 16px;
+}
+
 .round {
   height: calc(100% - 50px);
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  width: 100%;
 
   .content {
     flex-grow: 0;

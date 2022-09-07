@@ -1,19 +1,16 @@
 import React from "react";
 import "./Sidebar.css";
-import "./PlayerSidebar.css";
 
 
 export default class PlayerSidebar extends React.Component {
+  
   renderProfile() {
     const { player } = this.props;
-    console.log(this.props)
     return (
-      <div className="circle">
-        <img
-          src={player.get("avatar")}
-          className="profile-avatar"
-        />
-      </div>
+      <img
+        src={player.get("avatar")}
+        className="profile-avatar"
+      />
     );
   }
 
@@ -27,21 +24,18 @@ export default class PlayerSidebar extends React.Component {
     );
   }
   
- 
-
   renderSocialInteraction(otherPlayer) {
     const cumulativePayoff = otherPlayer.get("cumulativePayoff");
     return (
       <div className="player" key={otherPlayer._id}>
         <img src={otherPlayer.get("avatar")} className="profile-avatar" />
-        {/*} <div>Player key: {otherPlayer._id}</div> <br></br>*/}
-        </div>
+      </div>
     );
   }
 
 
   render() {
-    const { game, player, stage, round } = this.props;
+    const { game, player } = this.props;
 
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     const showNRounds = game.treatment.showNRounds;
@@ -51,7 +45,7 @@ export default class PlayerSidebar extends React.Component {
     }
 
     return (
-      <aside className="sidebar">
+      <div className="sidebar-wrapper">
         <div className="sidebar-stats">
           {this.renderProfile()}
           {this.renderScore()}
@@ -60,7 +54,7 @@ export default class PlayerSidebar extends React.Component {
             {otherPlayers.map((p) => this.renderSocialInteraction(p))}
           </div>
         </div>
-      </aside>
+      </div>
     );
   }
 }

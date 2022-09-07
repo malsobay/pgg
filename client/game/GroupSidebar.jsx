@@ -1,7 +1,6 @@
 import React from "react";
-import Timer from "./Timer.jsx";
-import "./RightSidebar.css";
-import "./GroupSidebar.css";
+import Timer from "./common/Timer.jsx";
+import "./Sidebar.css";
 
 
 export default class GroupView extends React.Component {
@@ -58,11 +57,9 @@ export default class GroupView extends React.Component {
 
     const showNRounds = game.treatment.showNRounds;
     return (
-      <div className="right-sidebar-container">
-      <div className="right-sidebar">
+      <div className="sidebar-wrapper">
         {this.renderRoundMU()}
         <Timer stage={stage} />
-      </div>
       </div>
     );
   }

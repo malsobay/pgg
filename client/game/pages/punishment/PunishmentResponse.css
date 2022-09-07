@@ -1,0 +1,66 @@
+.input-area {
+  background-color: #dddddd;
+  color: #666666;
+  padding: 1em;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  outline: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.4;
+  height: 30px;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.payoff {
+  background-color: yellow;
+}
+
+.contributions-heading {
+  text-align: center;
+  padding: 20px 40 px;
+  font-size: 30px;
+  margin: 0px;
+}
+
+.contributions-container-punishment {
+  width: calc(100% - 96px);
+  margin: 0 auto;
+}
+
+.contributions-total-wrapper{
+  font-size: 18px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 36px;
+}
+
+.contributions-total-record{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.punishment-players-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 24px);
+  margin-left: -12px;
+  margin-bottom: 24px;
+}
+
+.punishment-player-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 12px;
+}
+
+.player-avatar{
+  width: 120px;
+}

@@ -1,7 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
+
 import "./Contribution.css";
 
-export default class ContributionResponse extends React.Component {
+export default class Contribution extends React.Component {
+  
   handleChange = (event) => {
     const { player, game } = this.props;
     let value = parseFloat(event.target.value);
@@ -45,41 +47,42 @@ export default class ContributionResponse extends React.Component {
           />
         </label>
         <br></br>
-        {/*
-        <label>
-          <input
-            type="radio"
-            value="Contribute"
-            checked={value == "Contribute"}
-            onChange={this.handleChange}
-          />
-          Contribute
-        </label>
-    */}
       </div>
     );
   }
 
   render() {
     const { player, game } = this.props;
+    const multiplier = game.treatment.multiplier;
     const contribution = player.round.get("contribution");
     const endowment = game.treatment.endowment;
     const keep = endowment - parseFloat(contribution);
-    // If the player already submitted, don't show the slider or submit button
     if (player.stage.submitted) {
       return this.renderSubmitted();
     }
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        {this.renderInput()}
-        {0 <= parseFloat(contribution) && contribution <= endowment ? (
-          <div  className="contribute-you-keep"> You keep: {keep} </div>
-        ) : null}
-        <button type="submit" className="button">
-          Contribute
-        </button>
-      </form>
+      <>
+        <div className="contribution-container">
+          <h2 className="contribution-heading">
+            Contributions
+          </h2>
+          <h4> Multiplier: {multiplier}x</h4>
+          <div className="contribution-image"/>
+        </div>
+        <div className="instructions-text">
+          You can contribute any of your {endowment} money units towards the public fund, which will be multiplied then divided equally among the group.
+        </div>
+        <form className="form-container" onSubmit={this.handleSubmit}>
+          {this.renderInput()}
+          {0 <= parseFloat(contribution) && contribution <= endowment ? (
+            <div className="contribute-you-keep"> You keep: {keep} </div>
+          ) : null}
+          <button type="submit" className="button">
+            Contribute
+          </button>
+        </form>
+      </>       
     );
   }
 }

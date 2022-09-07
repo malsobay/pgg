@@ -2,6 +2,7 @@ import React from "react";
 import "./PunishmentResponse.css";
 
 export default class ContributionsDisplay extends React.Component {
+  
   render() {
     const { game, round, player } = this.props;
     const totalContributions = round.get("totalContributions");
@@ -12,7 +13,7 @@ export default class ContributionsDisplay extends React.Component {
     const payoff = round.get("payoff");
 
     return (
-      <body>
+      <>
         <div className="contributions-container-punishment">
           <h2 className="contributions-heading">Total Contributions</h2>
           <div className="contributions-total-wrapper">
@@ -63,7 +64,7 @@ export default class ContributionsDisplay extends React.Component {
             </div>
             <div className="contributions-total-record">
               <div>All players</div>
-              <div>/{game.treatment.playerCount}</div>
+              <div>/{playerCount}</div>
             </div>
             <div className="divider"/>
             <div className="contributions-total-record">
@@ -72,7 +73,7 @@ export default class ContributionsDisplay extends React.Component {
             </div>
           </div>
         </div>
-      </body>
+      </>
     );
   }
 }

@@ -1,0 +1,35 @@
+.player{
+  width: 70px;
+}
+.sidebar-wrapper {
+  overflow-x: auto;
+  width: 300px;
+  background-color: #EBE9E9;
+  min-width: 300px;
+  padding: 15px;
+  text-align: center;
+  font-size: 25px;
+}
+.players-wrapper {
+  margin: 20px 0px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.sidebar-stats {
+  margin: 30px 30px 60px 30px;
+}
+.profile-avatar {
+  width: 80%;
+  height: 80%;
+  padding: 0px;
+  margin: 0px;
+  justify-self: center;
+  text-align: center;
+}
+.profile-avatar-other {
+  width: 60%;
+  height: auto;
+  padding: 2rem;
+  justify-self: center;
+  text-align: center;
+}

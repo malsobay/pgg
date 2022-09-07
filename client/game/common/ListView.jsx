@@ -1,5 +1,5 @@
 import React from "react";
-import "./OutcomeStage.css";
+import "./ListView.css";
 
 export default class ListView extends React.Component {
   renderPlayer(game, playerId, punishments) {
@@ -8,16 +8,14 @@ export default class ListView extends React.Component {
     console.log(player);
     return (
       <div style={{textAlign:"center"}}>
-        {<img src={player.get("avatar")} className="player-avatar-listview" />}
-        {/*<img src={`/avatars/jdenticon/${player}`} className="player-avatar" />*/}
-
+        <img src={player.get("avatar")} className="player-avatar-listview" />
         <p>x{punishments[playerId]}</p>
       </div>
     );
   }
 
   render() {
-    const { game, punishments, className } = this.props;
+    const { game, punishments } = this.props;
     console.log(punishments);
     let nonzeroPunishments = {};
     for (const key of Object.keys(punishments)) {
@@ -32,7 +30,7 @@ export default class ListView extends React.Component {
     }
 
     return (
-      <div className={className}>
+      <div className="punishment-social-view">
         {Object.keys(nonzeroPunishments).map((p) =>
           this.renderPlayer(game, p, nonzeroPunishments)
         )}
