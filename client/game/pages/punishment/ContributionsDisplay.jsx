@@ -15,7 +15,7 @@ export default class ContributionsDisplay extends React.Component {
     return (
       <>
         <div className="contributions-container-punishment">
-          <h2 className="contributions-heading">Total Contributions</h2>
+          <h2>Total Contributions</h2>
           <div className="contributions-total-wrapper">
             <div className="contributions-total-record">
               <b>Contributions</b>

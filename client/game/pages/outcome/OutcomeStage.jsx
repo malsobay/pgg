@@ -1,5 +1,5 @@
 import React from "react";
-import Table from "../common/Table.jsx";
+import Table from "../../common/Table.jsx";
 
 export default class OutcomeStage extends React.Component {
   
@@ -22,7 +22,6 @@ export default class OutcomeStage extends React.Component {
 
     return (
       <>
-        {/* <h4>Round Outcome</h4> */}
         <Table 
           players={game.players}
           game={game}

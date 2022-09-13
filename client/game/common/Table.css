@@ -3,6 +3,7 @@
   width:100%;
   margin-bottom:24px;
 }
+
 .wrapper {
   width:100%;
   border-collapse: collapse;
@@ -15,6 +16,7 @@
 .tr {
   border-bottom:2px solid #EBE9E9;
 }
+
 .th {
   text-align:left;
   background:#D8D9DA;
@@ -25,6 +27,7 @@
   font-size:15px;
   font-weight:500;
 }
+
 .td {
   padding-left:0px;
   padding-top:20px;
@@ -32,6 +35,7 @@
   padding-left: 30px;
   text-align: left;
 }
+
 .img {
   height:30;
 }

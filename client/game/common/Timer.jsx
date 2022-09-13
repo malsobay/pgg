@@ -9,11 +9,11 @@ class timer extends React.Component {
     var b = remainingSeconds % 60;
 
     return (
-      <div>
+      <>
         <h4>Timer</h4>
-          {a}:{b < 10 && 0}
-          {b}
-      </div>
+        {a}:{b < 10 && 0}
+        {b}
+      </>
     );
   }
 }

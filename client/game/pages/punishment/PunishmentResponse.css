@@ -2,29 +2,13 @@
   background-color: #dddddd;
   color: #666666;
   padding: 1em;
-  border-radius: 10px;
-  border: 2px solid transparent;
+  border-radius: 0;
+  border: none;
   outline: none;
   font-weight: 500;
   font-size: 12px;
-  line-height: 1.4;
   height: 30px;
   text-align: center;
-}
-
-.center {
-  text-align: center;
-}
-
-.payoff {
-  background-color: yellow;
-}
-
-.contributions-heading {
-  text-align: center;
-  padding: 20px 40 px;
-  font-size: 30px;
-  margin: 0px;
 }
 
 .contributions-container-punishment {
@@ -33,10 +17,9 @@
 }
 
 .contributions-total-wrapper{
-  font-size: 18px;
-  max-width: 400px;
+  max-width: 300px;
   margin: 0 auto;
-  margin-top: 36px;
+  margin-top: 24px;
 }
 
 .contributions-total-record{
@@ -59,8 +42,4 @@
   align-items: center;
   justify-content: center;
   margin: 12px;
-}
-
-.player-avatar{
-  width: 120px;
 }

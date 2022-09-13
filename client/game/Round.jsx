@@ -2,9 +2,9 @@ import React from "react";
 
 import PlayerSidebar from "./PlayerSidebar.jsx";
 import GroupSidebar from "./GroupSidebar.jsx";
-import Contribution from "./pages/Contribution.jsx";
+import Contribution from "./pages/contributions/Contribution.jsx";
 import PunishmentStage from "./pages/punishment/PunishmentStage.jsx";
-import OutcomeStage from "./pages/OutcomeStage.jsx";
+import OutcomeStage from "./pages/outcome/OutcomeStage.jsx";
 
 
 export default class Round extends React.Component {

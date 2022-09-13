@@ -38,7 +38,6 @@ export default class Table extends React.Component {
                       <ListView
                         punishments={punished}
                         game={game}
-                        className="punishment-social-view"
                         me={me}
                       />
                     </td>
@@ -46,7 +45,6 @@ export default class Table extends React.Component {
                       <ListView
                         punishments={punishedBy}
                         game={game}
-                        className="punishment-social-view"
                         me={me}
                       />
                     </td>

@@ -1,35 +1,20 @@
-.player{
-  width: 70px;
-}
 .sidebar-wrapper {
   overflow-x: auto;
   width: 300px;
   background-color: #EBE9E9;
   min-width: 300px;
-  padding: 15px;
+  padding: 30px;
   text-align: center;
   font-size: 25px;
 }
+
 .players-wrapper {
-  margin: 20px 0px;
+  margin: 20px auto;
   display: flex;
   flex-wrap: wrap;
+  max-width: 200px;
 }
-.sidebar-stats {
-  margin: 30px 30px 60px 30px;
-}
-.profile-avatar {
+
+.profile-avatar{
   width: 80%;
-  height: 80%;
-  padding: 0px;
-  margin: 0px;
-  justify-self: center;
-  text-align: center;
-}
-.profile-avatar-other {
-  width: 60%;
-  height: auto;
-  padding: 2rem;
-  justify-self: center;
-  text-align: center;
 }
