@@ -132,7 +132,7 @@ export default class ExitSurvey extends React.Component {
             <div className="form-line thirds">
               <div>
                 <label htmlFor="strength">
-                  How would you describe your strength in the game?
+                  How would you describe your strategy in the game?
                 </label>
                 <div>
                   <textarea
