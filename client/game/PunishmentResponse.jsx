@@ -61,7 +61,7 @@ export default class PunishmentResponse extends React.Component {
     return (
       <div>
         <div className="waiting-response-container">
-          Waiting on other players' punishments...
+        Waiting on other players... Please wait until all players are ready
         </div>
       </div>
     );
@@ -114,6 +114,24 @@ export default class PunishmentResponse extends React.Component {
     const formError = this.state.formError;
     const cumulativePayoff = player.get("cumulativePayoff");
     const punishment = game.treatment.punishment;
+
+
+    if(punishment <= 0) {
+      if (player.stage.submitted) {
+        return this.renderSubmitted();
+      } else{
+      return (
+        <form onSubmit={this.handleSubmit}>
+              <div className="center">
+                <button type="submit" className="button">
+                Next
+                </button>
+              </div>
+
+              <p className="center">{formError}</p>
+            </form>
+      )}
+    }
 
     // If the player already submitted, don't show the input or submit button
     if (player.stage.submitted) {

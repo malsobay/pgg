@@ -15,11 +15,11 @@ export default class Quiz extends React.Component {
 
     if (
       this.state.players !== String(players - 1) ||
-      this.state.punishment !== String(2 * punishmentRate) ||
+      (this.state.punishment !== String(2 * punishmentRate) && punishmentRate > 0) ||
       this.state.payoff != "10" ||
       this.state.kept != "6"
     ) {
-      alert("Incorrect! Read the instructions, and please try again.");
+      alert("You have an incorrect answer; please read the instructions and try again.");
     } else {
       this.props.onNext();
     }
@@ -94,24 +94,28 @@ export default class Quiz extends React.Component {
               />
             </p>
 
-            <p>
-              <label htmlFor="horse">
-                Each money unit you spend to punish someone deducts{" "}
-                {punishmentRate} coins from them. If you spend 2 coins to punish
-                someone, how many coins will be deducted from them?
-              </label>
-              <input
-                type="text"
-                dir="auto"
-                id="punishment"
-                name="punishment"
-                placeholder="e.g. 2"
-                value={punishment}
-                onChange={this.handleChange}
-                autoComplete="off"
-                required
-              />
-            </p>
+            {punishmentRate > 0 && 
+              <>
+              <p>
+                <label htmlFor="horse">
+                  Each coin you spend to punish someone deducts{" "}
+                  {punishmentRate} coins from them. If you spend 2 coins to punish
+                  someone, how many coins will be deducted from them?
+                </label>
+                <input
+                  type="text"
+                  dir="auto"
+                  id="punishment"
+                  name="punishment"
+                  placeholder="e.g. 2"
+                  value={punishment}
+                  onChange={this.handleChange}
+                  autoComplete="off"
+                  required
+                />
+              </p>
+            </>}
+
 
             <p>
               <button type="button" onClick={onPrev} disabled={!hasPrev}>
