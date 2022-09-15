@@ -1,10 +1,10 @@
 import React from "react";
 
-import PlayerSidebar from "./PlayerSidebar.jsx";
-import GroupSidebar from "./GroupSidebar.jsx";
-import Contribution from "./pages/contributions/Contribution.jsx";
-import PunishmentStage from "./pages/punishment/PunishmentStage.jsx";
-import OutcomeStage from "./pages/outcome/OutcomeStage.jsx";
+import RightSidebar from "./RightSidebar.jsx";
+import LeftSidebar from "./LeftSidebar.jsx";
+import Contribution from "./pages/contribution/Contribution.jsx";
+import Punishment from "./pages/punishment/Punishment.jsx";
+import Outcome from "./pages/outcome/Outcome.jsx";
 import "./Sidebar.css";
 
 
@@ -14,13 +14,13 @@ export default class Round extends React.Component {
     const { stage } = this.props;
     return (
       <div className="round">
-        <PlayerSidebar {...this.props}/>
+        <RightSidebar {...this.props}/>
         <div className="body-wrapper">
           {stage.name === "contribution" && <Contribution {...this.props}/>}
-          {stage.name === "punishment" && <PunishmentStage {...this.props}/>}
-          {stage.name === "outcome" && <OutcomeStage {...this.props}/>}
+          {stage.name === "outcome" && <Punishment {...this.props}/>}
+          {stage.name === "summary" && <Outcome {...this.props}/>}
         </div>
-        <GroupSidebar {...this.props} />
+        <LeftSidebar {...this.props} />
       </div>
     );
   }

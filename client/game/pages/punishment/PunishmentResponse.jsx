@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./punishment.css";
 
 export default class PunishmentResponse extends React.Component {

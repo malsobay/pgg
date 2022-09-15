@@ -1,14 +1,14 @@
 import React from "react";
 import PunishmentResponse from "./PunishmentResponse.jsx";
-import ContributionsDisplay from "./ContributionsDisplay.jsx";
+import ContributionsTableResults from "./ContributionsTableResults.jsx";
 
 
-export default class PunishmentStage extends React.Component {
+export default class Punishment extends React.Component {
   render() {
 
     return (
       <>
-        <ContributionsDisplay {...this.props}/>
+        <ContributionsTableResults {...this.props}/>
         <PunishmentResponse {...this.props}/>
       </>
     );

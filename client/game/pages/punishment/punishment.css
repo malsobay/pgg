@@ -11,11 +11,6 @@
   text-align: center;
 }
 
-.contributions-container-punishment {
-  width: calc(100% - 96px);
-  margin: 0 auto;
-}
-
 .contributions-total-wrapper{
   max-width: 300px;
   margin: 0 auto;

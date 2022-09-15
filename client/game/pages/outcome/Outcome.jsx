@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "../../common/Table.jsx";
 
-export default class OutcomeStage extends React.Component {
+export default class Outcome extends React.Component {
   
   onNext = (event) => {
     event.preventDefault();
