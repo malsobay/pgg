@@ -43,10 +43,10 @@ export default class PunishmentResponse extends React.Component {
 
     if (totalPunishmentCost > cumulativePayoff) {
       this.setState({
-        formError: "Error: punishment cost exceeds your total coins",
+        formError: "Error: deduction cost exceeds your total coins",
       });
     } else if (negatives > 0) {
-      this.setState({ formError: "Error: punishment cannot be negative" });
+      this.setState({ formError: "Error: deduction cannot be negative" });
     } else {
       this.setState({ formError: "" });
     }
@@ -84,7 +84,7 @@ export default class PunishmentResponse extends React.Component {
               id={player._id}
               onChange={(event) => this.handleChange(event, player._id)}
               min="0"
-              placeholder="# of punishments"
+              placeholder="# of deductions"
               className="input-area"
             />
           </label>
@@ -138,7 +138,7 @@ export default class PunishmentResponse extends React.Component {
       if (cumulativePayoff < 0) {
         return (
           <div className="center">
-            <div>You do not have enough to punish other players</div>
+            <div>You do not have enough coins to deduct from other players</div>
             {this.renderSubmitted()}
           </div>
         );
@@ -151,11 +151,11 @@ export default class PunishmentResponse extends React.Component {
         <div>
           <div className="instructions-text">
               <p>
-                It will cost you 1 coin to impose a punishment of {punishment} coins.
+                It will cost you 1 coin to impose a deduction of {punishment} coins.
                 The costs will be taken directly from your cumulative payoff, so
-                you cannot exceed {cumulativePayoff} punishments.
+                you cannot exceed {cumulativePayoff} deductions.
               </p>
-              <p>(leaving a punishment input blank is equivalent to zero punishment)</p>
+              <p>(leaving a deduction input blank is equivalent to no deduction)</p>
           </div>
           <div>
             

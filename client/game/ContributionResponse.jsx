@@ -40,7 +40,7 @@ export default class ContributionResponse extends React.Component {
             min="0"
             value={player.round.get("contribution")}
             max={endowment}
-            placeholder="0 if left blank"
+            placeholder="How many coins will you contribute?"
             className="text-area"
           />
         </label>

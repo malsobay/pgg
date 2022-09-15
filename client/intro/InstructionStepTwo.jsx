@@ -19,13 +19,11 @@ export default class InstructionStepTwo extends React.Component {
             src="/experiment/images/InstructionsPunishment.png"
             className="instructions-img-punishment"
           ></img>
-          <h1> Punishment: </h1>
+          <h1> Deductions: </h1>
           <p>
-            You have the ability to punish your group members if you feel that
-            they did not contribute enough, but if you choose to punish someone,
-            you will incur a cost, too! Each coin you spend punishing someone
-            will deduct {punishmentRate} coins from another player and 1 coin
-            from your cumulative payoff. You can punish players as long as you
+            You have the ability to deduct coins from other players, but doing so comes at a cost. 
+            Each coin you spend will deduct {punishmentRate} coins from the intended player and 1 coin
+            from your cumulative payoff. You can deduct coins from other players as long as you
             have a positive cumulative payoff.
           </p>
           <p>

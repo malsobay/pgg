@@ -78,7 +78,7 @@ export default class Quiz extends React.Component {
                 players contributed the following amounts:
                 <div> Player 1: 10 Coins </div> <div> Player 2: 4 Coins </div>
                 <div> Player 3: 1 Coins </div>
-                What is the round payoff? (round payoff = sum of contributions x
+                <br></br>What is the round payoff? (round payoff = sum of contributions x
                 multiplier / the number of players){" "}
               </label>
               <input
@@ -98,9 +98,8 @@ export default class Quiz extends React.Component {
               <>
               <p>
                 <label htmlFor="horse">
-                  Each coin you spend to punish someone deducts{" "}
-                  {punishmentRate} coins from them. If you spend 2 coins to punish
-                  someone, how many coins will be deducted from them?
+                  Each coin you spend to to deduct coins from another player deducts{" "}
+                  {punishmentRate} coins from them. If you spend 2 coins to deduct from another player, how many coins will be deducted from them?
                 </label>
                 <input
                   type="text"
