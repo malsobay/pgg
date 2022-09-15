@@ -11,15 +11,16 @@ export default class Table extends React.Component {
       <div className='table-wrapper'>
         <table className='wrapper'>
           <tbody>
-            <tr className='tr'>
-              <th className='th'>Player</th>
-              <th className='th'>Total round gains</th>
-              <th className='th'>Contribution</th>
+            <tr className='Tr'>
+              <th className='Th'>Player</th>
+              <th className='Th'>Contribution</th>
               {punishment && <>
               <th className='th'>Punished</th>
               <th className='th'>Punished by</th>
               </>}
+              <th className='Th'>Total round gains</th>
             </tr>
+
             {players.map((player, i) => {
               const punished = player.round.get("punished");
               const punishedBy = player.round.get("punishedBy");
@@ -30,8 +31,7 @@ export default class Table extends React.Component {
                   <td className='td' >
                     <img src={player.get("avatar")} className="avatar" />
                   </td>
-                  <td className='td' >{roundPayoff}</td>
-                  <td className='td' >{contribution}</td>
+                  <td className='Td' ><h2>{contribution}</h2></td>
                   {punishment && 
                   <>
                     <td className='td'>
@@ -49,7 +49,8 @@ export default class Table extends React.Component {
                       />
                     </td>
                   </>
-                  }   
+                  } 
+                  <td className='Td'><font color={roundPayoff > 0 ? "green":"red"}><h2>{roundPayoff}</h2></font></td>  
                 </tr>
               )
             })}

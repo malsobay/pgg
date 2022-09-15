@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./PunishmentResponse.css";
+import "./punishment.css";
 
 export default class PunishmentResponse extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ export default class PunishmentResponse extends React.Component {
   renderSubmitted() {
     return (
       <div className="waiting-response-container">
-        Waiting on other players' punishments...
+         Waiting on other players... Please wait until all players are ready
       </div>
     );
   }
@@ -107,6 +107,24 @@ export default class PunishmentResponse extends React.Component {
     const cumulativePayoff = player.get("cumulativePayoff");
     const punishment = game.treatment.punishment;
 
+
+    if(punishment <= 0) {
+      if (player.stage.submitted) {
+        return this.renderSubmitted();
+      } else{
+      return (
+        <form onSubmit={this.handleSubmit}>
+              <div className="center">
+                <button type="submit">
+                Next
+                </button>
+              </div>
+
+              <p className="center">{formError}</p>
+            </form>
+      )}
+    }
+
     // If the player already submitted, don't show the input or submit button
     if (player.stage.submitted) {
       if (cumulativePayoff < 0) {
@@ -136,7 +154,7 @@ export default class PunishmentResponse extends React.Component {
             <div className="punishment-players-wrapper">
               {otherPlayers.map((player) => this.renderInput(player))}
             </div>
-            <button type="submit" className="button">
+            <button type="submit">
               Next
             </button>
 

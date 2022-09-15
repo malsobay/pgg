@@ -5,6 +5,7 @@ import GroupSidebar from "./GroupSidebar.jsx";
 import Contribution from "./pages/contributions/Contribution.jsx";
 import PunishmentStage from "./pages/punishment/PunishmentStage.jsx";
 import OutcomeStage from "./pages/outcome/OutcomeStage.jsx";
+import "./Sidebar.css";
 
 
 export default class Round extends React.Component {

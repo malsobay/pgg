@@ -37,7 +37,7 @@ Empirica.onStageEnd((game, round, stage) => {
   if (stage.name == "contribution") {
     computePayoff(game, round);
   } //player.stage.set values but wait to update until round end
-  if (stage.name == "punishment") {
+  if (stage.name == "outcome") {
     computePunishmentCosts(game, round);
     computeIndividualPayoff(game, round);
   }

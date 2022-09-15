@@ -1,5 +1,5 @@
 import React from "react";
-import "./PunishmentResponse.css";
+import "./punishment.css";
 
 export default class ContributionsDisplay extends React.Component {
   

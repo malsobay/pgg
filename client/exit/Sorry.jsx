@@ -11,22 +11,20 @@ export default class Sorry extends Component {
     let msg;
     switch (player.exitStatus) {
       case "gameFull":
-        msg = `All games you are eligible for have filled up too fast...you will be paid the base pay of ${basePay}`;
+        msg = `Unfortunately, all games are full. Please return the task with the code C5LWTCFM, and you will be compensated for your time via partial payment.`;
         break;
       case "gameLobbyTimedOut":
-        msg = "There were NOT enough players for the game to start...";
+        msg = `Unfortunately, not enough players joined to begin the game. Please return the task with the code C5LWTCFM, and you will be compensated for your time via partial payment.`;
         break;
       case "playerEndedLobbyWait":
-        msg =
-          "You decided to stop waiting, we are sorry it was too long a wait.";
+        msg = "You decided to stop waiting, we are sorry it was too long a wait. Please return the task.";
         break;
       default:
-        msg = "Unfortunately the Game was cancelled...";
+        msg = "Unfortunately, the game is unable to launch. Please return the task with the code C5LWTCFM";
         break;
     }
     if (player.exitReason === "failedQuestion") {
-      msg =
-        "Unfortunately you did not meet the conditions required to play the game.";
+      msg = "Unfortunately, you did not meet the conditions required to play the game. Please return the task with the code CGUQ2ZQU, and you will be compensated for your time via partial payment. ";
     }
     // Only for dev
     if (!game && Meteor.isDevelopment) {

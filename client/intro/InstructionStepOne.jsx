@@ -13,7 +13,7 @@ export default class InstructionStepOne extends React.Component {
           <h1> How the game works: </h1>
           <p>
             In this multi-player game, you will be in a group. Each person is
-            given a set amount of money units at the start of each round. You
+            given a set amount of coins at the start of each round. You
             will also be shown a money multiplier. There will be a public fund
             that you can choose to contribute to—you will not be able to see
             others' contributions before making your own. After everyone has

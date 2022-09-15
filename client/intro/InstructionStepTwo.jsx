@@ -23,8 +23,8 @@ export default class InstructionStepTwo extends React.Component {
           <p>
             You have the ability to punish your group members if you feel that
             they did not contribute enough, but if you choose to punish someone,
-            you will incur a cost, too! Each unit you spend punishing someone
-            will deduct {punishmentRate} units from another player and 1 unit
+            you will incur a cost, too! Each coin you spend punishing someone
+            will deduct {punishmentRate} coins from another player and 1 coin
             from your cumulative payoff. You can punish players as long as you
             have a positive cumulative payoff.
           </p>

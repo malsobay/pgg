@@ -58,7 +58,7 @@ export default class Contribution extends React.Component {
             {0 <= parseFloat(contribution) && contribution <= endowment ? (
               <p> You keep: {keep} </p>
             ) : null}
-            <button type="submit" className="button">
+            <button type="submit">
               Contribute
             </button>
           </form>

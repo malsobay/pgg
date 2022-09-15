@@ -32,7 +32,7 @@ export default class OutcomeStage extends React.Component {
           {player.stage.submitted ? (
             this.renderSubmitted()
           ) : (
-            <button type="button" onClick={this.onNext} className="button">
+            <button type="button" onClick={this.onNext}>
               Next Round
             </button>
           )}
