@@ -1,38 +1,32 @@
 import React from "react";
-import "./OutcomeStage.css";
+import "./ListView.css";
 
 export default class ListView extends React.Component {
   renderPlayer(game, playerId, punishments) {
-    console.log(game.players);
     const player = game.players.find((player) => player._id === playerId);
-    console.log(player);
     return (
-      <div style={{textAlign:"center"}}>
-        {<img src={player.get("avatar")} className="player-avatar-listview" />}
-        {/*<img src={`/avatars/jdenticon/${player}`} className="player-avatar" />*/}
-
-        <p>x{punishments[playerId]}</p>
+      <div className="center">
+        <img src={player.get("avatar")} className="player-avatar-listview" />
+        <div className="player-avatar-listview-text">x{punishments[playerId]}</div>
       </div>
     );
   }
 
   render() {
-    const { game, punishments, className } = this.props;
-    console.log(punishments);
+    const { game, punishments } = this.props;
     let nonzeroPunishments = {};
     for (const key of Object.keys(punishments)) {
       if (punishments[key] != "0") {
         nonzeroPunishments[key] = punishments[key];
-      } else {
       }
     }
 
     if (Object.keys(nonzeroPunishments).length == 0) {
-      return <div className="none"> / </div>
+      return <p> / </p>
     }
 
     return (
-      <div className={className}>
+      <div className="listview-avatar-wrapper">
         {Object.keys(nonzeroPunishments).map((p) =>
           this.renderPlayer(game, p, nonzeroPunishments)
         )}

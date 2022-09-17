@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import "./PunishmentResponse.css";
+import React from "react";
+import "./punishment.css";
 
 export default class PunishmentResponse extends React.Component {
   constructor(props) {
@@ -39,7 +39,6 @@ export default class PunishmentResponse extends React.Component {
       }
       totalPunishmentCost += parseFloat(punished[key]);
     }
-    console.log("negatives", negatives);
 
     if (totalPunishmentCost > cumulativePayoff) {
       this.setState({
@@ -50,7 +49,6 @@ export default class PunishmentResponse extends React.Component {
     } else {
       this.setState({ formError: "" });
     }
-    console.log("error", this.state.formError);
     if (totalPunishmentCost > cumulativePayoff || negatives > 0) {
     } else {
       this.props.player.stage.submit();
@@ -59,10 +57,8 @@ export default class PunishmentResponse extends React.Component {
 
   renderSubmitted() {
     return (
-      <div>
-        <div className="waiting-response-container">
-        Waiting on other players... Please wait until all players are ready
-        </div>
+      <div className="waiting-response-container">
+         Waiting on other players... Please wait until all players are ready
       </div>
     );
   }
@@ -77,18 +73,14 @@ export default class PunishmentResponse extends React.Component {
           className="player-avatar"
         />
         <div> Contributed: {contribution} Coins </div>
-        <form>
-          <label>
-            <input
-              type="number"
-              id={player._id}
-              onChange={(event) => this.handleChange(event, player._id)}
-              min="0"
-              placeholder="# of punishments"
-              className="input-area"
-            />
-          </label>
-        </form>
+        <input
+          type="number"
+          id={player._id}
+          onChange={(event) => this.handleChange(event, player._id)}
+          min="0"
+          placeholder="# of punishments"
+          className="input-area"
+        />
       </div>
     );
   }
@@ -123,7 +115,7 @@ export default class PunishmentResponse extends React.Component {
       return (
         <form onSubmit={this.handleSubmit}>
               <div className="center">
-                <button type="submit" className="button">
+                <button type="submit">
                 Next
                 </button>
               </div>
@@ -148,31 +140,27 @@ export default class PunishmentResponse extends React.Component {
 
     if (cumulativePayoff > 0) {
       return (
-        <div>
+        <>
           <div className="instructions-text">
-              <p>
-                It will cost you 1 coin to impose a punishment of {punishment} coins.
-                The costs will be taken directly from your cumulative payoff, so
-                you cannot exceed {cumulativePayoff} punishments.
-              </p>
-              <p>(leaving a punishment input blank is equivalent to zero punishment)</p>
+            <p>
+              It will cost you 1 coin to impose a punishment of {punishment} coins.
+              The costs will be taken directly from your cumulative payoff, so
+              you cannot exceed {cumulativePayoff} punishments.
+            </p>
+            <p>(leaving a punishment input blank is equivalent to zero punishment)</p>
           </div>
-          <div>
             
-            <form onSubmit={this.handleSubmit}>
-              <div className="punishment-players-wrapper">
-                {otherPlayers.map((player) => this.renderInput(player))}
-              </div>
-              <div className="center">
-                <button type="submit" className="button">
-                Next
-                </button>
-              </div>
+          <form className="center" onSubmit={this.handleSubmit}>
+            <div className="punishment-players-wrapper">
+              {otherPlayers.map((player) => this.renderInput(player))}
+            </div>
+            <button type="submit">
+              Next
+            </button>
 
-              <p className="center">{formError}</p>
-            </form>
-          </div>
-        </div>
+            <p>{formError}</p>
+          </form>
+        </>
       );
     } else {
       return <div>{this.props.player.stage.submit()}</div>;

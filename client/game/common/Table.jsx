@@ -2,22 +2,23 @@ import React from 'react';
 import "./Table.css";
 import ListView from "./ListView.jsx";
 
+
 export default class Table extends React.Component {
   render(){
     const { players, game, me, punishment } = this.props;
     
     return(
-      <div className='TableWrapper'>
-        <table className='Wrapper'>
+      <div className='table-wrapper'>
+        <table className='wrapper'>
           <tbody>
-            <tr className='Tr'>
-              <th className='Th'>Player</th>
-              <th className='Th'>Contribution</th>
+            <tr className='tr'>
+              <th className='th'>Player</th>
+              <th className='th'>Contribution</th>
               {punishment && <>
-              <th className='Th'>Punished</th>
-              <th className='Th'>Punished by</th>
+              <th className='th'>Punished</th>
+              <th className='th'>Punished by</th>
               </>}
-              <th className='Th'>Total round gains</th>
+              <th className='th'>Total round gains</th>
             </tr>
 
             {players.map((player, i) => {
@@ -26,32 +27,30 @@ export default class Table extends React.Component {
               const contribution = player.round.get("contribution");
               const roundPayoff = player.round.get("roundPayoff");
               return(
-                <tr className={i === 0 ? 'Tr back-gray' : 'Tr'} key={i}>
-                  <td className='Td' >
+                <tr className={i === 0 ? 'tr back-gray' : 'tr'} key={i}>
+                  <td className='td' >
                     <img src={player.get("avatar")} className="avatar" />
                   </td>
-                  <td className='Td' ><h2>{contribution}</h2></td>
+                  <td className='td'><h2>{contribution}</h2></td>
                   {punishment && 
                   <>
-                    <td className='Td'>
+                    <td className='td'>
                       <ListView
                         punishments={punished}
                         game={game}
-                        className="punishment-social-view"
                         me={me}
                       />
                     </td>
-                    <td className='Td' >
+                    <td className='td' >
                       <ListView
                         punishments={punishedBy}
                         game={game}
-                        className="punishment-social-view"
                         me={me}
                       />
                     </td>
                   </>
                   } 
-                  <td className='Td'><font color={roundPayoff > 0 ? "green":"red"}><h2>{roundPayoff}</h2></font></td>  
+                  <td className='td'><font color={roundPayoff > 0 ? "green":"red"}><h2>{roundPayoff}</h2></font></td>  
                 </tr>
               )
             })}

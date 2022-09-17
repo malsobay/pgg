@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import ExitSurvey from "./exit/ExitSurvey";
 import Thanks from "./exit/Thanks";
 import Sorry from "./exit/Sorry";
-import About from "./game/About";
+import About from "./game/pages/about/About";
 import Round from "./game/Round";
 import Consent from "./intro/Consent";
 import InstructionStepOne from "./intro/InstructionStepOne";
