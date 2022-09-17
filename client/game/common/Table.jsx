@@ -15,8 +15,8 @@ export default class Table extends React.Component {
               <th className='th'>Player</th>
               <th className='th'>Contribution</th>
               {punishment && <>
-              <th className='Th'>Deducted from</th>
-              <th className='Th'>Deducted by</th>
+              <th className='th'>Deducted from</th>
+              <th className='th'>Deducted by</th>
               </>}
               <th className='th'>Total round gains</th>
             </tr>

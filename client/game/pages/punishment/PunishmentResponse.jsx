@@ -24,7 +24,7 @@ export default class PunishmentResponse extends React.Component {
   };
 
   handleSubmit = (event) => {
-    const { player } = this.props;
+    const { player, game } = this.props;
     event.preventDefault();
     const punished = player.round.get("punished");
 
@@ -147,7 +147,7 @@ export default class PunishmentResponse extends React.Component {
               <p>
                 It will cost you {punishmentCost} coins to impose a deduction of {punishmentMagnitude} coins.
                 The costs will be taken directly from your cumulative payoff, so
-                you cannot exceed {cumulativePayoff} deductions.
+                you cannot exceed {Math.floor(cumulativePayoff/punishmentCost)} deductions.
               </p>
               <p>(leaving a deduction input blank is equivalent to no deduction)</p>
           </div>
