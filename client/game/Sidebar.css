@@ -1,0 +1,36 @@
+.sidebar-wrapper {
+  overflow-x: auto;
+  width: 300px;
+  background-color: #EBE9E9;
+  min-width: 300px;
+  padding: 30px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.players-wrapper {
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 200px;
+}
+
+.profile-avatar{
+  width: 80%;
+}
+
+.body-wrapper {
+  padding: 36px;
+  width: calc(100% - 600px);
+  overflow-x: auto;
+  min-width: 400px;
+}
+
+.round {
+  height: calc(100% - 50px);
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  width: 100%;
+}

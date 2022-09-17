@@ -1,8 +1,7 @@
 import React from "react";
-import Table from "./Table.jsx";
-import "./OutcomeStage.css";
+import Table from "../../common/Table.jsx";
 
-export default class OutcomeStage extends React.Component {
+export default class Outcome extends React.Component {
   
   onNext = (event) => {
     event.preventDefault();
@@ -22,24 +21,23 @@ export default class OutcomeStage extends React.Component {
     const { game, player } = this.props;
 
     return (
-      <body className="outcome-body">
-          {/* <h4 className="outcome-heading">Round Outcome</h4> */}
-          <Table 
-            players={game.players}
-            game={game}
-            me={player}
-            punishment={game.treatment.punishment !== 0}
-          />
-        <div className="next-round center">
+      <>
+        <Table 
+          players={game.players}
+          game={game}
+          me={player}
+          punishment={game.treatment.punishment !== 0}
+        />
+        <div className="center">
           {player.stage.submitted ? (
             this.renderSubmitted()
           ) : (
-            <button type="button" onClick={this.onNext} className="button">
+            <button type="button" onClick={this.onNext}>
               Next Round
             </button>
           )}
         </div>
-      </body>
+      </>
     );
   }
 }

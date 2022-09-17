@@ -1,57 +1,26 @@
 import React from "react";
 
-import PlayerSidebar from "./PlayerSidebar.jsx";
-import GroupSidebar from "./GroupSidebar.jsx";
-import Contribution from "./Contribution.jsx";
-import PunishmentStage from "./PunishmentStage.jsx";
-import OutcomeStage from "./OutcomeStage.jsx";
-import "./PlayerSidebar.css";
-import "./GroupSidebar.css";
+import RightSidebar from "./RightSidebar.jsx";
+import LeftSidebar from "./LeftSidebar.jsx";
+import Contribution from "./pages/contribution/Contribution.jsx";
+import Punishment from "./pages/punishment/Punishment.jsx";
+import Outcome from "./pages/outcome/Outcome.jsx";
+import "./Sidebar.css";
+
 
 export default class Round extends React.Component {
+
   render() {
-    const { round, stage, player, game } = this.props;
-    const social = game.treatment.social;
+    const { stage } = this.props;
     return (
       <div className="round">
-        <div className="round-content">
-          <div className="sidebar-container">
-            <PlayerSidebar
-              player={player}
-              stage={stage}
-              game={game}
-              round={round}
-            />
-          </div>
-
-          <div>
-            {stage.name == "contribution" ? (
-              <Contribution
-                game={game}
-                round={round}
-                stage={stage}
-                player={player}
-              />
-            ) : null}
-          </div>
-          {stage.name == "outcome" ? (
-            <PunishmentStage
-              game={game}
-              round={round}
-              stage={stage}
-              player={player}
-            />
-          ) : null}
-          {stage.name == "summary" ? (
-            <OutcomeStage
-              stage={stage}
-              player={player}
-              game={game}
-              round={round}
-            />
-          ) : null}
-          <GroupSidebar player={player} stage={stage} game={game} round={round} />
+        <RightSidebar {...this.props}/>
+        <div className="body-wrapper">
+          {stage.name === "contribution" && <Contribution {...this.props}/>}
+          {stage.name === "outcome" && <Punishment {...this.props}/>}
+          {stage.name === "summary" && <Outcome {...this.props}/>}
         </div>
+        <LeftSidebar {...this.props} />
       </div>
     );
   }

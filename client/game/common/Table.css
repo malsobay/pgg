@@ -1,9 +1,10 @@
-.TableWrapper {
+.table-wrapper {
   overflow-x: scroll;
   width:100%;
-  margin-top:0px;
+  margin-bottom:24px;
 }
-.Wrapper {
+
+.wrapper {
   width:100%;
   border-collapse: collapse;
 }
@@ -12,10 +13,11 @@
   background: #EBE9E9; 
 }
 
-.Tr {
+.tr {
   border-bottom:2px solid #EBE9E9;
 }
-.Th {
+
+.th {
   text-align:left;
   background:#D8D9DA;
   color:black;
@@ -25,16 +27,13 @@
   font-size:15px;
   font-weight:500;
 }
-.Td {
+
+.td {
   padding-left:0px;
   padding-top:20px;
   padding-bottom:20px;
   padding-left: 30px;
   text-align: left;
-}
-
-.Img {
-  height:30;
 }
 
 .avatar{

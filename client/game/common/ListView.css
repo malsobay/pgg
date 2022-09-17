@@ -1,0 +1,15 @@
+.listview-avatar-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 240px;
+}
+
+.player-avatar-listview {
+  width: 40px;
+  margin-right: 8px;
+}
+
+.player-avatar-listview-text {
+  margin-right: 8px;
+}
