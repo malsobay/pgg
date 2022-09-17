@@ -37,7 +37,7 @@ export default class PunishmentResponse extends React.Component {
       if (parseFloat(punished[key]) < 0) {
         negatives += 1;
       }
-      totalPunishmentCost += parseFloat(punished[key]);
+      totalPunishmentCost += parseFloat(punished[key]) * game.treatment.punishmentCost;
     }
 
     if (totalPunishmentCost > cumulativePayoff) {
@@ -78,7 +78,7 @@ export default class PunishmentResponse extends React.Component {
           id={player._id}
           onChange={(event) => this.handleChange(event, player._id)}
           min="0"
-          placeholder="# of punishments"
+          placeholder="# of deductions"
           className="input-area"
         />
       </div>
@@ -105,10 +105,12 @@ export default class PunishmentResponse extends React.Component {
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     const formError = this.state.formError;
     const cumulativePayoff = player.get("cumulativePayoff");
-    const punishment = game.treatment.punishment;
+    const punishmentMagnitude = game.treatment.punishmentMagnitude;
+    const punishmentCost = game.treatment.punishmentCost;
+    const punishmentExists = game.treatment.punishmentExists;
 
 
-    if(punishment <= 0) {
+    if(!punishmentExists) {
       if (player.stage.submitted) {
         return this.renderSubmitted();
       } else{
@@ -143,7 +145,7 @@ export default class PunishmentResponse extends React.Component {
         <>
           <div className="instructions-text">
               <p>
-                It will cost you 1 coin to impose a deduction of {punishment} coins.
+                It will cost you {punishmentCost} coins to impose a deduction of {punishmentMagnitude} coins.
                 The costs will be taken directly from your cumulative payoff, so
                 you cannot exceed {cumulativePayoff} deductions.
               </p>

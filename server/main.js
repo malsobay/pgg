@@ -40,7 +40,7 @@ Empirica.gameInit((game) => {
 
     round.addStage({
       name: "outcome",
-      displayName: game.treatment.punishment > 0 ? "Outcome & Deductions" : "Outcome",
+      displayName: game.treatment.punishmentExists ? "Outcome & Deductions" : "Outcome",
       durationInSeconds: game.treatment.outcomeDuration,
     })
 

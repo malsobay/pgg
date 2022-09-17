@@ -26,7 +26,7 @@ export default class Outcome extends React.Component {
           players={game.players}
           game={game}
           me={player}
-          punishment={game.treatment.punishment !== 0}
+          punishment={game.treatment.punishmentExists}
         />
         <div className="center">
           {player.stage.submitted ? (

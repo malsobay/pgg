@@ -10,12 +10,12 @@ export default class Quiz extends React.Component {
     this.setState({ [el.name]: el.value.trim().toLowerCase() });
   };
 
-  handleSubmit = (players, punishmentRate) => (event) => {
+  handleSubmit = (players, punishmentMagnitude, punishmentExists) => (event) => {
     event.preventDefault();
 
     if (
       this.state.players !== String(players - 1) ||
-      (this.state.punishment !== String(2 * punishmentRate) && punishmentRate > 0) ||
+      (this.state.punishment !== String(2 * punishmentMagnitude) && punishmentExists) ||
       this.state.payoff != "10" ||
       this.state.kept != "6"
     ) {
@@ -29,12 +29,14 @@ export default class Quiz extends React.Component {
     const { hasPrev, hasNext, onNext, onPrev, game } = this.props;
     const { players, punishment, payoff, kept } = this.state;
     const playerCount = game.treatment.playerCount;
-    const punishmentRate = game.treatment.punishment;
+    const punishmentExists = game.treatment.punishmentExists;
+    const punishmentMagnitude = game.treatment.punishmentMagnitude;
+    const punishmentCost = game.treatment.punishmentCost;
     return (
       <Centered>
         <div className="quiz">
           <h1> Quiz </h1>
-          <form onSubmit={this.handleSubmit(playerCount, punishmentRate)}>
+          <form onSubmit={this.handleSubmit(playerCount, punishmentMagnitude, punishmentExists)}>
             <p>
               <label htmlFor="sum">
                 {" "}
@@ -94,12 +96,12 @@ export default class Quiz extends React.Component {
               />
             </p>
 
-            {punishmentRate > 0 && 
+            {punishmentExists && 
               <>
               <p>
                 <label htmlFor="horse">
-                  Each coin you spend to to deduct coins from another player deducts{" "}
-                  {punishmentRate} coins from them. If you spend 2 coins to deduct from another player, how many coins will be deducted from them?
+                  Each deduction you impose on another player deducts{" "}
+                  {punishmentMagnitude} coins from them, and costs you {" "}{punishmentCost} coins. If you spend {" "}{2*punishmentCost} coins to deduct from another player, how many coins will be deducted from them?
                 </label>
                 <input
                   type="text"

@@ -5,7 +5,8 @@ import { Centered } from "meteor/empirica:core";
 export default class InstructionStepTwo extends React.Component {
   render() {
     const { hasPrev, hasNext, onNext, onPrev, game } = this.props;
-    const punishmentRate = game.treatment.punishment;
+    const punishmentMagnitude = game.treatment.punishmentMagnitude;
+    const punishmentCost = game.treatment.punishmentCost;
     return (
       <Centered>
         <div className="instructions">
@@ -22,7 +23,7 @@ export default class InstructionStepTwo extends React.Component {
           <h1> Deductions: </h1>
           <p>
             You have the ability to deduct coins from other players, but doing so comes at a cost. 
-            Each coin you spend will deduct {punishmentRate} coins from the intended player and 1 coin
+            Each deduction you impose will deduct {punishmentMagnitude} coins from the intended player and {punishmentCost} coins
             from your cumulative payoff. You can deduct coins from other players as long as you
             have a positive cumulative payoff.
           </p>
