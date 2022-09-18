@@ -18,13 +18,14 @@ export default class Outcome extends React.Component {
   }
 
   render() {
-    const { game, player } = this.props;
+    const { game, player, round} = this.props;
 
     return (
       <>
         <Table 
           players={game.players}
           game={game}
+          round={round}
           me={player}
           punishment={game.treatment.punishmentExists}
         />
