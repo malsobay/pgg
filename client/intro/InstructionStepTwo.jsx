@@ -5,7 +5,8 @@ import { Centered } from "meteor/empirica:core";
 export default class InstructionStepTwo extends React.Component {
   render() {
     const { hasPrev, hasNext, onNext, onPrev, game } = this.props;
-    const punishmentRate = game.treatment.punishment;
+    const punishmentMagnitude = game.treatment.punishmentMagnitude;
+    const punishmentCost = game.treatment.punishmentCost;
     return (
       <Centered>
         <div className="instructions">
@@ -19,13 +20,11 @@ export default class InstructionStepTwo extends React.Component {
             src="/experiment/images/InstructionsPunishment.png"
             className="instructions-img-punishment"
           ></img>
-          <h1> Punishment: </h1>
+          <h1> Deductions: </h1>
           <p>
-            You have the ability to punish your group members if you feel that
-            they did not contribute enough, but if you choose to punish someone,
-            you will incur a cost, too! Each coin you spend punishing someone
-            will deduct {punishmentRate} coins from another player and 1 coin
-            from your cumulative payoff. You can punish players as long as you
+            You have the ability to deduct coins from other players, but doing so comes at a cost. 
+            Each deduction you impose will deduct {punishmentMagnitude} coins from the intended player and {punishmentCost} coins
+            from your cumulative payoff. You can deduct coins from other players as long as you
             have a positive cumulative payoff.
           </p>
           <p>

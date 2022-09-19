@@ -18,15 +18,16 @@ export default class Outcome extends React.Component {
   }
 
   render() {
-    const { game, player } = this.props;
+    const { game, player, round} = this.props;
 
     return (
       <>
         <Table 
           players={game.players}
           game={game}
+          round={round}
           me={player}
-          punishment={game.treatment.punishment !== 0}
+          punishment={game.treatment.punishmentExists}
         />
         <div className="center">
           {player.stage.submitted ? (

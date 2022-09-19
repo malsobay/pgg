@@ -30,7 +30,7 @@ Empirica.newPlayer(NewPlayer);
 Empirica.introSteps((game, treatment) => {
   const steps = [InstructionStepOne];
 
-  if (treatment.punishment > 0) {
+  if (treatment.punishmentExists) {
     steps.push(InstructionStepTwo);
   }
   steps.push(Quiz);

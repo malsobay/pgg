@@ -87,7 +87,7 @@ function computePunishmentCosts(game, round) {
     for (const key of punishedKeys) {
       if (punished[key] != "0") {
         amount = punished[key];
-        cost += parseFloat(amount);
+        cost += parseFloat(amount) * game.treatment.punishmentCost;
       } else {
       }
     }
@@ -112,7 +112,7 @@ function computePunishmentCosts(game, round) {
       }
     }
     const penalties =
-      parseFloat(receivedPunishments) * game.treatment.punishment;
+      parseFloat(receivedPunishments) * game.treatment.punishmentMagnitude;
     player.round.set("penalties", penalties);
   });
 }
