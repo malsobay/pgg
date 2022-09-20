@@ -69,7 +69,8 @@ export default class Table extends React.Component {
                       <td className='td' >
                         <img src={player.get("avatar")} className="avatar" />
                       </td>
-                      <td className='td'><h2>{contribution}</h2></td>
+                      <td className='td'><h2>{endowment - contribution}</h2></td>
+                      <td className='td'><h2>{poolPayoff}</h2></td>
                       {punishment && 
                         <>
                         <td className='td'>
