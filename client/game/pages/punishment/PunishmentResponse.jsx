@@ -146,7 +146,7 @@ export default class PunishmentResponse extends React.Component {
           <div className="instructions-text">
               <p>
                 It will cost you {punishmentCost} coins to impose a deduction of {punishmentMagnitude} coins.
-                The costs will be taken directly from your cumulative payoff, so
+                The costs will be taken directly from your total coins, so
                 you cannot exceed {Math.floor(cumulativePayoff/punishmentCost)} deductions.
               </p>
               <p>(leaving a deduction input blank is equivalent to no deduction)</p>

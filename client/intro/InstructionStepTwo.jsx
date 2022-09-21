@@ -24,8 +24,8 @@ export default class InstructionStepTwo extends React.Component {
           <p>
             You have the ability to deduct coins from other players, but doing so comes at a cost. 
             Each deduction you impose will deduct {punishmentMagnitude} coins from the intended player and {punishmentCost} coins
-            from your cumulative payoff. You can deduct coins from other players as long as you
-            have a positive cumulative payoff.
+            from your total coins. You can deduct coins from other players as long as you
+            have a positive number of total coins.
           </p>
           <p>
             <button type="button" onClick={onPrev} disabled={!hasPrev}>

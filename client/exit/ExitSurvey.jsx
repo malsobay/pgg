@@ -32,8 +32,9 @@ export default class ExitSurvey extends React.Component {
   render() {
     const { game, player } = this.props;
     const { age, gender, strength, fair, feedback, education } = this.state;
-    const earnings = player.get("earnings");
+    const earnings = Math.max((player.get("cumulativePayoff") / game.treatment.conversionRate).toFixed(2), 0);
     const basePay = game.treatment.basePay;
+    const totalPay = (parseFloat(basePay) + parseFloat(earnings)).toFixed(2);
     return (
       <Centered>
         <div className="exit-survey">
@@ -43,8 +44,8 @@ export default class ExitSurvey extends React.Component {
           </p>
           {/*<p>Earnings: {earnings}</p>*/}
           <p>
-            Your final <strong>bonus</strong> is $7 in addition of the
-            <strong> $3 reward</strong> for completing the task.
+            You will receive a base payment of <strong>${basePay}</strong>, in addition to a performance 
+            bonus of <strong>${earnings}</strong>, for a total of <strong>${totalPay}</strong>. 
           </p>
           {/*
           <p>
