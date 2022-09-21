@@ -5,6 +5,7 @@ import Empirica from "meteor/empirica:core";
 // the first onRoundStart. It receives the game and list of all the players in
 // the game.
 Empirica.onGameStart((game) => {
+  game.set("justStarted", true);
   game.players.forEach((player, i) => {
     /*player.set("avatar", `/avatars/jdenticon/${player._id}`);*/
     player.set("avatar", `/avatars/${i}.png`);

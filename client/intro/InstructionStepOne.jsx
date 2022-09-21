@@ -49,7 +49,7 @@ export default class InstructionStepOne extends React.Component {
             <strong>
             You will receive a base payment of ${game.treatment.basePay} for your participation in the game,
             in addition to $1 per {game.treatment.conversionRate} coins earned. To receive the bonus payment, please be sure to stay for all
-            rounds of the game; the exit survey marks the end of the game and contains the code for submission. 
+            rounds of the game; the exit survey marks the end of the game and contains the code for submission. If you are detected to be idle, you forfeit the bonus amount. 
             </strong>
           </p>
 

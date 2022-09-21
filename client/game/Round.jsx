@@ -7,8 +7,20 @@ import Punishment from "./pages/punishment/Punishment.jsx";
 import Outcome from "./pages/outcome/Outcome.jsx";
 import "./Sidebar.css";
 
+const roundSound = new Audio("sounds/round-sound.mp3");
+const gameSound = new Audio("sounds/bell.mp3");
 
 export default class Round extends React.Component {
+  componentDidMount() {
+    const { game } = this.props;
+    if (game.get("justStarted")) {
+      //play the bell sound only once when the game starts
+      gameSound.play();
+      game.set("justStarted", false);
+    } else {
+      roundSound.play();
+    }
+  }
 
   render() {
     const { stage } = this.props;
