@@ -52,7 +52,7 @@ export default class Contribution extends React.Component {
             <div className="contribution-image"/>
           </div>
           <div className="instructions-text">
-            You can contribute any of your {endowment} coins for this round towards the public fund, which will be multiplied then divided equally among the group.
+            You can contribute all or none of your {endowment} coins for this round towards the public fund, which will be multiplied then divided equally among the group.
           </div>
           {player.stage.submitted ?
             <div className="waiting-response-container">
