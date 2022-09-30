@@ -14,7 +14,8 @@ export default class Table extends React.Component {
           <tbody>
             <tr className='tr'>
               <th className='th'>Player</th>
-              <th className='th'>Remaining coins<br></br>in round</th>
+              <th className='th'>Coins<br></br>contributed</th>
+              <th className='th'>Coins<br></br>withheld</th>
               <th className='th'>Share of public<br></br>fund payoff</th>
               {punishment && <>
               <th className='th'>Deductions given <br></br> (-{game.treatment.punishmentCost} coins each)</th>
@@ -37,7 +38,7 @@ export default class Table extends React.Component {
                         <td className='td' >
                           <img src={player.get("avatar")} className="avatar" />
                         </td>
-
+                        <td className='td'><h2>{contribution}</h2></td>
                         <td className='td'><h2>{endowment - contribution}</h2></td>
                         <td className='td'><h2>{poolPayoff}</h2></td>
                         {punishment && 
@@ -69,6 +70,7 @@ export default class Table extends React.Component {
                       <td className='td' >
                         <img src={player.get("avatar")} className="avatar" />
                       </td>
+                      <td className='td'><h2>{contribution}</h2></td>
                       <td className='td'><h2>{endowment - contribution}</h2></td>
                       <td className='td'><h2>{poolPayoff}</h2></td>
                       {punishment && 
