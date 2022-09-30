@@ -76,7 +76,7 @@ export default class Quiz extends React.Component {
             </p>
             <p>
               <label htmlFor="horse">
-                Imagine that in a given round, the money multiplier is 2 and
+                Imagine that in a given round, the money multiplier is 2, there are only 3 players, and
                 players contributed the following amounts:
                 <div> Player 1: 10 Coins </div> <div> Player 2: 4 Coins </div>
                 <div> Player 3: 1 Coins </div>

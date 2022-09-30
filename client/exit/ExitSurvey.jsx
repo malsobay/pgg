@@ -146,7 +146,7 @@ export default class ExitSurvey extends React.Component {
                 </div>
               </div>
               <div>
-                <label htmlFor="fair">Do you feel the pay was fair?</label>
+                <label htmlFor="fair">Do you feel you were fairly compensated for your time?</label>
                 <div>
                   <textarea
                     dir="auto"
