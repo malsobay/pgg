@@ -12,7 +12,7 @@ import QuizCopy from "./intro/QuizCopy";
 import Quiz from "./intro/Quiz";
 import NewPlayer from "./intro/NewPlayer";
 import React from "react";
-
+import { dev } from "../dev";
 
 // Set the About Component you want to use for the About dialog (optional).
 Empirica.about(About);
@@ -28,6 +28,10 @@ Empirica.newPlayer(NewPlayer);
 // different instruction steps depending on the assigned treatment.
 
 Empirica.introSteps((game, treatment) => {
+  if (dev) {
+    return [];
+  }
+
   const steps = [InstructionStepOne];
 
   if (treatment.punishmentExists) {
@@ -65,14 +69,25 @@ Empirica.exitSteps((game, player) => {
 
 const Breadcrumb = ({ round, stage, game }) => (
   <ul className="bp3-breadcrumbs round-nav">
-    <li><a className="bp3-breadcrumb" tabIndex="0">Round {round.index + 1}{game.treatment.showNRounds ? "/"+game.treatment.numRounds : ""}</a></li>
-    {round.stages.map(s => (
-      <li key={s.name} className={s.name === stage.name ? "bp3-breadcrumb-current" : "bp3-breadcrumb"}>{s.displayName}</li>
+    <li>
+      <a className="bp3-breadcrumb" tabIndex="0">
+        Round {round.index + 1}
+        {game.treatment.showNRounds ? "/" + game.treatment.numRounds : ""}
+      </a>
+    </li>
+    {round.stages.map((s) => (
+      <li
+        key={s.name}
+        className={
+          s.name === stage.name ? "bp3-breadcrumb-current" : "bp3-breadcrumb"
+        }
+      >
+        {s.displayName}
+      </li>
     ))}
   </ul>
 );
 Empirica.breadcrumb(Breadcrumb);
-
 
 // Start the app render tree.
 // NB: This must be called after any other Empirica calls (Empirica.round(),

@@ -1,3 +1,0 @@
-module.exportDefault({
-  disabled: false
-});

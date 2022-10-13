@@ -1,4 +1,5 @@
 import Empirica from "meteor/empirica:core";
+import { dev } from "../dev.js";
 import "./bots.js";
 import "./callbacks.js";
 
@@ -28,6 +29,7 @@ import "./callbacks.js";
   } = game;
 
 */
+
 Empirica.gameInit((game) => {
   _.times(game.treatment.numRounds, (i) => {
     const round = game.addRound();
@@ -35,19 +37,21 @@ Empirica.gameInit((game) => {
     round.addStage({
       name: "contribution",
       displayName: "Contribution",
-      durationInSeconds: game.treatment.contributionDuration,
+      durationInSeconds: dev ? 300000 : game.treatment.contributionDuration,
     });
 
     round.addStage({
       name: "outcome",
-      displayName: game.treatment.punishmentExists ? "Outcome & Deductions" : "Outcome",
-      durationInSeconds: game.treatment.outcomeDuration,
-    })
+      displayName: game.treatment.punishmentExists
+        ? "Outcome & Deductions"
+        : "Outcome",
+      durationInSeconds: dev ? 300000 : game.treatment.outcomeDuration,
+    });
 
     round.addStage({
       name: "summary",
       displayName: "Summary",
-      durationInSeconds: game.treatment.summaryDuration,
+      durationInSeconds: dev ? 300000 : game.treatment.summaryDuration,
     });
   });
 });
