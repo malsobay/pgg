@@ -24,12 +24,14 @@ files = {}
 # Read all the svg files in directory and iterate over them
 Dir.foreach(dir) do |file|
   # Skip the . and .. directories
-  next if file == "." or file == ".." or !(file.include? ".svg")
+  next if file == "." or file == ".." or !(file.include? ".svg") or !(file.include? "animal_")
+
   # Read the file
   content = File.read(dir + "/" + file)
 
   name = file.sub(".svg", "").sub("animal_", "").downcase
   files[name] = content.split("\n").select { |line| line.include? "<path" }.join("\n")
+  files[name].gsub!("fill-opacity", "fillOpacity")
 end
 
 files.each do |name, content|
@@ -56,6 +58,22 @@ js = <<EOF
     default: return null;
   }
 }
+EOF
+
+puts js
+js = <<EOF
+
+export const AnimalList = [
+EOF
+
+puts js
+
+files.each do |name, content|
+  puts "\"#{name}\","
+end
+
+js = <<EOF
+];
 EOF
 
 puts js

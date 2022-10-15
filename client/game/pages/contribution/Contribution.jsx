@@ -1,5 +1,6 @@
 import React from "react";
-import { AnimalAvatar } from "../../../components/AnimalsAvatar";
+import { MoneyBowl } from "../../../components/assets/Assets";
+import { Avatar } from "../../../components/Avatar";
 import "./Contribution.css";
 
 export default class Contribution extends React.Component {
@@ -78,7 +79,8 @@ export default class Contribution extends React.Component {
             <div className="contribution-image" />
 
             <div style={{ height: "30px", width: "30px" }}>
-              <AnimalAvatar animal={"bear"} />
+              <Avatar animal={"bear"} />
+              <MoneyBowl />
             </div>
           </div>
           <div className="text-blue-400">HEYO</div>
