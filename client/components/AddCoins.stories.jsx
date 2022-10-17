@@ -7,6 +7,7 @@ export function AddingCoins() {
       <AddingCoinsTester purse={20} multiplier={3} />
       <AddingCoinsTester purse={2500} multiplier={32} />
       <AddingCoinsTester purse={1} multiplier={1} />
+      <AddingCoinsTester purse={10} multiplier={1} submitted />
     </div>
   );
 }
@@ -14,12 +15,14 @@ export function AddingCoins() {
 class AddingCoinsTester extends React.Component {
   state = { contributed: 0 };
   render() {
-    const { purse, multiplier } = this.props;
+    const { purse, multiplier, submitted } = this.props;
     return (
       <div className="h-screen flex justify-center">
         <AddCoins
           header={`You can contribute up to ${purse} coins this round`}
           footer={`The pot will be multiplied by ${multiplier}× and divided equally among the group at the end of the round`}
+          submittedText="You have submitted your contribution. Waiting on the other players"
+          submitted={submitted}
           purse={purse}
           multiplier={multiplier}
           contributed={this.state.contributed}
@@ -39,6 +42,19 @@ export function Elements() {
         <AddCoins
           header="You can contribute up to 20 coins this round"
           footer="The pot will be multiplied by x3 and divided equally among the group at the end of the round"
+          submittedText="You have submitted your contribution. Waiting on the other players"
+          purse={20}
+          multiplier={3}
+          contributed={5}
+          onClick={(amount) => console.log(`Added ${amount}`)}
+        />
+      </div>
+      <div className="px-16 w-1/3">
+        <AddCoins
+          header="You can contribute up to 20 coins this round"
+          footer="The pot will be multiplied by x3 and divided equally among the group at the end of the round"
+          submittedText="You have submitted your contribution. Waiting on the other players"
+          submitted
           purse={20}
           multiplier={3}
           contributed={5}

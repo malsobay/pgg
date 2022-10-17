@@ -12,6 +12,7 @@ export function ArrowNumber({
   small = false,
   dim = false,
   double = false,
+  multiply = false,
 }) {
   let className = "";
   switch (direction) {
@@ -47,7 +48,7 @@ export function ArrowNumber({
       <div className={`relative h-full w-full ${className}`}>
         {double ? (
           <div className="relative h-full w-full">
-            <div className="absolute h-full w-full -top-0 -left-3">
+            <div className="absolute h-full w-full top-0 -left-3">
               <Arrow color={color} full={full} />
             </div>
             <div className="absolute h-full w-full top-0 left-3">
@@ -69,6 +70,7 @@ export function ArrowNumber({
               shadow
             >
               {number}
+              {multiply && "×"}
             </Label>
             {text && (
               <Label

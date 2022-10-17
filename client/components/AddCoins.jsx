@@ -1,36 +1,57 @@
 import React from "react";
 import { Arrow, Coin } from "./assets/Assets";
 import { Bowl } from "./Bowl";
+import { Button } from "./Button";
 import { Label } from "./Label";
 
 export function AddCoins({
   header,
+  submittedText,
   footer,
   purse,
   contributed,
   multiplier,
   onClick,
+  submitted = false,
 }) {
   console.log(multiplier);
   return (
     <div className="flex flex-col items-center text-center max-w-sm">
-      <Label color="orange" size="md" snug>
-        {header}
-      </Label>
-      <AddCoinsPurse amount={purse - contributed} />
-      <AddCoinsArrows
-        canAdd1={purse - contributed > 0}
-        canAdd10={purse - contributed > 9}
-        canRemove1={contributed > 0}
-        canRemove10={contributed > 9}
-        onClick={onClick}
-      />
-      <div className="w-52 mt-8">
+      {!submitted && (
+        <Label color="orange" size="md" snug>
+          {header}
+        </Label>
+      )}
+      {!submitted && <AddCoinsPurse amount={purse - contributed} />}
+      {!submitted && (
+        <AddCoinsArrows
+          canAdd1={purse - contributed > 0}
+          canAdd10={purse - contributed > 9}
+          canRemove1={contributed > 0}
+          canRemove10={contributed > 9}
+          onClick={onClick}
+        />
+      )}
+      <div className="w-52 pt-8">
         <Bowl money={contributed} multiplier={multiplier} />
       </div>
-      <Label color="orange" size="md" snug>
-        {footer}
-      </Label>
+      {!submitted && (
+        <Button onClick={() => console.log("I'm done")}>I'm done</Button>
+      )}
+      {submitted && (
+        <div className="pt-8">
+          <Label color="gray" size="md" snug>
+            {submittedText}
+          </Label>
+        </div>
+      )}
+      {!submitted && (
+        <div className="pt-8">
+          <Label color="orange" size="md" snug>
+            {footer}
+          </Label>
+        </div>
+      )}
     </div>
   );
 }
