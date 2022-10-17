@@ -12,8 +12,8 @@ export const Header = ({
   rightOnClick,
 }) => {
   return (
-    <header className="w-full grid grid-cols-3 items-baseline bg-white py-4 px-12">
-      <div className="flex items-center space-x-8">
+    <header className="w-full grid grid-cols-12 grid-flow-row justify-center items-baseline bg-white py-4 px-12">
+      <div className="flex items-center space-x-8 col-start-1 col-end-4">
         <Label size="lg" color="pink">
           {left}
         </Label>
@@ -28,12 +28,12 @@ export const Header = ({
           </div>
         )}
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center col-start-4 col-end-9">
         <Label size="2xl" color="sky">
           <Clock timerMinutes={timerMinutes} timerSeconds={timerSeconds} />
         </Label>
       </div>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end col-start-9 col-end-13">
         <button className="py-1 px-4" onClick={rightOnClick}>
           <Label size="md" color="gray">
             {right}
@@ -58,12 +58,12 @@ function Clock({ timerMinutes, timerSeconds }) {
 
   return (
     <div className="flex">
-      {timerMinutes.split("").map((num) => (
-        <Digit digit={num} />
+      {timerMinutes.split("").map((num, i) => (
+        <Digit key={i} digit={num} />
       ))}
       <Digit tight digit=":" />
-      {ts.split("").map((num) => (
-        <Digit digit={num} />
+      {ts.split("").map((num, i) => (
+        <Digit key={i} digit={num} />
       ))}
     </div>
   );

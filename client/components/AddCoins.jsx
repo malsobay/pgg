@@ -12,6 +12,7 @@ export function AddCoins({
   contributed,
   multiplier,
   onClick,
+  onSubmit = () => console.log("I'm done"),
   submitted = false,
 }) {
   console.log(multiplier);
@@ -35,9 +36,7 @@ export function AddCoins({
       <div className="w-52 pt-8">
         <Bowl money={contributed} multiplier={multiplier} />
       </div>
-      {!submitted && (
-        <Button onClick={() => console.log("I'm done")}>I'm done</Button>
-      )}
+      {!submitted && <Button onClick={onSubmit}>I'm done</Button>}
       {submitted && (
         <div className="pt-8">
           <Label color="gray" size="md" snug>

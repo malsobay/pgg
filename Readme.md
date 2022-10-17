@@ -4,11 +4,12 @@
 
 _This project was generated with [create-empirica-app](https://github.com/empiricaly/create-empirica-app)._
 
-*Add a description of your Empirica app*
+_Add a description of your Empirica app_
 
 # Running this App Locally
 
-## General  Setup
+## General Setup
+
 If you haven't already:
 
 - Install `Node.js` and `npm` here: [https://nodejs.org/en/](https://nodejs.org/en/)
@@ -29,6 +30,7 @@ You can now run the app on your local machine with:
 ```
 meteor
 ```
+
 This can take a few minutes.
 
 This will start the app that you can access as a participant:
@@ -37,11 +39,12 @@ This will start the app that you can access as a participant:
 You can access the admin panel here:
 [https:/localhost:3000/admin](https:/localhost:3000/admin)
 
-Log in with the *username* and *password* provided in the command line.
+Log in with the _username_ and _password_ provided in the command line.
 
 ## Loading the factors and treatments
 
 To use the app, you usually need to use treatments and factors. Some might be prepared in a `.yaml` file (e.g., `factors.yaml`). In the **admin panel**:
+
 - click on the **Configuration** button
 - click on **import**
 - select the `.yaml` file you want to import the factors and treatments from
@@ -54,6 +57,7 @@ To run a game create a new `batch` with the games of treatments you want to use 
 Open a player tab by going to [https:/localhost:3000/](https:/localhost:3000/) or clicking on **open app**.
 
 The player that you open with [https:/localhost:3000/](https:/localhost:3000/) is cached on your browser. Whenever you start a game with this player, your local app will keep that information. To play again there are multiple things you can do:
+
 - Click on the **Reset current session** button on the header of a tab with your player to reset this player, and create a new game for this player to join.
 - Click on the **New Player** button on the header of a tab with your player to open a new tab with a different player (you will see the id of that player in the title of the tab).
 - Go to the **Players** tab in the admin panel and retire players that have finished or cancelled.
@@ -111,3 +115,24 @@ be available in the app at `http://localhost:3000/my-logo.jpeg`.
 - React Tutorial: [https://reactjs.org/tutorial/tutorial.html](https://reactjs.org/tutorial/tutorial.html)
 - LESS Intro: [http://lesscss.org/#overview](http://lesscss.org/#overview)
 - JavaScript Tutorial: [https://javascript.info/](https://javascript.info/)
+
+# Ladle
+
+Ladle is used to test the UI elements. But it required a later version of react.
+For now, just switch react versions when working with Ladle:
+
+```sh
+npm i -E react@16.14.0 react-dom@16.14.0
+```
+
+Run ladle:
+
+```sh
+npm run ladle
+```
+
+And when done switch back before comitting:
+
+```sh
+npm i -E react@16.5.2 react-dom@16.5.2
+```

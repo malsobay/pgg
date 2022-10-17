@@ -16,7 +16,8 @@ export const PlayerGrid = ({ children }) => {
     ypad = "py-[66%]";
   }
 
-  const className = "pr-16 grid grid-flow-col bg-white";
+  const className =
+    "h-full pr-16 grid grid-flow-col bg-white justify-center items-center";
 
   return (
     <div dir="rtl" className={`${rows} ${className} ${ypad}`}>

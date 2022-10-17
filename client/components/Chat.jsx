@@ -11,6 +11,10 @@ export class Chat extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (!this.messagesRef.current) {
+      return;
+    }
+
     if (
       (!prevState.open && this.state.open) ||
       (!prevState.focused && this.state.focused)
@@ -51,7 +55,10 @@ export class Chat extends React.Component {
         // onMouseLeave={this.handleMouseLeaveOpen}
       >
         <div className="rounded-2xl outline outline-2 outline-gray-300 pb-2 w-full h-full flex flex-col font-mono bg-white/95">
-          <div className="overflow-auto px-2 pb-2" ref={this.messagesRef}>
+          <div
+            className="overflow-auto h-full px-2 pb-2"
+            ref={this.messagesRef}
+          >
             <Messages messages={messages} />
           </div>
           <div className="px-2">
@@ -142,7 +149,10 @@ function Messages({ messages, maxSize = 0 }) {
     }
 
     return (
-      <div className="pl-2 flex items-start space-x-2" key={message.id}>
+      <div
+        className="pl-2 flex min-h-full items-start space-x-2"
+        key={message.id}
+      >
         <div className="w-6 h-6 pt-2 py-0.5 shrink-0">
           <Avatar animal={message.avatar} />
         </div>
@@ -232,4 +242,45 @@ class Input extends React.Component {
       </form>
     );
   }
+}
+
+export class ChatExample extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: this.props.messages,
+    };
+  }
+
+  render() {
+    const { playerId, avatar } = this.props;
+    const { messages } = this.state;
+
+    return (
+      <Chat
+        messages={messages}
+        avatar={avatar}
+        onNewMessage={(text) => {
+          console.log("text:", text);
+          this.setState({
+            messages: [
+              ...this.state.messages,
+              {
+                text,
+                avatar,
+                playerId,
+                self: true,
+                id: randID(),
+                timestamp: Date.now(),
+              },
+            ],
+          });
+        }}
+      />
+    );
+  }
+}
+
+function randID() {
+  return Math.random().toString(16).slice(8);
 }

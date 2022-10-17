@@ -10,8 +10,8 @@
     "@blueprintjs/core": "3.54.0",
     "bcrypt": "^5.0.0",
     "meteor-node-stubs": "0.4.1",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
     "react-router-dom": "4.3.1",
     "simpl-schema": "1.10.2"
   },

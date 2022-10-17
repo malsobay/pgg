@@ -21,7 +21,7 @@ export class NormalHeader extends React.Component {
 
   render() {
     return (
-      <div className="w-full outline-slate-200 outline">
+      <div className="w-full ">
         <Header
           left="Round 1"
           showPiggyBank

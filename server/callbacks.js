@@ -1,5 +1,37 @@
-import { ALIGN_LEFT } from "@blueprintjs/core/lib/esm/common/classes";
 import Empirica from "meteor/empirica:core";
+
+export const AnimalList = [
+  "sloth",
+  "gorilla",
+  "duck",
+  "chicken",
+  "dog",
+  "parrot",
+  "moose",
+  "rabbit",
+  "owl",
+  "chick",
+  "snake",
+  "crocodile",
+  "cow",
+  "pinguin",
+  "monkey",
+  "frog",
+  "elephant",
+  "whale",
+  "horse",
+  "walrus",
+  "rhino",
+  "giraffe",
+  "pig",
+  "buffalo",
+  "zebra",
+  "narwhal",
+  "bear",
+  "goat",
+  "hippo",
+  "panda",
+];
 
 // onGameStart is triggered opnce per game before the game starts, and before
 // the first onRoundStart. It receives the game and list of all the players in
@@ -8,7 +40,7 @@ Empirica.onGameStart((game) => {
   game.set("justStarted", true);
   game.players.forEach((player, i) => {
     /*player.set("avatar", `/avatars/jdenticon/${player._id}`);*/
-    player.set("avatar", `/avatars/${i}.png`);
+    player.set("avatar", AnimalList[i]);
     player.set("avatarId", i);
     player.set("cumulativePayoff", game.treatment.endowment);
   });

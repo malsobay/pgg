@@ -1,18 +1,20 @@
 import Empirica from "meteor/empirica:core";
 import { render } from "react-dom";
+import { dev } from "../dev";
+import DevHelp from "./components/DevHelp";
 import ExitSurvey from "./exit/ExitSurvey";
-import Thanks from "./exit/Thanks";
 import Sorry from "./exit/Sorry";
+import Thanks from "./exit/Thanks";
 import About from "./game/pages/about/About";
 import Round from "./game/Round";
 import Consent from "./intro/Consent";
 import InstructionStepOne from "./intro/InstructionStepOne";
 import InstructionStepTwo from "./intro/InstructionStepTwo";
-import QuizCopy from "./intro/QuizCopy";
-import Quiz from "./intro/Quiz";
 import NewPlayer from "./intro/NewPlayer";
-import React from "react";
-import { dev } from "../dev";
+import Quiz from "./intro/Quiz";
+
+Empirica.header(DevHelp);
+Empirica.breadcrumb(() => null);
 
 // Set the About Component you want to use for the About dialog (optional).
 Empirica.about(About);
@@ -67,27 +69,27 @@ Empirica.exitSteps((game, player) => {
   return [ExitSurvey, Thanks];
 });
 
-const Breadcrumb = ({ round, stage, game }) => (
-  <ul className="bp3-breadcrumbs round-nav">
-    <li>
-      <a className="bp3-breadcrumb" tabIndex="0">
-        Round {round.index + 1}
-        {game.treatment.showNRounds ? "/" + game.treatment.numRounds : ""}
-      </a>
-    </li>
-    {round.stages.map((s) => (
-      <li
-        key={s.name}
-        className={
-          s.name === stage.name ? "bp3-breadcrumb-current" : "bp3-breadcrumb"
-        }
-      >
-        {s.displayName}
-      </li>
-    ))}
-  </ul>
-);
-Empirica.breadcrumb(Breadcrumb);
+// const Breadcrumb = ({ round, stage, game }) => (
+//   <ul className="bp3-breadcrumbs round-nav">
+//     <li>
+//       <a className="bp3-breadcrumb" tabIndex="0">
+//         Round {round.index + 1}
+//         {game.treatment.showNRounds ? "/" + game.treatment.numRounds : ""}
+//       </a>
+//     </li>
+//     {round.stages.map((s) => (
+//       <li
+//         key={s.name}
+//         className={
+//           s.name === stage.name ? "bp3-breadcrumb-current" : "bp3-breadcrumb"
+//         }
+//       >
+//         {s.displayName}
+//       </li>
+//     ))}
+//   </ul>
+// );
+// Empirica.breadcrumb(Breadcrumb);
 
 // Start the app render tree.
 // NB: This must be called after any other Empirica calls (Empirica.round(),

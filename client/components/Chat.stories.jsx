@@ -1,5 +1,5 @@
 import React from "react";
-import { Chat } from "./Chat";
+import { ChatExample } from "./Chat";
 import { You } from "./You";
 
 function randID() {
@@ -65,40 +65,3 @@ export const MyChat = () => {
     </div>
   );
 };
-
-class ChatExample extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      messages: this.props.messages,
-    };
-  }
-
-  render() {
-    const { playerId, avatar } = this.props;
-    const { messages } = this.state;
-
-    return (
-      <Chat
-        messages={messages}
-        avatar={avatar}
-        onNewMessage={(text) => {
-          console.log("text:", text);
-          this.setState({
-            messages: [
-              ...this.state.messages,
-              {
-                text,
-                avatar,
-                playerId,
-                self: true,
-                id: randID(),
-                timestamp: Date.now(),
-              },
-            ],
-          });
-        }}
-      />
-    );
-  }
-}

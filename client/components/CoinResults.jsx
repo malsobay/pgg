@@ -13,7 +13,7 @@ export const CoinResults = ({
   playerCount,
 }) => {
   return (
-    <div className="relative w-full px-8">
+    <div className="relative w-full">
       <div className="relative w-full">
         <div className="flex flex-col -space-y-12">
           <div className="flex w-full justify-center items-center">

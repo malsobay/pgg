@@ -148,7 +148,7 @@ export const DeductCancel = () => (
       r="11"
       fill="#F3F4F6"
       stroke="#9CA3AF"
-      stroke-width="2"
+      strokeWidth="2"
     />
     <rect
       x="8.46436"
