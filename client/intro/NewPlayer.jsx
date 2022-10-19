@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
+import { Button } from "./Button";
+import React, { Component } from "react";
 import { Centered } from "meteor/empirica:core";
 
 export default class NewPlayer extends Component {
   state = { id: "" };
 
-  handleUpdate = event => {
+  handleUpdate = (event) => {
     const { value, name } = event.currentTarget;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const { handleNewPlayer } = this.props;
@@ -22,13 +23,11 @@ export default class NewPlayer extends Component {
 
     return (
       <Centered>
-        <div >
+        <div>
           <form onSubmit={this.handleSubmit}>
             <h1>Identification</h1>
 
-            <p>
-              Please enter your id:
-                        </p>
+            <p>Please enter your id:</p>
 
             <input
               dir="auto"
@@ -43,13 +42,12 @@ export default class NewPlayer extends Component {
 
             <br />
 
-            <p>
-              <button type="submit">Submit</button>
+            <p className="pt-4">
+              <Button type="submit">Submit</Button>
             </p>
-
           </form>
         </div>
       </Centered>
-    )
+    );
   }
 }
