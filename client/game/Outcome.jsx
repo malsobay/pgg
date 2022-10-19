@@ -55,27 +55,32 @@ export default function Stage1({ stage, round, game, player }) {
         </div>
         <div className="h-full grid grid-rows-1 col-start-9 col-end-13">
           <PlayerGrid>
-            {otherPlayers.map((player, i) => {
+            {otherPlayers.map((otherPlayer, i) => {
               const punishments = player.round.get("punished");
-              const punished = punishments[player._id] || 0;
+              const punished = punishments[otherPlayer._id] || 0;
 
               return (
-                <div dir="ltr" key={player._id} className="w-[6.5rem]">
-                  <AvatarDeduction
-                    animal={player.get("avatar")}
-                    submitted={player.stage.submitted}
-                    contributed={player.round.get("contribution")}
-                    active
-                    deducted={punished}
-                    onCancel={() => {
-                      punishments[player._id] = 0;
-                      player.round.set("punished", punishments);
-                    }}
-                    onDeduct={() => {
-                      punishments[player._id] = punished + 1;
-                      player.round.set("punished", punishments);
-                    }}
-                  />
+                <div
+                  key={player._id}
+                  className="flex justify-center items-center"
+                >
+                  <div dir="ltr" className="w-[6.5rem]">
+                    <AvatarDeduction
+                      animal={otherPlayer.get("avatar")}
+                      submitted={otherPlayer.stage.submitted}
+                      contributed={otherPlayer.round.get("contribution")}
+                      active
+                      deducted={punished}
+                      onCancel={() => {
+                        punishments[otherPlayer._id] = 0;
+                        player.round.set("punished", punishments);
+                      }}
+                      onDeduct={() => {
+                        punishments[otherPlayer._id] = punished + 1;
+                        player.round.set("punished", punishments);
+                      }}
+                    />
+                  </div>
                 </div>
               );
             })}

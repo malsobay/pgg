@@ -130,13 +130,11 @@ export function AvatarDeduction({
             <DeductCancel />
           </button>
         )}
-        {contributed && (
-          <div className="absolute -bottom-1 left-0 w-full text-center">
-            <Label color="yellow" size="md" stroke shadow>
-              {contributed}
-            </Label>
-          </div>
-        )}
+        <div className="absolute -bottom-1 left-0 w-full text-center">
+          <Label color="yellow" size="md" stroke shadow>
+            {contributed}
+          </Label>
+        </div>
       </div>
     </div>
   );

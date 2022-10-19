@@ -2,8 +2,8 @@ import React from "react";
 
 import Contribution from "./Contribution.jsx";
 import Outcome from "./Outcome.jsx";
-import Summary from "./Summary.jsx";
 import "./Sidebar.css";
+import Summary from "./Summary.jsx";
 
 const roundSound = new Audio("sounds/round-sound.mp3");
 const gameSound = new Audio("sounds/bell.mp3");

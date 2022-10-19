@@ -46,11 +46,16 @@ export default function Stage1({ stage, game, player }) {
         <div className="h-full grid grid-rows-1 col-start-9 col-end-13">
           <PlayerGrid>
             {otherPlayers.map((player, i) => (
-              <div dir="ltr" key={player._id} className="w-16">
-                <Avatar
-                  animal={player.get("avatar")}
-                  submitted={player.stage.submitted}
-                />
+              <div
+                key={player._id}
+                className="flex justify-center items-center"
+              >
+                <div dir="ltr" className="w-16">
+                  <Avatar
+                    animal={player.get("avatar")}
+                    submitted={player.stage.submitted}
+                  />
+                </div>
               </div>
             ))}
           </PlayerGrid>
