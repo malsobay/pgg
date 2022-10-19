@@ -1,6 +1,6 @@
-import { Button } from "./Button";
-import React, { Component } from "react";
 import { Centered } from "meteor/empirica:core";
+import React, { Component } from "react";
+import { Button } from "../components/NormalButton";
 
 export default class NewPlayer extends Component {
   state = { id: "" };

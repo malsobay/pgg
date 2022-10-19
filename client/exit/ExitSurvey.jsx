@@ -1,9 +1,10 @@
 import React from "react";
+import { Button } from "../components/NormalButton";
 
 import { Centered } from "meteor/empirica:core";
 
 const Radio = ({ selected, name, value, label, onChange }) => (
-  <label>
+  <label className="flex space-x-1">
     <input
       type="radio"
       name={name}
@@ -11,7 +12,7 @@ const Radio = ({ selected, name, value, label, onChange }) => (
       checked={selected === value}
       onChange={onChange}
     />
-    {label}
+    <div>{label}</div>
   </label>
 );
 
@@ -32,20 +33,27 @@ export default class ExitSurvey extends React.Component {
   render() {
     const { game, player } = this.props;
     const { age, gender, strength, fair, feedback, education } = this.state;
-    const earnings = Math.max((player.get("cumulativePayoff") / game.treatment.conversionRate).toFixed(2), 0);
+    const earnings = Math.max(
+      (player.get("cumulativePayoff") / game.treatment.conversionRate).toFixed(
+        2
+      ),
+      0
+    );
     const basePay = game.treatment.basePay;
     const totalPay = (parseFloat(basePay) + parseFloat(earnings)).toFixed(2);
     return (
       <Centered>
-        <div className="exit-survey">
+        <div className="prose pb-8">
           <h1> Exit Survey </h1>
           <p>
-            Please submit the following code to receive your bonus: <strong>C2A8NL83</strong>
+            Please submit the following code to receive your bonus:{" "}
+            <strong>C2A8NL83</strong>
           </p>
           {/*<p>Earnings: {earnings}</p>*/}
           <p>
-            You will receive a base payment of <strong>${basePay}</strong>, in addition to a performance 
-            bonus of <strong>${earnings}</strong>, for a total of <strong>${totalPay}</strong>. 
+            You will receive a base payment of <strong>${basePay}</strong>, in
+            addition to a performance bonus of <strong>${earnings}</strong>, for
+            a total of <strong>${totalPay}</strong>.
           </p>
           {/*
           <p>
@@ -65,7 +73,9 @@ export default class ExitSurvey extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <div className="form-line">
               <div>
-                <label htmlFor="age">Age</label>
+                <label className="block mt-4 mb-2" htmlFor="age">
+                  Age
+                </label>
                 <div>
                   <input
                     id="age"
@@ -81,7 +91,9 @@ export default class ExitSurvey extends React.Component {
                 </div>
               </div>
               <div>
-                <label htmlFor="gender">Gender</label>
+                <label className="block mt-4 mb-2" htmlFor="gender">
+                  Gender
+                </label>
                 <div>
                   <input
                     id="gender"
@@ -97,8 +109,10 @@ export default class ExitSurvey extends React.Component {
             </div>
 
             <div>
-              <label>Highest Education Qualification</label>
-              <div>
+              <label className="block mt-4 mb-2">
+                Highest Education Qualification
+              </label>
+              <div className="flex space-x-2">
                 <Radio
                   selected={education}
                   name="education"
@@ -132,7 +146,7 @@ export default class ExitSurvey extends React.Component {
 
             <div className="form-line thirds">
               <div>
-                <label htmlFor="strength">
+                <label className="block mt-4 mb-2" htmlFor="strength">
                   How would you describe your strategy in the game?
                 </label>
                 <div>
@@ -146,7 +160,9 @@ export default class ExitSurvey extends React.Component {
                 </div>
               </div>
               <div>
-                <label htmlFor="fair">Do you feel you were fairly compensated for your time?</label>
+                <label className="block mt-4 mb-2" htmlFor="fair">
+                  Do you feel you were fairly compensated for your time?
+                </label>
                 <div>
                   <textarea
                     dir="auto"
@@ -158,7 +174,7 @@ export default class ExitSurvey extends React.Component {
                 </div>
               </div>
               <div>
-                <label htmlFor="feedback">
+                <label className="block mt-4 mb-2" htmlFor="feedback">
                   Feedback, including problems you encountered.
                 </label>
                 <div>
@@ -173,7 +189,9 @@ export default class ExitSurvey extends React.Component {
               </div>
             </div>
 
-            <button type="submit">Submit</button>
+            <div className="pt-4">
+              <Button type="submit">Next</Button>
+            </div>
           </form>
         </div>
       </Centered>

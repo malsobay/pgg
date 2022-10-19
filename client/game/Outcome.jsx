@@ -1,7 +1,7 @@
 import React from "react";
 import { AvatarDeduction } from "../components/AvatarComplications";
-import { Button } from "../components/Button";
 import { CoinResults } from "../components/CoinResults";
+import { Button } from "../components/FunButton";
 import { Label } from "../components/Label";
 import { PlayerGrid } from "../components/PlayerGrid";
 import { You } from "../components/You";

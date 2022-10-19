@@ -1,7 +1,7 @@
 import React from "react";
 import { Arrow, Coin } from "./assets/Assets";
 import { Bowl } from "./Bowl";
-import { Button } from "./Button";
+import { Button } from "./FunButton";
 import { Label } from "./Label";
 
 export function AddCoins({

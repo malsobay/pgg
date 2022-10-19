@@ -24,6 +24,7 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
     require("tailwindcss-text-fill-stroke"),
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(

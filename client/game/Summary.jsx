@@ -1,7 +1,7 @@
 import React from "react";
 import { AvatarScores } from "../components/AvatarComplications";
-import { Button } from "../components/Button";
 import { DeductionDetails } from "../components/DeductionDetails";
+import { Button } from "../components/FunButton";
 import { Label } from "../components/Label";
 import { PlayerGrid } from "../components/PlayerGrid";
 import { ChatView } from "./Chat";

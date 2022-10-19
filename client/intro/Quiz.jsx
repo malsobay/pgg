@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "./Button";
+import { Button } from "../components/NormalButton";
 
 import { Centered } from "meteor/empirica:core";
 
@@ -39,7 +39,7 @@ export default class Quiz extends React.Component {
     const punishmentCost = game.treatment.punishmentCost;
     return (
       <Centered>
-        <div className="quiz">
+        <div className="prose">
           <h1> Quiz </h1>
           <form
             onSubmit={this.handleSubmit(
@@ -49,7 +49,7 @@ export default class Quiz extends React.Component {
             )}
           >
             <p>
-              <label htmlFor="sum">
+              <label className="block pb-4" htmlFor="sum">
                 {" "}
                 In this game there will be a total of {playerCount} players. How
                 many players are there other than yourself?{" "}
@@ -67,8 +67,7 @@ export default class Quiz extends React.Component {
               />
             </p>
             <p>
-              <label htmlFor="horse">
-                {" "}
+              <label className="block pb-4" htmlFor="kept">
                 Imagine that in a given round, you have a starting fund of 10
                 coins. If you contribute 4 coins, how much of your starting
                 funds do you keep?
@@ -86,7 +85,7 @@ export default class Quiz extends React.Component {
               />
             </p>
             <p>
-              <label htmlFor="horse">
+              <label className="block pb-4" htmlFor="payoff">
                 Imagine that in a given round, the money multiplier is 2, there
                 are only 3 players, and players contributed the following
                 amounts:
@@ -110,7 +109,7 @@ export default class Quiz extends React.Component {
             {punishmentExists && (
               <>
                 <p>
-                  <label htmlFor="horse">
+                  <label className="block pb-4" htmlFor="punishment">
                     Each deduction you impose on another player deducts{" "}
                     {punishmentMagnitude} coins from them, and costs you{" "}
                     {punishmentCost} coins. If you spend {2 * punishmentCost}{" "}
@@ -131,7 +130,7 @@ export default class Quiz extends React.Component {
                 </p>
               </>
             )}
-            <p className="space-x-4">
+            <p className="pt-8 space-x-4">
               <Button onClick={onPrev} disabled={!hasPrev}>
                 Back to instructions
               </Button>
