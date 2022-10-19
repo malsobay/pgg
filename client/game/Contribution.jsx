@@ -7,7 +7,7 @@ import { You } from "../components/You";
 import { ChatView } from "./Chat";
 import Header from "./Header";
 
-export default function Stage1({ stage, game, player }) {
+export default function Contribution({ stage, game, player }) {
   const multiplier = game.treatment.multiplier;
   const contribution = player.round.get("contribution") || 0;
   const endowment = game.treatment.endowment;

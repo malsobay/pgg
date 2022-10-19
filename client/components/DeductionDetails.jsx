@@ -20,7 +20,7 @@ export function DeductionDetails({
   );
 
   return (
-    <div className="font-mono w-96 p-4 border-2 border-gray-300 bg-white rounded-xl">
+    <div className="font-mono w-96 p-4 border-2 border-gray-300 bg-white rounded-xl shadow-lg">
       <Label color="gray" size="sm">
         <div className="capitalize font-sans">{animal}</div>
       </Label>
