@@ -1,0 +1,26 @@
+{
+  "name": "ladle-stories",
+  "private": true,
+  "scripts": {
+    "dev": "ladle serve"
+  },
+  "dependencies": {
+    "react": "16.14.0",
+    "react-dom": "16.14.0"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {}
+    }
+  },
+  "devDependencies": {
+    "@ladle/react": "2.4.4",
+    "@tailwindcss/forms": "0.5.3",
+    "autoprefixer": "10.4.12",
+    "postcss": "8.2.15",
+    "postcss-import": "^15.0.0",
+    "postcss-load-config": "3.0.1",
+    "tailwindcss": "^3.1.8",
+    "tailwindcss-text-fill-stroke": "2.0.0-beta.1"
+  }
+}

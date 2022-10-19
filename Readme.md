@@ -116,23 +116,18 @@ be available in the app at `http://localhost:3000/my-logo.jpeg`.
 - LESS Intro: [http://lesscss.org/#overview](http://lesscss.org/#overview)
 - JavaScript Tutorial: [https://javascript.info/](https://javascript.info/)
 
-# Ladle
+# Ladle Stories
 
-Ladle is used to test the UI elements. But it required a later version of react.
-For now, just switch react versions when working with Ladle:
+Ladle is used to test the UI elements. But it required a later version of react,
+so it was seperated into a folder called stories. To run the stories, first
+update npm once, in stories:
 
 ```sh
-npm i -E react@16.14.0 react-dom@16.14.0
+> cd stories; npm i; cd ..
 ```
 
-Run ladle:
+Then, when you want to run the stories:
 
 ```sh
-npm run ladle
-```
-
-And when done switch back before comitting:
-
-```sh
-npm i -E react@16.5.2 react-dom@16.5.2
+npm run stories
 ```
