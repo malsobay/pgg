@@ -85,14 +85,18 @@ export default class Quiz extends React.Component {
               />
             </p>
             <p>
+              Imagine that in a given round, the money multiplier is 2, there
+              are only 3 players, and players contributed the following amounts:
+            </p>
+            <ul>
+              <li>Player 1 10 Coins</li>
+              <li>Player 2 4 Coins</li>
+              <li>Player 3 1 Coins</li>
+            </ul>
+            <p>
               <label className="block pb-4" htmlFor="payoff">
-                Imagine that in a given round, the money multiplier is 2, there
-                are only 3 players, and players contributed the following
-                amounts:
-                <div> Player 1: 10 Coins </div> <div> Player 2: 4 Coins </div>
-                <div> Player 3: 1 Coins </div>
-                <br></br>What is the round payoff? (round payoff = sum of
-                contributions x multiplier / the number of players){" "}
+                What is the round payoff? (round payoff = sum of contributions x
+                multiplier / the number of players){" "}
               </label>
               <input
                 type="text"

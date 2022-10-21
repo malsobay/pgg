@@ -59,7 +59,8 @@ export const MyChat = () => {
       </div>
       <div className="w-1/3 h-full absolute bottom-0 left-0 pointer-events-none">
         <div className="pr-20 h-full ">
-          <ChatExample messages={messages} playerId="1" avatar="parrot" />
+          {/* <ChatExample messages={messages} playerId="1" avatar="parrot" /> */}
+          <ChatExample messages={[]} playerId="1" avatar="parrot" />
         </div>
       </div>
     </div>

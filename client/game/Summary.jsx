@@ -15,7 +15,7 @@ export default class Summary extends React.Component {
   }
 
   render() {
-    const { stage, game, player } = this.props;
+    const { stage, round, game, player } = this.props;
     const { hovered, self } = this.state;
 
     // const multiplier = game.treatment.multiplier;
@@ -29,7 +29,7 @@ export default class Summary extends React.Component {
 
     return (
       <div className="h-full grid grid-rows-[min-content_1fr]">
-        <Header stage={stage} />
+        <Header player={player} game={game} round={round} stage={stage} />
         <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
           <div className="h-full relative col-start-1 col-end-4">
             <div className="h-full relative flex flex-col items-center justify-center pb-48">
@@ -85,7 +85,7 @@ export default class Summary extends React.Component {
                   <div
                     dir="ltr"
                     key={player._id}
-                    className="w-full h-full"
+                    className="w-full h-full flex justify-center items-center"
                     onMouseEnter={() => this.setState({ hovered: player._id })}
                     onMouseLeave={() => this.setState({ hovered: null })}
                   >

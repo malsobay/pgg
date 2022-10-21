@@ -8,7 +8,13 @@ export function ChatView({ game, player }) {
         <Chat
           messages={game.get("messages") || []}
           avatar={player.get("avatar")}
-          onNewMessage={(text) => {
+          onNewMessage={(t) => {
+            const text = t.trim();
+
+            if (text.length === 0) {
+              return;
+            }
+
             game.set("messages", [
               ...(game.get("messages") || []),
               {

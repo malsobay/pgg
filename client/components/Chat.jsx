@@ -50,16 +50,13 @@ export class Chat extends React.Component {
 
     return (
       <div
-        className="absolute w-full h-full px-2 py-2 pointer-events-auto"
+        className="absolute w-full h-full px-2 py-2 pointer-events-auto flex flex-col justify-end "
         // onMouseEnter={this.handleMouseEnterOpen}
         // onMouseLeave={this.handleMouseLeaveOpen}
       >
-        <div className="rounded-2xl outline outline-2 outline-gray-300 pb-2 w-full h-full flex flex-col font-mono bg-white/95">
-          <div
-            className="overflow-auto h-full px-2 pb-2"
-            ref={this.messagesRef}
-          >
-            <Messages messages={messages} />
+        <div className="rounded-2xl outline outline-2 outline-gray-300 pb-2 max-h-[75%] flex flex-col font-mono bg-white/95">
+          <div className="overflow-auto px-2 pb-2" ref={this.messagesRef}>
+            <Messages messages={messages} showNoMessages />
           </div>
           <div className="px-2">
             <Input
@@ -139,7 +136,19 @@ export class Chat extends React.Component {
   }
 }
 
-function Messages({ messages, maxSize = 0 }) {
+function Messages({ messages, maxSize = 0, showNoMessages = false }) {
+  if (messages.length === 0) {
+    if (showNoMessages) {
+      return (
+        <div className="h-full min-h-[4rem] w-full flex justify-center items-center">
+          No messages yet
+        </div>
+      );
+    } else {
+      return null;
+    }
+  }
+
   return messages.map((message, i) => {
     let sliced = false;
     let text = message.text;
@@ -149,10 +158,7 @@ function Messages({ messages, maxSize = 0 }) {
     }
 
     return (
-      <div
-        className="pl-2 flex min-h-full items-start space-x-2"
-        key={message.id}
-      >
+      <div className="pl-2 flex items-start space-x-2" key={message.id}>
         <div className="w-6 h-6 pt-2 py-0.5 shrink-0">
           <Avatar animal={message.avatar} />
         </div>
@@ -261,12 +267,16 @@ export class ChatExample extends React.Component {
         messages={messages}
         avatar={avatar}
         onNewMessage={(text) => {
-          console.log("text:", text);
+          const t = text.trim();
+          if (t.length === 0) {
+            return;
+          }
+          console.log("text:", t);
           this.setState({
             messages: [
               ...this.state.messages,
               {
-                text,
+                text: t,
                 avatar,
                 playerId,
                 self: true,

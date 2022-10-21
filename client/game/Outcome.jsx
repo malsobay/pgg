@@ -22,7 +22,7 @@ export default function Outcome({ stage, round, game, player }) {
 
   return (
     <div className="h-full grid grid-rows-[min-content_1fr]">
-      <Header stage={stage} />
+      <Header player={player} game={game} round={round} stage={stage} />
       <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
         <div className="h-full relative col-start-1 col-end-4">
           <div className="h-full relative flex items-center justify-center pb-48">

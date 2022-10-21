@@ -7,7 +7,7 @@ import { You } from "../components/You";
 import { ChatView } from "./Chat";
 import Header from "./Header";
 
-export default function Contribution({ stage, game, player }) {
+export default function Contribution({ stage, round, game, player }) {
   const multiplier = game.treatment.multiplier;
   const contribution = player.round.get("contribution") || 0;
   const endowment = game.treatment.endowment;
@@ -15,7 +15,7 @@ export default function Contribution({ stage, game, player }) {
 
   return (
     <div className="h-full grid grid-rows-[min-content_1fr]">
-      <Header stage={stage} />
+      <Header player={player} game={game} round={round} stage={stage} />
       <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
         <div className="h-full relative col-start-1 col-end-4">
           <div className="h-full relative flex items-center justify-center pb-48">
