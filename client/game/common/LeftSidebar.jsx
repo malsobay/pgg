@@ -1,13 +1,11 @@
 import React from "react";
-import Timer from "./common/Timer.jsx";
+import Timer from "./Timer.jsx";
 import "./Sidebar.css";
 
-
 export default class GroupView extends React.Component {
-  
   render() {
-    const { stage, game, player} = this.props;
-    if(stage.name == "contribution"){
+    const { stage, game, player } = this.props;
+    if (stage.name == "contribution") {
       return (
         <div className="sidebar-wrapper">
           <h4>Your Round Coins</h4>
@@ -15,16 +13,16 @@ export default class GroupView extends React.Component {
           <Timer stage={stage} />
         </div>
       );
-    }
-    else{
+    } else {
       return (
         <div className="sidebar-wrapper">
           <h4>Your Round Coins</h4>
-          <span>{game.treatment.endowment - player.round.get("contribution")}</span>
+          <span>
+            {game.treatment.endowment - player.round.get("contribution")}
+          </span>
           <Timer stage={stage} />
         </div>
       );
     }
-
   }
 }

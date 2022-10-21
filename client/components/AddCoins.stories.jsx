@@ -6,7 +6,24 @@ export function AddingCoins() {
     <div className="grid grid-cols-3 grid-flow-row h-full justify-center">
       <AddingCoinsTester purse={20} multiplier={3} />
       <AddingCoinsTester purse={2500} multiplier={32} />
-      <AddingCoinsTester purse={1} multiplier={1} />
+      <AddingCoinsTester
+        purse={123}
+        multiplier={1}
+        allOrNothing
+        allOrNothingAmount={123}
+      />
+      <AddingCoinsTester
+        purse={1}
+        multiplier={1}
+        allOrNothing
+        allOrNothingAmount={1}
+      />
+      <AddingCoinsTester
+        purse={20}
+        multiplier={1}
+        allOrNothing
+        allOrNothingAmount={20}
+      />
       <AddingCoinsTester purse={10} multiplier={1} submitted />
     </div>
   );
@@ -15,10 +32,13 @@ export function AddingCoins() {
 class AddingCoinsTester extends React.Component {
   state = { contributed: 0 };
   render() {
-    const { purse, multiplier, submitted } = this.props;
+    const { purse, multiplier, submitted, allOrNothing, allOrNothingAmount } =
+      this.props;
     return (
       <div className="h-screen flex justify-center">
         <AddCoins
+          allOrNothingAmount={allOrNothingAmount}
+          allOrNothing={allOrNothing}
           header={`You can contribute up to ${purse} coins this round`}
           footer={`The pot will be multiplied by ${multiplier}× and divided equally among the group at the end of the round`}
           submittedText="You have submitted your contribution. Waiting on the other players"

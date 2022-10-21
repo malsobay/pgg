@@ -12,10 +12,11 @@ export function AddCoins({
   contributed,
   multiplier,
   onClick,
+  allOrNothing = false,
+  allOrNothingAmount = 0,
   onSubmit = () => console.log("I'm done"),
   submitted = false,
 }) {
-  console.log(multiplier);
   return (
     <div className="flex flex-col items-center text-center max-w-sm">
       {!submitted && (
@@ -24,15 +25,23 @@ export function AddCoins({
         </Label>
       )}
       {!submitted && <AddCoinsPurse amount={purse - contributed} />}
-      {!submitted && (
-        <AddCoinsArrows
-          canAdd1={purse - contributed > 0}
-          canAdd10={purse - contributed > 9}
-          canRemove1={contributed > 0}
-          canRemove10={contributed > 9}
-          onClick={onClick}
-        />
-      )}
+      {!submitted &&
+        (allOrNothing ? (
+          <AddCoinsAllOrNothingArrows
+            amount={allOrNothingAmount}
+            canAdd={purse - contributed > 0}
+            canRemove={contributed > 0}
+            onClick={onClick}
+          />
+        ) : (
+          <AddCoinsArrows
+            canAdd1={purse - contributed > 0}
+            canAdd10={purse - contributed > 9}
+            canRemove1={contributed > 0}
+            canRemove10={contributed > 9}
+            onClick={onClick}
+          />
+        ))}
       <div className="w-52 pt-8">
         <Bowl money={contributed} multiplier={multiplier} />
       </div>
@@ -110,9 +119,55 @@ export function AddCoinsArrows({
   );
 }
 
-function AddButton({ amount, down = false, dark = false, disabled, onClick }) {
+export function AddCoinsAllOrNothingArrows({
+  amount,
+  canAdd,
+  canRemove,
+  onClick,
+}) {
+  console.log(amount);
+  return (
+    <div className="h-48 flex items-center space-x-4">
+      <AddButton
+        amount={amount}
+        disabled={!canRemove}
+        onClick={() => onClick(-amount)}
+        dark
+        freeWidth
+      />
+      <div className="w-4 relative flex justify-center pointer-events-none">
+        <div className="absolute -top-20 w-44 shrink-0 rotate-180">
+          <Arrow></Arrow>
+        </div>
+      </div>
+      <AddButton
+        amount={amount}
+        disabled={!canAdd}
+        onClick={() => onClick(amount)}
+        down
+        dark
+        freeWidth
+      />
+    </div>
+  );
+}
+
+function AddButton({
+  amount,
+  down = false,
+  dark = false,
+  freeWidth = false,
+  disabled,
+  onClick,
+}) {
   let className =
-    "w-14 h-14 relative flex items-center justify-center rounded-md outline outline-4 shadow-none";
+    "h-14 relative flex items-center justify-center rounded-md outline outline-4 shadow-none";
+
+  if (!freeWidth) {
+    className += " w-14";
+  } else {
+    className += " px-4 space-x-2";
+  }
 
   if (!disabled) {
     className = `${className} hover:-top-0.5 hover:shadow-[0_8px_0px_0px_rgba(0,0,0,.25)] active:top-0.5 active:shadow-none`;
@@ -132,9 +187,15 @@ function AddButton({ amount, down = false, dark = false, disabled, onClick }) {
     }
   }
 
-  let arrowClass = "w-8 h-8 shrink-0  -ml-2";
+  let arrowClass = "w-8 h-8 shrink-0";
   if (down) {
     arrowClass = `${arrowClass} transform rotate-180`;
+  }
+
+  if (!freeWidth) {
+    arrowClass += " -ml-2";
+  } else {
+    arrowClass += " -ml-4";
   }
 
   return (

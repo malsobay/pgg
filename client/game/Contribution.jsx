@@ -13,6 +13,9 @@ export default function Contribution({ stage, round, game, player }) {
   const endowment = game.treatment.endowment;
   const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
 
+  if (game.treatment.allOrNothing) {
+  }
+
   return (
     <div className="h-full grid grid-rows-[min-content_1fr]">
       <Header player={player} game={game} round={round} stage={stage} />
@@ -35,6 +38,8 @@ export default function Contribution({ stage, round, game, player }) {
             multiplier={multiplier}
             contributed={contribution}
             submitted={player.stage.submitted}
+            allOrNothing={game.treatment.allOrNothing}
+            allOrNothingAmount={endowment}
             onClick={(amount) => {
               player.round.set("contribution", contribution + amount);
             }}
