@@ -56,7 +56,8 @@ export const CoinResults = ({
           <ArrowNumber
             direction="W"
             showNumber
-            number={contributedOthers}
+            number={Math.round(contributedOthers / (playerCount - 1))}
+            text="avg. each"
             color="yellow"
           />
         </div>

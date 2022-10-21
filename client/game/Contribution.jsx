@@ -31,7 +31,9 @@ export default function Contribution({ stage, round, game, player }) {
         </div>
         <div className="h-full flex items-center justify-center col-start-4 col-end-9">
           <AddCoins
-            header={`You can contribute up to ${endowment} coins this round`}
+            header={`You can contribute ${
+              game.treatment.allOrNothing ? "" : "up to"
+            } ${endowment} coins this round`}
             footer={`The pot will be multiplied by x${multiplier} and divided equally among the group at the end of the round`}
             submittedText="You have submitted your contribution. Waiting on the other players"
             purse={endowment}
