@@ -132,6 +132,14 @@ export const Deduct = () => (
       strokeWidth="2"
     />
     <rect x="5" y="10" width="14" height="4" fill="#7C3AED" />
+    <rect
+      x="10"
+      y="19"
+      width="14"
+      height="4"
+      transform="rotate(-90 10 19)"
+      fill="#7C3AED"
+    />
   </svg>
 );
 
@@ -150,22 +158,7 @@ export const DeductCancel = () => (
       stroke="#9CA3AF"
       strokeWidth="2"
     />
-    <rect
-      x="8.46436"
-      y="5.63599"
-      width="14"
-      height="4"
-      transform="rotate(45 8.46436 5.63599)"
-      fill="#9CA3AF"
-    />
-    <rect
-      x="18.364"
-      y="8.46436"
-      width="14"
-      height="4"
-      transform="rotate(135 18.364 8.46436)"
-      fill="#9CA3AF"
-    />
+    <rect x="5" y="10" width="14" height="4" fill="#9CA3AF" />
   </svg>
 );
 

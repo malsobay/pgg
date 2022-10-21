@@ -19,6 +19,9 @@ export default function Outcome({ stage, round, game, player }) {
   const playerCount = game.treatment.playerCount;
   const totalReturns = round.get("totalReturns");
   const payoff = round.get("payoff");
+  const punishmentMagnitude = game.treatment.punishmentMagnitude;
+  const punishmentCost = game.treatment.punishmentCost;
+  const cumulativePayoff = player.get("cumulativePayoff");
 
   return (
     <div className="h-full grid grid-rows-[min-content_1fr]">
@@ -70,12 +73,29 @@ export default function Outcome({ stage, round, game, player }) {
                       submitted={otherPlayer.stage.submitted}
                       contributed={otherPlayer.round.get("contribution")}
                       active
-                      deducted={punished}
+                      deducted={punished * punishmentMagnitude}
                       onCancel={() => {
                         punishments[otherPlayer._id] = 0;
                         player.round.set("punished", punishments);
                       }}
                       onDeduct={() => {
+                        let totalPunishmentCost = 0;
+                        for (const key in punishments) {
+                          totalPunishmentCost +=
+                            parseFloat(punishments[key]) * punishmentMagnitude;
+                        }
+
+                        if (
+                          totalPunishmentCost + punishmentMagnitude >
+                          cumulativePayoff
+                        ) {
+                          alert(
+                            "You don't have enough coins to make this deduction!"
+                          );
+
+                          return;
+                        }
+
                         punishments[otherPlayer._id] = punished + 1;
                         player.round.set("punished", punishments);
                       }}
@@ -87,7 +107,8 @@ export default function Outcome({ stage, round, game, player }) {
           </PlayerGrid>
           <div className="px-4 pb-16 text-center">
             <Label color="purple">
-              Deductions: It will cost you 2 coins to impose a deduction of 6
+              Deductions: It will cost you {punishmentCost} coins to impose a
+              deduction of {punishmentMagnitude}
               coins.
             </Label>
           </div>
