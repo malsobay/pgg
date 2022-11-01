@@ -108,8 +108,7 @@ export default function Outcome({ stage, round, game, player }) {
           <div className="px-4 pb-16 text-center">
             <Label color="purple">
               Deductions: It will cost you {punishmentCost} coins to impose a
-              deduction of {punishmentMagnitude}
-              coins.
+              deduction of {punishmentMagnitude} coins.
             </Label>
           </div>
         </div>

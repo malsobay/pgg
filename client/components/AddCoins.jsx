@@ -71,7 +71,7 @@ export function AddCoinsPurse({ amount }) {
         <Coin />
       </div>
       <Label color="yellow" size="2xl" stroke>
-        × {amount}
+        {amount}
       </Label>
     </div>
   );

@@ -58,13 +58,13 @@ export function AvatarScores({
     <div className="pt-20 pb-20 px-24 relative">
       <div className="absolute w-28 text-right top-0 left-0">
         <Label color="purple" size="xs">
-          Deductions Given
+          Coins spent on deductions
         </Label>
         <div className="absolute right-2 top-0 mt-14 h-6 w-0 border border-purple-600"></div>
       </div>
       <div className="absolute w-32 top-0 left-0 ml-44">
         <Label color="pink" size="xs">
-          Deductions Received
+          Coins deducted by other players
         </Label>
         <div className="absolute left-2.5 top-0 mt-14 h-6 w-0 border border-pink-600"></div>
       </div>

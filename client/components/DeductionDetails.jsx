@@ -48,14 +48,14 @@ export function DeductionDetails({
       </div>
 
       <div className="mt-8 flex justify-between text-orange-600 border-b border-orange-600">
-        <div className="">Coins Spent on Deductions</div>
+        <div className="">Coins spent on deductions</div>
         <div className="font-bold text-right">{totalSpent}</div>
       </div>
 
       <IndividualDeductions deductions={deductionsSpent} />
 
       <div className="mt-6 flex justify-between text-orange-600 border-b border-orange-600">
-        <div className="">Coin Deductions Received</div>
+        <div className="">Coins deducted by other players</div>
         <div className="font-bold text-right">{totalReceived}</div>
       </div>
 

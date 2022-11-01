@@ -41,11 +41,8 @@ export default class Summary extends React.Component {
                   hints
                   submitted={player.stage.submitted}
                   animal={player.get("avatar")}
-                  given={Object.values(punished).reduce((a, b) => a + b, 0)}
-                  received={Object.values(punishedBy).reduce(
-                    (a, b) => a + b,
-                    0
-                  )}
+                  given={Object.values(punished).reduce((a, b) => a + b, 0) * game.treatment.punishmentCost}
+                  received={Object.values(punishedBy).reduce((a, b) => a + b, 0) * game.treatment.punishmentMagnitude}
                   contributed={contribution}
                   gains={roundPayoff}
                 />
@@ -65,7 +62,7 @@ export default class Summary extends React.Component {
 
             {self === null && hovered !== null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
-                <Details selectedPlayerID={hovered} players={game.players} />
+                <Details selectedPlayerID={hovered} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude}/>
               </div>
             ) : (
               ""
@@ -92,11 +89,8 @@ export default class Summary extends React.Component {
                     <AvatarScores
                       submitted={player.stage.submitted}
                       animal={player.get("avatar")}
-                      given={Object.values(punished).reduce((a, b) => a + b, 0)}
-                      received={Object.values(punishedBy).reduce(
-                        (a, b) => a + b,
-                        0
-                      )}
+                      given={Object.values(punished).reduce((a, b) => a + b, 0) * game.treatment.punishmentCost}
+                      received={Object.values(punishedBy).reduce((a, b) => a + b, 0) * game.treatment.punishmentMagnitude}
                       contributed={contribution}
                       gains={roundPayoff}
                     />
@@ -107,7 +101,7 @@ export default class Summary extends React.Component {
 
             {self !== null && hovered === null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
-                <Details selectedPlayerID={self} players={game.players} />
+                <Details selectedPlayerID={self} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude}/>
               </div>
             ) : (
               ""
@@ -119,9 +113,8 @@ export default class Summary extends React.Component {
   }
 }
 
-function Details({ selectedPlayerID, players }) {
+function Details({ selectedPlayerID, players, cost, magnitude}) {
   const player = players.find((p) => p._id === selectedPlayerID);
-
   const punished = player.round.get("punished");
   const punishedBy = player.round.get("punishedBy");
   const contribution = player.round.get("contribution");
@@ -129,7 +122,7 @@ function Details({ selectedPlayerID, players }) {
 
   const deductionsSpent = [];
   for (const playerID in punished) {
-    const amount = punished[playerID] || 0;
+    const amount = punished[playerID] * cost || 0;
     if (amount === 0) continue;
     const otherPlayer = players.find((p) => p._id === playerID);
     deductionsSpent.push({ animal: otherPlayer.get("avatar"), amount });
@@ -137,7 +130,7 @@ function Details({ selectedPlayerID, players }) {
 
   const deductionsReceived = [];
   for (const playerID in punishedBy) {
-    const amount = punished[playerID] || 0;
+    const amount = punishedBy[playerID] * magnitude || 0;
     if (amount === 0) continue;
     const otherPlayer = players.find((p) => p._id === playerID);
     deductionsReceived.push({ animal: otherPlayer.get("avatar"), amount });
