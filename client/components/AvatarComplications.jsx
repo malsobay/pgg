@@ -93,6 +93,7 @@ export function AvatarDeduction({
   contributed = "",
   deducted = 0,
   active = false,
+  disabled = false,
   submitted = false,
   onDeduct = () => {},
   onCancel = () => {},
@@ -114,7 +115,7 @@ export function AvatarDeduction({
             </Label>
           </div>
         )}
-        {active && (
+        {active && !disabled && (
           <button
             onClick={onDeduct}
             className="absolute w-6 top-0 left-full -ml-6 hover:-top-0.5 active:top-0.5 active:shadow-none"
@@ -122,7 +123,7 @@ export function AvatarDeduction({
             <Deduct />
           </button>
         )}
-        {active && deducted > 0 && (
+        {active && !disabled && deducted > 0 && (
           <button
             onClick={onCancel}
             className="absolute w-6 top-0 right-full -mr-6 text-right hover:-top-0.5 active:top-0.5 active:shadow-none"

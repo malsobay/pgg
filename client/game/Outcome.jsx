@@ -73,6 +73,7 @@ export default function Outcome({ stage, round, game, player }) {
                       submitted={otherPlayer.stage.submitted}
                       contributed={otherPlayer.round.get("contribution")}
                       active
+                      disabled={player.stage.submitted}
                       deducted={punished * punishmentMagnitude}
                       onCancel={() => {
                         punishments[otherPlayer._id] = 0;
