@@ -26,6 +26,7 @@ export default class Summary extends React.Component {
     const punishedBy = player.round.get("punishedBy");
     const contribution = player.round.get("contribution");
     const roundPayoff = player.round.get("roundPayoff");
+    const showOtherSummaries = game.treatment.showOtherSummaries;
 
     return (
       <div className="h-full grid grid-rows-[min-content_1fr]">
@@ -60,7 +61,7 @@ export default class Summary extends React.Component {
               </div>
             </div>
 
-            {self === null && hovered !== null ? (
+            {self === null && hovered !== null && showOtherSummaries ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
                 <Details selectedPlayerID={hovered} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude}/>
               </div>
@@ -77,6 +78,7 @@ export default class Summary extends React.Component {
                 const punishedBy = player.round.get("punishedBy");
                 const contribution = player.round.get("contribution");
                 const roundPayoff = player.round.get("roundPayoff");
+                const showOtherSummaries = game.treatment.showOtherSummaries;
 
                 return (
                   <div
@@ -89,10 +91,10 @@ export default class Summary extends React.Component {
                     <AvatarScores
                       submitted={player.stage.submitted}
                       animal={player.get("avatar")}
-                      given={Object.values(punished).reduce((a, b) => a + b, 0) * game.treatment.punishmentCost}
-                      received={Object.values(punishedBy).reduce((a, b) => a + b, 0) * game.treatment.punishmentMagnitude}
-                      contributed={contribution}
-                      gains={roundPayoff}
+                      given={showOtherSummaries ? Object.values(punished).reduce((a, b) => a + b, 0) * game.treatment.punishmentCost: null}
+                      received={showOtherSummaries ? Object.values(punishedBy).reduce((a, b) => a + b, 0) * game.treatment.punishmentMagnitude: null}
+                      contributed={showOtherSummaries ? contribution:null}
+                      gains={showOtherSummaries ? roundPayoff:null}
                     />
                   </div>
                 );
