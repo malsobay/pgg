@@ -9,6 +9,8 @@ export function DeductionDetails({
   gains,
   deductionsSpent,
   deductionsReceived,
+  isSelf, 
+  showPunishmentId
 }) {
   const totalSpent = deductionsSpent.reduce(
     (sum, deduction) => sum + deduction.amount,
@@ -52,14 +54,14 @@ export function DeductionDetails({
         <div className="font-bold text-right">{totalSpent}</div>
       </div>
 
-      <IndividualDeductions deductions={deductionsSpent} />
+      {(isSelf || showPunishmentId) && <IndividualDeductions deductions={deductionsSpent} />}
 
       <div className="mt-6 flex justify-between text-orange-600 border-b border-orange-600">
         <div className="">Coins deducted by other players</div>
         <div className="font-bold text-right">{totalReceived}</div>
       </div>
 
-      <IndividualDeductions deductions={deductionsReceived} />
+      {showPunishmentId && <IndividualDeductions deductions={deductionsReceived} />}
     </div>
   );
 }

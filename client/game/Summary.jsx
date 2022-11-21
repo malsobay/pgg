@@ -63,7 +63,7 @@ export default class Summary extends React.Component {
 
             {self === null && hovered !== null && showOtherSummaries ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
-                <Details selectedPlayerID={hovered} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude}/>
+                <Details selectedPlayerID={hovered} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude} isSelf={false} showPunishmentId={game.treatment.showPunishmentId}/>
               </div>
             ) : (
               ""
@@ -103,7 +103,7 @@ export default class Summary extends React.Component {
 
             {self !== null && hovered === null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
-                <Details selectedPlayerID={self} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude}/>
+                <Details selectedPlayerID={self} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude} isSelf={true} showPunishmentId={game.treatment.showPunishmentId}/>
               </div>
             ) : (
               ""
@@ -115,7 +115,7 @@ export default class Summary extends React.Component {
   }
 }
 
-function Details({ selectedPlayerID, players, cost, magnitude}) {
+function Details({ selectedPlayerID, players, cost, magnitude, isSelf, showPunishmentId}) {
   const player = players.find((p) => p._id === selectedPlayerID);
   const punished = player.round.get("punished");
   const punishedBy = player.round.get("punishedBy");
@@ -146,6 +146,8 @@ function Details({ selectedPlayerID, players, cost, magnitude}) {
       gains={roundPayoff}
       deductionsSpent={deductionsSpent}
       deductionsReceived={deductionsReceived}
+      isSelf={isSelf}
+      showPunishmentId={showPunishmentId}
     />
   );
 }
