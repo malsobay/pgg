@@ -164,6 +164,10 @@ export function Stage2() {
   );
 }
 
+export function Mock() {
+  return <div className="p-8">Cool</div>;
+}
+
 export function Stage3() {
   return (
     <div className="h-full grid grid-rows-[min-content_1fr]">

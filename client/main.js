@@ -1,17 +1,22 @@
+import React from "react";
 import Empirica from "meteor/empirica:core";
 import { render } from "react-dom";
 import { dev } from "../dev";
 import DevHelp from "./components/DevHelp";
+import { InstructionsStepOne } from "./components/InstructionsStepOne";
+import { InstructionsStepThree } from "./components/InstructionsStepThree";
+import { InstructionsStepTwo } from "./components/InstructionsStepTwo";
 import ExitSurvey from "./exit/ExitSurvey";
 import Sorry from "./exit/Sorry";
 import Thanks from "./exit/Thanks";
-import About from "./game/pages/about/About";
+import About from "./game/About";
 import Round from "./game/Round";
 import Consent from "./intro/Consent";
 import InstructionStepOne from "./intro/InstructionStepOne";
 import InstructionStepTwo from "./intro/InstructionStepTwo";
 import NewPlayer from "./intro/NewPlayer";
 import Quiz from "./intro/Quiz";
+import { pickRandom } from "./utils";
 
 Empirica.header(DevHelp);
 Empirica.breadcrumb(() => null);
@@ -29,17 +34,89 @@ Empirica.newPlayer(NewPlayer);
 // At this point they have been assigned a treatment. You can return
 // different instruction steps depending on the assigned treatment.
 
+function StepOne({ onNext }) {
+  return (
+    <InstructionsStepOne
+      onNext={onNext}
+      treatment={{
+        playerCount: 2,
+        conversionRate: 2,
+        basePay: 1,
+        multiplier: 12,
+        endowment: 20,
+        allOrNothing: false,
+      }}
+      player={{
+        _id: 10000,
+        avatar: "elephant",
+      }}
+    />
+  );
+}
+
+function StepTwo({ onNext }) {
+  return (
+    <InstructionsStepTwo
+      onNext={onNext}
+      treatment={{
+        playerCount: 2,
+        conversionRate: 2,
+        basePay: 1,
+        multiplier: 12,
+        endowment: 20,
+        punishmentMagnitude: 2,
+        punishmentCost: 2,
+        allOrNothing: false,
+      }}
+      player={{
+        _id: 10000,
+        avatar: "elephant",
+        punished: {},
+      }}
+    />
+  );
+}
+
+function StepThree({ onNext }) {
+  const roundPayoff = 7;
+  const contribution = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  return (
+    <InstructionsStepThree
+      onNext={onNext}
+      treatment={{
+        playerCount: 2,
+        conversionRate: 2,
+        basePay: 1,
+        multiplier: 12,
+        endowment: 20,
+        punishmentMagnitude: 2,
+        punishmentCost: 2,
+        allOrNothing: false,
+      }}
+      roundPayoff={roundPayoff}
+      player={{
+        _id: 10000,
+        avatar: "elephant",
+        punished: {},
+        punishedBy: {},
+        contribution: contribution,
+        roundPayoff: roundPayoff - contribution,
+      }}
+    />
+  );
+}
+
 Empirica.introSteps((game, treatment) => {
   if (dev) {
     return [];
   }
 
-  const steps = [InstructionStepOne];
+  const steps = [StepOne];
 
   if (treatment.punishmentExists) {
-    steps.push(InstructionStepTwo);
+    steps.push(StepTwo);
   }
-  steps.push(Quiz);
+  steps.push(StepThree);
 
   return steps;
 });

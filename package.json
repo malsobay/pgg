@@ -8,6 +8,7 @@
   "dependencies": {
     "@babel/runtime": "^7.18.9",
     "@blueprintjs/core": "3.54.0",
+    "@popperjs/core": "2.11.6",
     "@tailwindcss/typography": "0.5.7",
     "bcrypt": "^5.0.0",
     "meteor-node-stubs": "0.4.1",

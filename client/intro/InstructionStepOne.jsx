@@ -1,76 +1,78 @@
 import React from "react";
 import { Button } from "../components/NormalButton";
 
-import { Centered } from "meteor/empirica:core";
-
 export default class InstructionStepOne extends React.Component {
   render() {
-    const { hasPrev, hasNext, onNext, onPrev, game } = this.props;
+    const { hasPrev, hasNext, onNext, onPrev, game, player } = this.props;
 
     return (
-      <Centered>
-        <div className="prose">
-          <h1> How the game works </h1>
-          <p>
-            In this multi-player game, you will be in a group. Each person is
-            given a set amount of coins at the start of each round. You will
-            also be shown a money multiplier. There will be a public fund that
-            you can choose to contribute to—you will not be able to see others'
-            contributions before making your own. After everyone has
-            contributed, the amount in the public fund will be multiplied by the
-            money multiplier.
-          </p>
+      <div className="relative">
+        <div className="h-screen w-screen fixed top-0 left-0 bg-white/70 p-20">
+          <div className="relative bg-white rounded-lg shadow-lg border-2 border-gray-200 p-8 h-full prose overflow-auto">
+            <div className="prose">
+              <h1> How the game works </h1>
+              <p>
+                In this multi-player game, you will be in a group. Each person
+                is given a set amount of coins at the start of each round. You
+                will also be shown a money multiplier. There will be a public
+                fund that you can choose to contribute to—you will not be able
+                to see others' contributions before making your own. After
+                everyone has contributed, the amount in the public fund will be
+                multiplied by the money multiplier.
+              </p>
 
-          <p>
-            This amount is then evenly divided among the group as the "payoff".
-            You get to keep the payoff and whatever you have left of your
-            private funds. The diagram below shows an example:
-          </p>
+              <p>
+                This amount is then evenly divided among the group as the
+                "payoff". You get to keep the payoff and whatever you have left
+                of your private funds. The diagram below shows an example:
+              </p>
 
-          <img
-            className="public-fund-img"
-            src="/experiment/images/explanation.png"
-          />
+              <img
+                className="public-fund-img"
+                src="/experiment/images/explanation.png"
+              />
 
-          <p>
-            In this example, three players chose to contribute all 20 coins they
-            were granted for the round, while one player contributed 0 coins.
-            The total contribution, 60 coins, is then multiplied by a factor of
-            2, making the total size of the public fund then 120 coins, which is
-            equally distributed among the four players.
-          </p>
+              <p>
+                In this example, three players chose to contribute all 20 coins
+                they were granted for the round, while one player contributed 0
+                coins. The total contribution, 60 coins, is then multiplied by a
+                factor of 2, making the total size of the public fund then 120
+                coins, which is equally distributed among the four players.
+              </p>
 
-          <h1> Total coins and cash earnings </h1>
+              <h1> Total coins and cash earnings </h1>
 
-          <p>
-            You will have a total balance of coins throughout the game, with
-            each round's earnings being added to this amount. Try to maximize
-            your total coins! When the game concludes, the coins will be
-            converted to a cash bonus towards your final payment.
-          </p>
+              <p>
+                You will have a total balance of coins throughout the game, with
+                each round's earnings being added to this amount. Try to
+                maximize your total coins! When the game concludes, the coins
+                will be converted to a cash bonus towards your final payment.
+              </p>
 
-          <p>
-            <strong>
-              You will receive a base payment of ${game.treatment.basePay} for
-              your participation in the game, in addition to $1 per{" "}
-              {game.treatment.conversionRate} coins earned. To receive the bonus
-              payment, please be sure to stay for all rounds of the game; the
-              exit survey marks the end of the game and contains the code for
-              submission. If you are detected to be idle, you forfeit the bonus
-              amount.
-            </strong>
-          </p>
+              <p>
+                <strong>
+                  You will receive a base payment of ${game.treatment.basePay}{" "}
+                  for your participation in the game, in addition to $1 per{" "}
+                  {game.treatment.conversionRate} coins earned. To receive the
+                  bonus payment, please be sure to stay for all rounds of the
+                  game; the exit survey marks the end of the game and contains
+                  the code for submission. If you are detected to be idle, you
+                  forfeit the bonus amount.
+                </strong>
+              </p>
 
-          <p className="space-x-4 pt-8 pb-16">
-            <Button onClick={onPrev} disabled={!hasPrev}>
-              Previous
-            </Button>
-            <Button onClick={onNext} disabled={!hasNext}>
-              Next
-            </Button>
-          </p>
+              <p className="space-x-4 pt-8 pb-16">
+                <Button onClick={onPrev} disabled={!hasPrev}>
+                  Previous
+                </Button>
+                <Button onClick={onNext} disabled={!hasNext}>
+                  Next
+                </Button>
+              </p>
+            </div>
+          </div>
         </div>
-      </Centered>
+      </div>
     );
   }
 }
