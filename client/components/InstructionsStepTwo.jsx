@@ -7,61 +7,63 @@ import { MockOutcome } from "./MockOutcome";
 
 export class InstructionsStepTwo extends React.Component {
   state = { current: 0, messages: [] };
-  steps = [
-    {
-      component: "contributions",
-      content: (
-        <div className="prose">
-          <p>
-            In the outcome stage, you can see how much you contributed (left)
-            and how much your group contributed (right, shown as total and
-            per-person average).
-          </p>
-        </div>
-      ),
-      nextText: "Ok",
-    },
-    {
-      component: "outcome",
-      content: (
-        <div className="prose">
-          <p>
-            The coins contributed to the public fund are multiplied, then
-            divided equally among players.
-          </p>
-        </div>
-      ),
-      nextText: "Great",
-    },
-    {
-      component: "players",
-      content: (
-        <div className="prose">
-          <p>
-            Below each player's avatar is the number of coins they contributed
-            to the public fund.
-          </p>
-          <p>
-            You can click + on any player's avatar to add a deduction, and - to
-            remove deductions. The total coins deducted from a player are shown
-            below. Try it out.
-          </p>
-        </div>
-      ),
-      nextText: "Sweet",
-    },
-
-    {
-      modal: "quizz",
-    },
-  ];
 
   constructor(props) {
     super(props);
 
-    const { playerCount } = props.treatment;
+    const { playerCount, punishmentExists } = props.treatment;
     const playerAvatar = props.player.avatar;
     const exclude = [playerAvatar];
+
+    this.steps = [
+      {
+        component: "contributions",
+        content: (
+          <div className="prose">
+            <p>
+              In the outcome stage, you can see how much you contributed (left)
+              and how much your group contributed (right, shown as total and
+              per-person average).
+            </p>
+          </div>
+        ),
+        nextText: "Ok",
+      },
+      {
+        component: "outcome",
+        content: (
+          <div className="prose">
+            <p>
+              The coins contributed to the public fund are multiplied, then
+              divided equally among players.
+            </p>
+          </div>
+        ),
+        nextText: "Great",
+      },
+      {
+        component: "players",
+        content: (
+          <div className="prose">
+            <p>
+              Below each player's avatar is the number of coins they contributed
+              to the public fund.
+            </p>
+            {punishmentExists && (
+              <p>
+                You can click + on any player's avatar to add a deduction, and -
+                to remove deductions. The total coins deducted from a player are
+                shown below. Try it out.
+              </p>
+            )}
+          </div>
+        ),
+        nextText: "Sweet",
+      },
+      {
+        modal: "quizz",
+      },
+    ];
 
     const otherPlayers = [];
     for (let i = 0; i < playerCount - 1; i++) {

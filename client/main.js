@@ -11,11 +11,8 @@ import Sorry from "./exit/Sorry";
 import Thanks from "./exit/Thanks";
 import About from "./game/About";
 import Round from "./game/Round";
-import Consent from "./intro/Consent";
-import InstructionStepOne from "./intro/InstructionStepOne";
-import InstructionStepTwo from "./intro/InstructionStepTwo";
-import NewPlayer from "./intro/NewPlayer";
-import Quiz from "./intro/Quiz";
+import Consent from "./components/Consent";
+import NewPlayer from "./components/NewPlayer";
 import { pickRandom } from "./utils";
 
 Empirica.header(DevHelp);
@@ -111,12 +108,7 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
-  const steps = [StepOne];
-
-  if (treatment.punishmentExists) {
-    steps.push(StepTwo);
-  }
-  steps.push(StepThree);
+  const steps = [StepOne, StepTwo, StepThree];
 
   return steps;
 });

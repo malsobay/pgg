@@ -9,18 +9,20 @@ import { ChatView } from "./Chat";
 import Header from "./Header";
 
 export default function Outcome({ stage, round, game, player }) {
-  // const multiplier = game.treatment.multiplier;
-  // const contribution = player.round.get("contribution") || 0;
-  // const endowment = game.treatment.endowment;
-  const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
+  const {
+    multiplier,
+    playerCount,
+    punishmentCost,
+    punishmentExists,
+    punishmentMagnitude,
+  } = game.treatment;
+
+  const otherPlayers = game.players.filter((p) => p._id !== player._id);
+
   const totalContributions = round.get("totalContributions");
   const contribution = player.round.get("contribution");
-  const multiplier = game.treatment.multiplier;
-  const playerCount = game.treatment.playerCount;
   const totalReturns = round.get("totalReturns");
   const payoff = round.get("payoff");
-  const punishmentMagnitude = game.treatment.punishmentMagnitude;
-  const punishmentCost = game.treatment.punishmentCost;
   const cumulativePayoff = player.get("cumulativePayoff");
 
   return (
@@ -72,7 +74,7 @@ export default function Outcome({ stage, round, game, player }) {
                       animal={otherPlayer.get("avatar")}
                       submitted={otherPlayer.stage.submitted}
                       contributed={otherPlayer.round.get("contribution")}
-                      active
+                      active={punishmentExists}
                       disabled={player.stage.submitted}
                       deducted={punished * punishmentMagnitude}
                       onCancel={() => {
@@ -107,10 +109,12 @@ export default function Outcome({ stage, round, game, player }) {
             })}
           </PlayerGrid>
           <div className="px-4 pb-16 text-center">
-            <Label color="purple">
-              Deductions: It will cost you {punishmentCost} coins to impose a
-              deduction of {punishmentMagnitude} coins.
-            </Label>
+            {punishmentExists && (
+              <Label color="purple">
+                Deductions: It will cost you {punishmentCost} coins to impose a
+                deduction of {punishmentMagnitude} coins.
+              </Label>
+            )}
           </div>
         </div>
       </div>

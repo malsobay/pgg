@@ -9,6 +9,7 @@ export function AvatarScores({
   given = "",
   received = "",
   contributed = "",
+  enableDeductions = true,
   hints = false,
   submitted = false,
 }) {
@@ -28,16 +29,20 @@ export function AvatarScores({
         <div className="w-16">
           <Avatar submitted={submitted} animal={animal} />
         </div>
-        <div className="absolute top-0 right-full -mr-3.5 text-right">
-          <Label color="purple" size="md" stroke shadow>
-            {given}
-          </Label>
-        </div>
-        <div className="absolute top-0 left-full -ml-[1.25rem]">
-          <Label color="pink" size="md" stroke shadow>
-            {received}
-          </Label>
-        </div>
+        {enableDeductions && (
+          <>
+            <div className="absolute top-0 right-full -mr-3.5 text-right">
+              <Label color="purple" size="md" stroke shadow>
+                {given}
+              </Label>
+            </div>
+            <div className="absolute top-0 left-full -ml-[1.25rem]">
+              <Label color="pink" size="md" stroke shadow>
+                {received}
+              </Label>
+            </div>
+          </>
+        )}
         <div className="absolute bottom-0 left-0 w-full text-center">
           <Label color="yellow" size="md" stroke shadow>
             {contributed}
@@ -56,18 +61,22 @@ export function AvatarScores({
 
   return (
     <div className="pt-20 pb-20 px-24 relative">
-      <div className="absolute w-28 text-right top-0 left-0">
-        <Label color="purple" size="xs">
-          Coins spent on deductions
-        </Label>
-        <div className="absolute right-2 top-0 mt-14 h-6 w-0 border border-purple-600"></div>
-      </div>
-      <div className="absolute w-32 top-0 left-0 ml-44">
-        <Label color="pink" size="xs">
-          Coins deducted by other players
-        </Label>
-        <div className="absolute left-2.5 top-0 mt-14 h-6 w-0 border border-pink-600"></div>
-      </div>
+      {enableDeductions && (
+        <>
+          <div className="absolute w-28 text-right top-0 left-0">
+            <Label color="purple" size="xs">
+              Coins spent on deductions
+            </Label>
+            <div className="absolute right-2 top-0 mt-14 h-6 w-0 border border-purple-600"></div>
+          </div>
+          <div className="absolute w-32 top-0 left-0 ml-44">
+            <Label color="pink" size="xs">
+              Coins deducted by other players
+            </Label>
+            <div className="absolute left-2.5 top-0 mt-14 h-6 w-0 border border-pink-600"></div>
+          </div>
+        </>
+      )}
       <div className="absolute w-32 bottom-0 ml-20 left-0 text-center">
         <Label color="orange" size="xs">
           Coins Contributed

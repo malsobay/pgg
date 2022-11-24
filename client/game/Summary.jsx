@@ -18,15 +18,19 @@ export default class Summary extends React.Component {
     const { stage, round, game, player } = this.props;
     const { hovered, self } = this.state;
 
-    // const multiplier = game.treatment.multiplier;
-    // const contribution = player.round.get("contribution") || 0;
-    // const endowment = game.treatment.endowment;
+    const {
+      showOtherSummaries,
+      punishmentExists,
+      punishmentCost,
+      punishmentMagnitude,
+      showPunishmentId,
+    } = game.treatment;
+
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     const punished = player.round.get("punished");
     const punishedBy = player.round.get("punishedBy");
     const contribution = player.round.get("contribution");
     const roundPayoff = player.round.get("roundPayoff");
-    const showOtherSummaries = game.treatment.showOtherSummaries;
 
     return (
       <div className="h-full grid grid-rows-[min-content_1fr]">
@@ -42,8 +46,15 @@ export default class Summary extends React.Component {
                   hints
                   submitted={player.stage.submitted}
                   animal={player.get("avatar")}
-                  given={Object.values(punished).reduce((a, b) => a + b, 0) * game.treatment.punishmentCost}
-                  received={Object.values(punishedBy).reduce((a, b) => a + b, 0) * game.treatment.punishmentMagnitude}
+                  enableDeductions={punishmentExists}
+                  given={
+                    Object.values(punished).reduce((a, b) => a + b, 0) *
+                    punishmentCost
+                  }
+                  received={
+                    Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                    punishmentMagnitude
+                  }
                   contributed={contribution}
                   gains={roundPayoff}
                 />
@@ -63,7 +74,15 @@ export default class Summary extends React.Component {
 
             {self === null && hovered !== null && showOtherSummaries ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
-                <Details selectedPlayerID={hovered} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude} isSelf={false} showPunishmentId={game.treatment.showPunishmentId}/>
+                <Details
+                  punishmentExists={punishmentExists}
+                  selectedPlayerID={hovered}
+                  players={game.players}
+                  cost={punishmentCost}
+                  magnitude={punishmentMagnitude}
+                  isSelf={false}
+                  showPunishmentId={showPunishmentId}
+                />
               </div>
             ) : (
               ""
@@ -78,7 +97,6 @@ export default class Summary extends React.Component {
                 const punishedBy = player.round.get("punishedBy");
                 const contribution = player.round.get("contribution");
                 const roundPayoff = player.round.get("roundPayoff");
-                const showOtherSummaries = game.treatment.showOtherSummaries;
 
                 return (
                   <div
@@ -91,10 +109,23 @@ export default class Summary extends React.Component {
                     <AvatarScores
                       submitted={player.stage.submitted}
                       animal={player.get("avatar")}
-                      given={showOtherSummaries ? Object.values(punished).reduce((a, b) => a + b, 0) * game.treatment.punishmentCost: null}
-                      received={showOtherSummaries ? Object.values(punishedBy).reduce((a, b) => a + b, 0) * game.treatment.punishmentMagnitude: null}
-                      contributed={showOtherSummaries ? contribution:null}
-                      gains={showOtherSummaries ? roundPayoff:null}
+                      enableDeductions={punishmentExists}
+                      given={
+                        showOtherSummaries
+                          ? Object.values(punished).reduce((a, b) => a + b, 0) *
+                            punishmentCost
+                          : null
+                      }
+                      received={
+                        showOtherSummaries
+                          ? Object.values(punishedBy).reduce(
+                              (a, b) => a + b,
+                              0
+                            ) * punishmentMagnitude
+                          : null
+                      }
+                      contributed={showOtherSummaries ? contribution : null}
+                      gains={showOtherSummaries ? roundPayoff : null}
                     />
                   </div>
                 );
@@ -103,7 +134,15 @@ export default class Summary extends React.Component {
 
             {self !== null && hovered === null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
-                <Details selectedPlayerID={self} players={game.players} cost={game.treatment.punishmentCost} magnitude={game.treatment.punishmentMagnitude} isSelf={true} showPunishmentId={game.treatment.showPunishmentId}/>
+                <Details
+                  punishmentExists={punishmentExists}
+                  selectedPlayerID={self}
+                  players={game.players}
+                  cost={punishmentCost}
+                  magnitude={punishmentMagnitude}
+                  isSelf={true}
+                  showPunishmentId={showPunishmentId}
+                />
               </div>
             ) : (
               ""
@@ -115,7 +154,15 @@ export default class Summary extends React.Component {
   }
 }
 
-function Details({ selectedPlayerID, players, cost, magnitude, isSelf, showPunishmentId}) {
+function Details({
+  punishmentExists,
+  selectedPlayerID,
+  players,
+  cost,
+  magnitude,
+  isSelf,
+  showPunishmentId,
+}) {
   const player = players.find((p) => p._id === selectedPlayerID);
   const punished = player.round.get("punished");
   const punishedBy = player.round.get("punishedBy");
@@ -144,6 +191,7 @@ function Details({ selectedPlayerID, players, cost, magnitude, isSelf, showPunis
       submitted={player.stage.submitted}
       contributed={contribution}
       gains={roundPayoff}
+      enableDeductions={punishmentExists}
       deductionsSpent={deductionsSpent}
       deductionsReceived={deductionsReceived}
       isSelf={isSelf}

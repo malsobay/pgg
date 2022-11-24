@@ -25,9 +25,15 @@ export class MockSummary extends React.Component {
       roundPayoff,
       otherPlayers,
     } = this.props;
-
-    const { endowment, punishmentMagnitude, punishmentCost } = treatment;
     const { hovered, self } = this.state;
+
+    const {
+      endowment,
+      punishmentMagnitude,
+      punishmentCost,
+      punishmentExists,
+      showPunishmentId,
+    } = treatment;
 
     const allPlayers = [player, ...otherPlayers];
 
@@ -48,6 +54,7 @@ export class MockSummary extends React.Component {
                     hints
                     submitted={false}
                     animal={player.avatar}
+                    enableDeductions={punishmentExists}
                     given={
                       Object.values(player.punished).reduce(
                         (a, b) => a + b,
@@ -77,10 +84,13 @@ export class MockSummary extends React.Component {
             {false && self === null && hovered !== null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
                 <Details
+                  punishmentExists={punishmentExists}
                   selectedPlayerID={hovered}
                   players={allPlayers}
                   cost={punishmentCost}
                   magnitude={punishmentMagnitude}
+                  isSelf={false}
+                  showPunishmentId={showPunishmentId}
                 />
               </div>
             ) : (
@@ -117,6 +127,7 @@ export class MockSummary extends React.Component {
                       <AvatarScores
                         submitted={false}
                         animal={player.avatar}
+                        enableDeductions={punishmentExists}
                         given={
                           Object.values(punished).reduce((a, b) => a + b, 0) *
                           punishmentCost
@@ -137,10 +148,13 @@ export class MockSummary extends React.Component {
             {false && self !== null && hovered === null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
                 <Details
+                  punishmentExists={punishmentExists}
                   selectedPlayerID={self}
                   players={allPlayers}
                   cost={punishmentCost}
                   magnitude={punishmentMagnitude}
+                  isSelf={true}
+                  showPunishmentId={showPunishmentId}
                 />
               </div>
             ) : (
@@ -153,7 +167,15 @@ export class MockSummary extends React.Component {
   }
 }
 
-function Details({ selectedPlayerID, players, cost, magnitude }) {
+function Details({
+  punishmentExists,
+  selectedPlayerID,
+  players,
+  cost,
+  magnitude,
+  isSelf,
+  showPunishmentId,
+}) {
   console.log(selectedPlayerID, players);
   const player = players.find((p) => p._id === selectedPlayerID);
   const punished = player.punished;
@@ -183,8 +205,11 @@ function Details({ selectedPlayerID, players, cost, magnitude }) {
       submitted={false}
       contributed={contribution}
       gains={roundPayoff}
+      enableDeductions={punishmentExists}
       deductionsSpent={deductionsSpent}
       deductionsReceived={deductionsReceived}
+      isSelf={isSelf}
+      showPunishmentId={showPunishmentId}
     />
   );
 }

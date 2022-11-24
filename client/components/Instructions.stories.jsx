@@ -37,6 +37,7 @@ export function StepTwo() {
         punishmentMagnitude: 2,
         punishmentCost: 2,
         allOrNothing: false,
+        punishmentExists: false,
       }}
       player={{
         _id: 10000,

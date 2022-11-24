@@ -27,7 +27,6 @@ export class MockOutcome extends React.Component {
       totalContributions,
       totalReturns,
       payoff,
-      cumulativePayoff,
       otherPlayers,
     } = this.props;
     const { contribution } = this.state;
@@ -38,6 +37,7 @@ export class MockOutcome extends React.Component {
       playerCount,
       punishmentMagnitude,
       punishmentCost,
+      punishmentExists,
     } = treatment;
 
     return (
@@ -99,7 +99,7 @@ export class MockOutcome extends React.Component {
                           animal={otherPlayer.avatar}
                           submitted={false}
                           contributed={otherPlayer.contribution}
-                          active
+                          active={punishmentExists}
                           disabled={false}
                           deducted={
                             otherPlayer.punishment * punishmentMagnitude
@@ -133,10 +133,12 @@ export class MockOutcome extends React.Component {
             </Highlighter>
             <div className="px-4 pb-16 text-center">
               <Highlighter name="never" highlight={highlight}>
-                <Label color="purple">
-                  Deductions: It will cost you {punishmentCost} coins to impose
-                  a deduction of {punishmentMagnitude} coins.
-                </Label>
+                {punishmentExists && (
+                  <Label color="purple">
+                    Deductions: It will cost you {punishmentCost} coins to
+                    impose a deduction of {punishmentMagnitude} coins.
+                  </Label>
+                )}
               </Highlighter>
             </div>
           </div>
