@@ -100,7 +100,7 @@ export class InstructionsStepThree extends React.Component {
     let step = this.steps[current];
 
     return (
-      <div className="relative">
+      <div className="relative h-full">
         <MockSummary
           highlight={{
             step: step?.component ? step : null,

@@ -22,14 +22,19 @@ export class Highlighter extends React.Component {
         return;
       }
 
+      const current = this.rectEl.current;
+      const child = current.children.item(0);
+
+      if (!child) {
+        return;
+      }
+
       this.resizeObserver = new ResizeObserver((entries) => {
         for (const entry of entries) {
           this.setState({ rect: entry.target.getBoundingClientRect() });
         }
       });
 
-      const current = this.rectEl.current;
-      const child = current.children.item(0);
       this.resizeObserver.observe(child);
     } else {
       this.resizeObserver?.disconnect();
@@ -98,16 +103,16 @@ class HighlighterBox extends React.Component {
   }
 
   updateTooltip() {
-    const { rect } = this.props;
+    const { rect, highlight } = this.props;
 
     if (this.popper) {
       return;
     }
 
-    if (this.box.current && this.tooltip.current && rect.left !== 0) {
+    if (this.box.current && this.tooltip.current && rect.width !== 0) {
       this.popper = createPopper(this.box.current, this.tooltip.current, {
         strategy: "fixed",
-        placement: "auto",
+        placement: highlight.step.position || "auto",
         modifiers: [
           {
             name: "offset",

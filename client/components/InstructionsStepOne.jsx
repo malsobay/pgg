@@ -23,6 +23,7 @@ export class InstructionsStepOne extends React.Component {
           </p>
         </div>
       ),
+      position: "bottom",
       nextText: "Ok",
     },
     {
@@ -105,6 +106,10 @@ export class InstructionsStepOne extends React.Component {
       return;
     }
 
+    this.setState({
+      chatted: true,
+    });
+
     this.timeout = setTimeout(() => {
       this.setState((state) => ({
         ...state,
@@ -134,7 +139,7 @@ export class InstructionsStepOne extends React.Component {
     let step = this.steps[current];
 
     return (
-      <div className="relative">
+      <div className="relative h-full">
         <MockContribution
           highlight={{
             step: step?.component ? step : null,

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.introduction-steps {
+  height: 100%;
+}
+
 #tooltip {
   display: none;
   z-index: 100;

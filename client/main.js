@@ -31,76 +31,66 @@ Empirica.newPlayer(NewPlayer);
 // At this point they have been assigned a treatment. You can return
 // different instruction steps depending on the assigned treatment.
 
-function StepOne({ onNext }) {
-  return (
-    <InstructionsStepOne
-      onNext={onNext}
-      treatment={{
-        playerCount: 2,
-        conversionRate: 2,
-        basePay: 1,
-        multiplier: 12,
-        endowment: 20,
-        allOrNothing: false,
-      }}
-      player={{
-        _id: 10000,
-        avatar: "elephant",
-      }}
-    />
-  );
+class StepOne extends React.Component {
+  render() {
+    const { onNext, game } = this.props;
+
+    return (
+      <InstructionsStepOne
+        onNext={onNext}
+        treatment={game.treatment}
+        player={{
+          _id: 10000,
+          avatar: "elephant",
+        }}
+      />
+    );
+  }
 }
 
-function StepTwo({ onNext }) {
-  return (
-    <InstructionsStepTwo
-      onNext={onNext}
-      treatment={{
-        playerCount: 2,
-        conversionRate: 2,
-        basePay: 1,
-        multiplier: 12,
-        endowment: 20,
-        punishmentMagnitude: 2,
-        punishmentCost: 2,
-        allOrNothing: false,
-      }}
-      player={{
-        _id: 10000,
-        avatar: "elephant",
-        punished: {},
-      }}
-    />
-  );
+class StepTwo extends React.Component {
+  render() {
+    const { onNext, game } = this.props;
+
+    return (
+      <InstructionsStepTwo
+        onNext={onNext}
+        treatment={game.treatment}
+        player={{
+          _id: 10000,
+          avatar: "elephant",
+          punished: {},
+        }}
+      />
+    );
+  }
 }
 
-function StepThree({ onNext }) {
-  const roundPayoff = 7;
-  const contribution = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-  return (
-    <InstructionsStepThree
-      onNext={onNext}
-      treatment={{
-        playerCount: 2,
-        conversionRate: 2,
-        basePay: 1,
-        multiplier: 12,
-        endowment: 20,
-        punishmentMagnitude: 2,
-        punishmentCost: 2,
-        allOrNothing: false,
-      }}
-      roundPayoff={roundPayoff}
-      player={{
-        _id: 10000,
-        avatar: "elephant",
-        punished: {},
-        punishedBy: {},
-        contribution: contribution,
-        roundPayoff: roundPayoff - contribution,
-      }}
-    />
-  );
+class StepThree extends React.Component {
+  constructor(props) {
+    super(props);
+    this.roundPayoff = 7;
+    this.contribution = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  }
+
+  render() {
+    const { onNext, game } = this.props;
+    return (
+      <InstructionsStepThree
+        onNext={onNext}
+        treatment={game.treatment}
+        roundPayoff={this.roundPayoff}
+        player={{
+          _id: 10000,
+          avatar: "elephant",
+          punished: {},
+          punishedBy: {},
+          contribution: this.contribution,
+          roundPayoff: this.roundPayoff - this.contribution,
+        }}
+      />
+    );
+  }
 }
 
 Empirica.introSteps((game, treatment) => {
