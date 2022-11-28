@@ -151,7 +151,7 @@ class Quizz extends React.Component {
     const { treatment } = this.props;
     const incorrect = [];
 
-    const val = (4 / treatment.punishmentCost) * treatment.punishmentMagnitude;
+    const val = 2 * treatment.punishmentMagnitude;
     if (this.state.coins !== val.toString()) {
       incorrect.push("coins");
     }
@@ -184,7 +184,7 @@ class Quizz extends React.Component {
         <p>
           Each deduction you impose on another player deducts{" "}
           {treatment.punishmentMagnitude} coins from them, and costs you{" "}
-          {treatment.punishmentCost} coins. If you spend 4 coins to deduct from
+          {treatment.punishmentCost} coins. If you spend {2*treatment.punishmentCost} coins to deduct from
           another player, how many coins will be deducted from them?
         </p>
 
