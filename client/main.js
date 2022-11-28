@@ -69,7 +69,7 @@ class StepTwo extends React.Component {
 class StepThree extends React.Component {
   constructor(props) {
     super(props);
-    this.roundPayoff = 7;
+    this.roundPayoff = 15;
     this.contribution = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   }
 
