@@ -55,8 +55,10 @@ Empirica.onRoundStart((game, round) => {
   game.players.forEach((player, i) => {
     player.round.set("endowment", game.treatment.endowment);
     player.round.set("punishedBy", {});
-    player.round.set("contribution", 0);
     player.round.set("punished", {});
+    player.round.set("rewardedBy", {});
+    player.round.set("rewarded", {});
+    player.round.set("contribution", 0);
   });
 });
 
@@ -72,6 +74,7 @@ Empirica.onStageEnd((game, round, stage) => {
   } //player.stage.set values but wait to update until round end
   if (stage.name == "outcome") {
     computePunishmentCosts(game, round);
+    computeRewards(game, round);
     computeIndividualPayoff(game, round);
   }
 });
@@ -150,6 +153,50 @@ function computePunishmentCosts(game, round) {
   });
 }
 
+function computeRewards(game, round) {
+  game.players.forEach((player) => {
+    const rewarded = player.round.get("rewarded");
+    const rewardedKeys = Object.keys(rewarded);
+    
+    let cost = 0;
+    for (const key of rewardedKeys) {
+      if (rewarded[key] != "0") {
+        amount = rewarded[key];
+        cost += parseFloat(amount) * game.treatment.rewardCost;
+      } else {
+      }
+    }
+
+    let rewardedBy = {};
+
+    player.round.set("costs", player.round.get("costs")+cost);
+
+    const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
+    otherPlayers.forEach((otherPlayer) => {
+      const otherPlayerRewarded = otherPlayer.round.get("rewarded");
+      if (Object.keys(otherPlayerRewarded).includes(player._id)) {
+        rewardedBy[otherPlayer._id] = otherPlayerRewarded[player._id];
+        console.log(rewardedBy);
+      }
+    });
+
+    player.round.set("rewardedBy", rewardedBy);
+    rewardedBy = player.round.get("rewardedBy");
+    
+    let receivedRewards = 0;
+    const rewardedByKeys = Object.keys(rewardedBy);
+    for (const key of rewardedByKeys) {
+      if (rewardedBy[key] != "0") {
+        amount = rewardedBy[key];
+        receivedRewards += parseFloat(amount);
+      }
+    }
+    const rewards =
+      parseFloat(receivedRewards) * game.treatment.rewardMagnitude;
+    player.round.set("rewards", rewards);
+  });
+}
+
 // computes players' individual payoff (round payoff minus punishment costs and penalties)
 function computeIndividualPayoff(game, round) {
   game.players.forEach((player) => {
@@ -159,9 +206,11 @@ function computeIndividualPayoff(game, round) {
       parseFloat(game.treatment.endowment) - parseFloat(contribution);
     player.round.set("remainingEndowment", remainingEndowment);
     const penalties = player.round.get("penalties");
+    const rewards = player.round.get("rewards");
     const costs = player.round.get("costs");
     const roundPayoff =
       parseFloat(payoff) +
+      parseFloat(rewards) +
       parseFloat(remainingEndowment) -
       parseFloat(penalties) -
       parseFloat(costs);
