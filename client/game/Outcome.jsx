@@ -85,12 +85,11 @@ export default function Outcome({ stage, round, game, player }) {
                         let totalPunishmentCost = 0;
                         for (const key in punishments) {
                           totalPunishmentCost +=
-                            parseFloat(punishments[key]) * punishmentMagnitude;
+                            parseFloat(punishments[key]) * punishmentCost;
                         }
 
                         if (
-                          totalPunishmentCost + punishmentMagnitude >
-                          cumulativePayoff
+                          totalPunishmentCost >= cumulativePayoff
                         ) {
                           alert(
                             "You don't have enough coins to make this deduction!"
