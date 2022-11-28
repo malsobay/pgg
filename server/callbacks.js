@@ -169,7 +169,7 @@ function computeRewards(game, round) {
 
     let rewardedBy = {};
 
-    player.round.set("costs", player.round.get("costs")+cost);
+    player.round.set("costs", parseFloat(player.round.get("costs")) + cost);
 
     const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
     otherPlayers.forEach((otherPlayer) => {
