@@ -147,7 +147,7 @@ class Quizz extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const incorrect = [];
-    if (this.state.coins !== "5") {
+    if (this.state.coins !== "10") {
       incorrect.push("coins");
     }
 

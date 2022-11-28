@@ -32,37 +32,12 @@ function genPunishments(player, players) {
 
 export class InstructionsStepThree extends React.Component {
   state = { current: 0, messages: [] };
-  steps = [
-    {
-      component: "you",
-      content: (
-        <div className="prose">
-          <p>
-            Here, you can view a summary of your outcome for the round,
-            including contributions and deductions (given/received).
-          </p>
-        </div>
-      ),
-      nextText: "Ok",
-    },
-    {
-      component: "players",
-      content: (
-        <div className="prose">
-          <p>The same summary is also shown for other players.</p>
-        </div>
-      ),
-      nextText: "Great",
-    },
-    {
-      modal: "quizz",
-    },
-  ];
+  
 
   constructor(props) {
     super(props);
 
-    const { playerCount } = props.treatment;
+    const { playerCount, punishmentExists } = props.treatment;
     const playerAvatar = props.player.avatar;
     const exclude = [playerAvatar];
 
@@ -83,18 +58,49 @@ export class InstructionsStepThree extends React.Component {
       });
     }
 
+    
     const allPlayers = [props.player, ...otherPlayers];
-    for (const player of otherPlayers) {
-      genPunishments(player, allPlayers);
-    }
 
-    genPunishments(props.player, allPlayers);
+    if(punishmentExists){
+      for (const player of otherPlayers) {
+        genPunishments(player, allPlayers);
+      }
+
+      genPunishments(props.player, allPlayers);
+    };
 
     this.state = { ...this.state, otherPlayers };
+
+    this.steps = [
+      {
+        component: "you",
+        content: (
+          <div className="prose">
+            <p>
+              Here, you can view a summary of your outcome for the round,
+              including contributions{punishmentExists && (" and deductions (given/received)")}.
+            </p>
+          </div>
+        ),
+        nextText: "Ok",
+      },
+      {
+        component: "players",
+        content: (
+          <div className="prose">
+            <p>The same summary is also shown for other players.</p>
+          </div>
+        ),
+        nextText: "Great",
+      },
+      {
+        modal: "quizz",
+      },
+    ];
   }
 
   render() {
-    const { onNext, treatment, player, paused } = this.props;
+    const { onNext, treatment, player, paused} = this.props;
     const { current, messages, otherPlayers } = this.state;
 
     let step = this.steps[current];
@@ -166,6 +172,10 @@ class Quizz extends React.Component {
   render() {
     const { treatment } = this.props;
     const { coins, incorrect } = this.state;
+
+    if(!treatment.punishmentExists){
+      this.props.next();
+    }
 
     return (
       <form onSubmit={this.handleSubmit}>

@@ -280,7 +280,7 @@ function Intro({ next, treatment }) {
 
       <img
         className="public-fund-img"
-        src="http://localhost:4000/experiment/images/explanation.png"
+        src="experiment/images/explanation.png"
       />
 
       <p>
