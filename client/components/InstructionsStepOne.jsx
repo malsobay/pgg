@@ -7,79 +7,6 @@ import { MockContribution } from "./MockContribution";
 
 export class InstructionsStepOne extends React.Component {
   state = { current: 0, messages: [] };
-  steps = [
-    {
-      modal: "pre",
-    },
-    {
-      component: "header",
-      content: (
-        <div className="prose">
-          <p>
-            This is the navigation bar. Here, you can see which round of the
-            game you are currently in, the coins you have earned so far, and the
-            time remaining for the current stage. To review information about
-            the game, click "Help".
-          </p>
-        </div>
-      ),
-      position: "bottom",
-      nextText: "Ok",
-    },
-    {
-      component: "center",
-      content: (
-        <div className="prose">
-          <p>
-            In the contribution stage, use the arrow buttons to decide how many
-            of the coins you are given in each round you want to contribute to
-            the public fund. Try it out.
-          </p>
-          <p>
-            When you have decided how many coins to contribute, be sure to
-            submit your decision by clicking the "I'm done" button. Go ahead and
-            click "I'm done" when you're ready for the next step.
-          </p>
-        </div>
-      ),
-      nonext: true,
-    },
-    {
-      component: "you",
-      content: (
-        <div className="prose">
-          <p>
-            Your information and avatar will always show up on the left side of
-            the screen.
-          </p>
-        </div>
-      ),
-      nextText: "Got it",
-    },
-    {
-      component: "players",
-      content: (
-        <div className="prose">
-          <p>
-            Other players' avatars will always show up on the right side of the
-            screen.
-          </p>
-        </div>
-      ),
-    },
-    {
-      component: "chat",
-      content: (
-        <div className="prose">
-          <p>You can use the chat window to communicate with other players.</p>
-        </div>
-      ),
-      nextText: "Understood",
-    },
-    {
-      modal: "quizz",
-    },
-  ];
 
   constructor(props) {
     super(props);
@@ -96,6 +23,86 @@ export class InstructionsStepOne extends React.Component {
     }
 
     this.state = { ...this.state, otherPlayers };
+
+    this.steps = [
+      {
+        modal: "pre",
+      },
+      {
+        component: "header",
+        content: (
+          <div className="prose">
+            <p>
+              This is the navigation bar. Here, you can see which round of the
+              game you are currently in, the coins you have earned so far, and
+              the time remaining for the current stage. To review information
+              about the game, click "Help".
+            </p>
+          </div>
+        ),
+        position: "bottom",
+        nextText: "Ok",
+      },
+      {
+        component: "center",
+        content: (
+          <div className="prose">
+            <p>
+              In the contribution stage, use the arrow buttons to decide how
+              many of the coins you are given in each round you want to
+              contribute to the public fund. Try it out.
+            </p>
+            <p>
+              When you have decided how many coins to contribute, be sure to
+              submit your decision by clicking the "I'm done" button. Go ahead
+              and click "I'm done" when you're ready for the next step.
+            </p>
+          </div>
+        ),
+        nonext: true,
+      },
+      {
+        component: "you",
+        content: (
+          <div className="prose">
+            <p>
+              Your information and avatar will always show up on the left side
+              of the screen.
+            </p>
+          </div>
+        ),
+        nextText: "Got it",
+      },
+      {
+        component: "players",
+        content: (
+          <div className="prose">
+            <p>
+              Other players' avatars will always show up on the right side of
+              the screen.
+            </p>
+          </div>
+        ),
+      },
+    ];
+
+    if (props.treatment.chat) {
+      this.steps.push({
+        component: "chat",
+        content: (
+          <div className="prose">
+            <p>
+              You can use the chat window to communicate with other players.
+            </p>
+          </div>
+        ),
+        nextText: "Understood",
+      });
+    }
+
+    this.steps.push({
+      modal: "quizz",
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
