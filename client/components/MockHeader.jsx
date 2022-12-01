@@ -42,15 +42,21 @@ export class MockHeader extends React.Component {
   }
 
   render() {
-    const { endowment } = this.props;
+    const { endowment, showNRounds, numRounds } = this.props;
     const { num } = this.state;
     var min = Math.floor(num / 60);
     var sec = num % 60;
 
+    let roundNum = `Round 1`;
+
+    if (showNRounds) {
+      roundNum += ` of ${numRounds}`;
+    }
+
     return (
       <div className="w-full pgg-header">
         <Header
-          left="Round 1"
+          left={roundNum}
           showPiggyBank
           piggyBankAmount={endowment}
           timerMinutes={`${min < 10 ? "0" : ""}${min}`}

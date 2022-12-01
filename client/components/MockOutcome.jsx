@@ -34,6 +34,8 @@ export class MockOutcome extends React.Component {
     const {
       multiplier,
       endowment,
+      showNRounds,
+      numRounds,
       playerCount,
       punishmentMagnitude,
       punishmentCost,
@@ -43,7 +45,12 @@ export class MockOutcome extends React.Component {
     return (
       <div className="h-full grid grid-rows-[min-content_1fr]">
         <Highlighter name="header" highlight={highlight}>
-          <MockHeader endowment={endowment} paused={paused} />
+          <MockHeader
+            endowment={endowment}
+            paused={paused}
+            showNRounds={showNRounds}
+            numRounds={numRounds}
+          />
         </Highlighter>
         <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
           <div className="h-full relative col-start-1 col-end-4">

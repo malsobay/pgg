@@ -27,12 +27,18 @@ export class MockContribution extends React.Component {
     } = this.props;
     const { contribution } = this.state;
 
-    const { multiplier, endowment, allOrNothing } = treatment;
+    const { multiplier, endowment, allOrNothing, showNRounds, numRounds } =
+      treatment;
 
     return (
       <div className="h-full grid grid-rows-[min-content_1fr]">
         <Highlighter name="header" highlight={highlight}>
-          <MockHeader endowment={endowment} paused={paused} />
+          <MockHeader
+            endowment={endowment}
+            paused={paused}
+            showNRounds={showNRounds}
+            numRounds={numRounds}
+          />
         </Highlighter>
 
         <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
