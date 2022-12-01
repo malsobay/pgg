@@ -15,6 +15,9 @@ export class MockHeader extends React.Component {
   }
 
   startTimer() {
+    // Disabling timer in intro. To reenable, remove return.
+    return;
+
     this.interval = setInterval(() => {
       let num = this.state.num - 1;
       if (num < 0) {
