@@ -1,8 +1,9 @@
 import React from "react";
 import { Header } from "../components/Header";
+import { HelpModal } from "./HelpContent";
 
 export class MockHeader extends React.Component {
-  state = { num: 300 };
+  state = { num: 300, help: false };
 
   componentDidMount() {
     const { paused } = this.props;
@@ -52,8 +53,11 @@ export class MockHeader extends React.Component {
           timerMinutes={`${min < 10 ? "0" : ""}${min}`}
           timerSeconds={`${sec < 10 ? "0" : ""}${sec}`}
           right="Help"
-          rightOnClick={() => alert("click")}
+          rightOnClick={() => this.setState({ help: true })}
         />
+        {this.state.help ? (
+          <HelpModal done={() => this.setState({ help: false })} />
+        ) : null}
       </div>
     );
   }

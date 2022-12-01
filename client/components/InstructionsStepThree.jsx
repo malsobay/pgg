@@ -32,7 +32,6 @@ function genPunishments(player, players) {
 
 export class InstructionsStepThree extends React.Component {
   state = { current: 0, messages: [] };
-  
 
   constructor(props) {
     super(props);
@@ -58,16 +57,15 @@ export class InstructionsStepThree extends React.Component {
       });
     }
 
-    
     const allPlayers = [props.player, ...otherPlayers];
 
-    if(punishmentExists){
+    if (punishmentExists) {
       for (const player of otherPlayers) {
         genPunishments(player, allPlayers);
       }
 
       genPunishments(props.player, allPlayers);
-    };
+    }
 
     this.state = { ...this.state, otherPlayers };
 
@@ -78,7 +76,8 @@ export class InstructionsStepThree extends React.Component {
           <div className="prose">
             <p>
               Here, you can view a summary of your outcome for the round,
-              including contributions{punishmentExists && (" and deductions (given/received)")}.
+              including contributions
+              {punishmentExists && " and deductions (given/received)"}.
             </p>
           </div>
         ),
@@ -100,7 +99,7 @@ export class InstructionsStepThree extends React.Component {
   }
 
   render() {
-    const { onNext, treatment, player, paused} = this.props;
+    const { onNext, treatment, player, paused } = this.props;
     const { current, messages, otherPlayers } = this.state;
 
     let step = this.steps[current];
@@ -128,7 +127,7 @@ export class InstructionsStepThree extends React.Component {
           cumulativePayoff={10}
         />
         {step?.modal ? (
-          <div className="z-50 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
+          <div className="z-40 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
             <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto max-w-prose overflow-auto">
               <div className="prose prose-slate prose-p:text-gray-500 prose-p:font-['Inter'] prose-ul:font-['Inter'] prose-headings:text-orange-600">
                 {step.modal === "quizz" ? (
@@ -173,7 +172,7 @@ class Quizz extends React.Component {
     const { treatment } = this.props;
     const { coins, incorrect } = this.state;
 
-    if(!treatment.punishmentExists){
+    if (!treatment.punishmentExists) {
       this.props.next();
     }
 
@@ -184,8 +183,9 @@ class Quizz extends React.Component {
         <p>
           Each deduction you impose on another player deducts{" "}
           {treatment.punishmentMagnitude} coins from them, and costs you{" "}
-          {treatment.punishmentCost} coins. If you spend {2*treatment.punishmentCost} coins to deduct from
-          another player, how many coins will be deducted from them?
+          {treatment.punishmentCost} coins. If you spend{" "}
+          {2 * treatment.punishmentCost} coins to deduct from another player,
+          how many coins will be deducted from them?
         </p>
 
         <Input

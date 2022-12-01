@@ -164,7 +164,7 @@ export class InstructionsStepOne extends React.Component {
           }}
         />
         {step?.modal ? (
-          <div className="z-50 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
+          <div className="z-40 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
             <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto max-w-prose overflow-auto">
               <div className="prose prose-slate prose-p:text-gray-500 prose-p:font-['Inter'] prose-headings:text-orange-600">
                 {step.modal === "pre" ? (
