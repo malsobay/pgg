@@ -7,18 +7,30 @@ export function DeductionDetails({
   submitted = false,
   contributed,
   gains,
-  enableDeductions,
+  punishmentExists,
   deductionsSpent,
   deductionsReceived,
+  rewardExists,
+  rewardsSpent,
+  rewardsReceived,
   isSelf,
   showPunishmentId,
 }) {
-  const totalSpent = deductionsSpent.reduce(
+  const totalDeductionsSpent = deductionsSpent.reduce(
     (sum, deduction) => sum + deduction.amount,
     0
   );
-  const totalReceived = deductionsReceived.reduce(
+  const totalDeductionsReceived = deductionsReceived.reduce(
     (sum, deduction) => sum + deduction.amount,
+    0
+  );
+
+  const totalRewardsSpent = rewardsSpent.reduce(
+    (sum, reward) => sum + reward.amount,
+    0
+  );
+  const totalRewardsReceived = rewardsReceived.reduce(
+    (sum, reward) => sum + reward.amount,
     0
   );
 
@@ -50,11 +62,11 @@ export function DeductionDetails({
         </div>
       </div>
 
-      {enableDeductions && (
+      {punishmentExists && (
         <>
           <div className="mt-8 flex justify-between text-orange-600 border-b border-orange-600">
             <div className="">Coins spent on deductions</div>
-            <div className="font-bold text-right">{totalSpent}</div>
+            <div className="font-bold text-right">{totalDeductionsSpent}</div>
           </div>
 
           {(isSelf || showPunishmentId) && (
@@ -63,11 +75,35 @@ export function DeductionDetails({
 
           <div className="mt-6 flex justify-between text-orange-600 border-b border-orange-600">
             <div className="">Coins deducted by other players</div>
-            <div className="font-bold text-right">{totalReceived}</div>
+            <div className="font-bold text-right">
+              {totalDeductionsReceived}
+            </div>
           </div>
 
           {showPunishmentId && (
             <IndividualDeductions deductions={deductionsReceived} />
+          )}
+        </>
+      )}
+
+      {rewardExists && (
+        <>
+          <div className="mt-8 flex justify-between text-orange-600 border-b border-orange-600">
+            <div className="">Coins spent on rewards</div>
+            <div className="font-bold text-right">{totalRewardsSpent}</div>
+          </div>
+
+          {(isSelf || showPunishmentId) && (
+            <IndividualDeductions deductions={rewardsSpent} />
+          )}
+
+          <div className="mt-6 flex justify-between text-orange-600 border-b border-orange-600">
+            <div className="">Coins rewarded by other players</div>
+            <div className="font-bold text-right">{totalRewardsReceived}</div>
+          </div>
+
+          {showPunishmentId && (
+            <IndividualDeductions deductions={rewardsReceived} />
           )}
         </>
       )}

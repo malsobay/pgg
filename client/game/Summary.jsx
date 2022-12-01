@@ -23,6 +23,9 @@ export default class Summary extends React.Component {
       punishmentExists,
       punishmentCost,
       punishmentMagnitude,
+      rewardExists,
+      rewardCost,
+      rewardMagnitude,
       showPunishmentId,
     } = game.treatment;
 
@@ -76,10 +79,13 @@ export default class Summary extends React.Component {
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
                 <Details
                   punishmentExists={punishmentExists}
+                  rewardExists={rewardExists}
                   selectedPlayerID={hovered}
                   players={game.players}
-                  cost={punishmentCost}
-                  magnitude={punishmentMagnitude}
+                  punishmentCost={punishmentCost}
+                  punishmentMagnitude={punishmentMagnitude}
+                  rewardCost={rewardCost}
+                  rewardMagnitude={rewardMagnitude}
                   isSelf={false}
                   showPunishmentId={showPunishmentId}
                 />
@@ -136,10 +142,13 @@ export default class Summary extends React.Component {
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
                 <Details
                   punishmentExists={punishmentExists}
+                  rewardExists={rewardExists}
                   selectedPlayerID={self}
                   players={game.players}
-                  cost={punishmentCost}
-                  magnitude={punishmentMagnitude}
+                  punishmentCost={punishmentCost}
+                  punishmentMagnitude={punishmentMagnitude}
+                  rewardCost={rewardCost}
+                  rewardMagnitude={rewardMagnitude}
                   isSelf={true}
                   showPunishmentId={showPunishmentId}
                 />
@@ -156,22 +165,27 @@ export default class Summary extends React.Component {
 
 function Details({
   punishmentExists,
+  rewardExists,
   selectedPlayerID,
   players,
-  cost,
-  magnitude,
+  punishmentCost,
+  punishmentMagnitude,
+  rewardCost,
+  rewardMagnitude,
   isSelf,
   showPunishmentId,
 }) {
   const player = players.find((p) => p._id === selectedPlayerID);
   const punished = player.round.get("punished");
   const punishedBy = player.round.get("punishedBy");
+  const rewarded = player.round.get("rewarded");
+  const rewardedBy = player.round.get("rewardedBy");
   const contribution = player.round.get("contribution");
   const roundPayoff = player.round.get("roundPayoff");
 
   const deductionsSpent = [];
   for (const playerID in punished) {
-    const amount = punished[playerID] * cost || 0;
+    const amount = punished[playerID] * punishmentCost || 0;
     if (amount === 0) continue;
     const otherPlayer = players.find((p) => p._id === playerID);
     deductionsSpent.push({ animal: otherPlayer.get("avatar"), amount });
@@ -179,10 +193,26 @@ function Details({
 
   const deductionsReceived = [];
   for (const playerID in punishedBy) {
-    const amount = punishedBy[playerID] * magnitude || 0;
+    const amount = punishedBy[playerID] * punishmentMagnitude || 0;
     if (amount === 0) continue;
     const otherPlayer = players.find((p) => p._id === playerID);
     deductionsReceived.push({ animal: otherPlayer.get("avatar"), amount });
+  }
+
+  const rewardsSpent = [];
+  for (const playerID in rewarded) {
+    const amount = rewarded[playerID] * rewardCost || 0;
+    if (amount === 0) continue;
+    const otherPlayer = players.find((p) => p._id === playerID);
+    rewardsSpent.push({ animal: otherPlayer.get("avatar"), amount });
+  }
+
+  const rewardsReceived = [];
+  for (const playerID in rewardedBy) {
+    const amount = rewardedBy[playerID] * rewardMagnitude || 0;
+    if (amount === 0) continue;
+    const otherPlayer = players.find((p) => p._id === playerID);
+    rewardsReceived.push({ animal: otherPlayer.get("avatar"), amount });
   }
 
   return (
@@ -191,9 +221,12 @@ function Details({
       submitted={player.stage.submitted}
       contributed={contribution}
       gains={roundPayoff}
-      enableDeductions={punishmentExists}
+      punishmentExists={punishmentExists}
       deductionsSpent={deductionsSpent}
       deductionsReceived={deductionsReceived}
+      rewardExists={rewardExists}
+      rewardsSpent={rewardsSpent}
+      rewardsReceived={rewardsReceived}
       isSelf={isSelf}
       showPunishmentId={showPunishmentId}
     />
