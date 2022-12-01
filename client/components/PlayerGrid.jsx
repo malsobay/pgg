@@ -13,7 +13,7 @@ export const PlayerGrid = ({ children }) => {
     ypad = "py-[33%]";
   } else if (children.length > 1) {
     rows = "grid-rows-2";
-    ypad = "py-[66%]";
+    ypad = "py-[33%]";
   }
 
   const className =

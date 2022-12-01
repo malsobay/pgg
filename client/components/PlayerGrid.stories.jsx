@@ -6,7 +6,7 @@ import { PlayerGrid } from "./PlayerGrid";
 export const MyPlayerGrid = () => {
   // const sizes = [1, 2, 5, 9, 14];
   // const sizes = [2, 9, 10, 15];
-  const sizes = [10, 15];
+  const sizes = [2, 10, 15];
   // const sizes = [5, 9, 14];
   // const sizes = [5, 9, 14];
 
