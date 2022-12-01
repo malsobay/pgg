@@ -40,6 +40,9 @@ export class MockOutcome extends React.Component {
       punishmentMagnitude,
       punishmentCost,
       punishmentExists,
+      rewardCost,
+      rewardExists,
+      rewardMagnitude,
     } = treatment;
 
     return (
@@ -106,29 +109,56 @@ export class MockOutcome extends React.Component {
                           animal={otherPlayer.avatar}
                           submitted={false}
                           contributed={otherPlayer.contribution}
-                          active={punishmentExists}
+                          punishmentExists={punishmentExists}
+                          rewardExists={rewardExists}
                           disabled={false}
                           deducted={
                             otherPlayer.punishment * punishmentMagnitude
                           }
-                          onCancel={() => {
-                            otherPlayer.punish(otherPlayer._id, 0);
-                          }}
-                          onDeduct={() => {
-                            console.log(
-                              "deduct",
-                              otherPlayer.punishment,
-                              punishmentMagnitude,
-                              endowment
-                            );
-                            if (
-                              (otherPlayer.punishment + 1) * punishmentCost <=
-                              endowment
-                            ) {
+                          added={otherPlayer.reward * rewardMagnitude}
+                          onAdd={() => {
+                            if (otherPlayer.punishment > 0) {
+                              console.log("add p");
                               otherPlayer.punish(
                                 otherPlayer._id,
-                                otherPlayer.punishment + 1
+                                -otherPlayer.punishment + 1
                               );
+                            } else if (rewardExists) {
+                              console.log(
+                                "add R",
+                                otherPlayer.reward,
+                                rewardCost
+                              );
+                              if (
+                                (otherPlayer.reward + 1) * rewardCost <=
+                                endowment
+                              ) {
+                                console.log("add r");
+                                otherPlayer.punish(
+                                  otherPlayer._id,
+                                  otherPlayer.reward + 1
+                                );
+                              }
+                            }
+                          }}
+                          onDeduct={() => {
+                            if (otherPlayer.reward > 0) {
+                              console.log("deduct r");
+                              otherPlayer.punish(
+                                otherPlayer._id,
+                                otherPlayer.reward - 1
+                              );
+                            } else if (punishmentExists) {
+                              console.log("deduct p");
+                              if (
+                                (otherPlayer.punishment + 1) * punishmentCost <=
+                                endowment
+                              ) {
+                                otherPlayer.punish(
+                                  otherPlayer._id,
+                                  -otherPlayer.punishment - 1
+                                );
+                              }
                             }
                           }}
                         />
@@ -140,12 +170,22 @@ export class MockOutcome extends React.Component {
             </Highlighter>
             <div className="px-4 pb-16 text-center">
               <Highlighter name="never" highlight={highlight}>
-                {punishmentExists && (
-                  <Label color="purple">
-                    Deductions: It will cost you {punishmentCost} coins to
-                    impose a deduction of {punishmentMagnitude} coins.
-                  </Label>
-                )}
+                <div>
+                  {rewardExists && (
+                    <Label color="yellow">
+                      Rewards: It will cost you {rewardCost} coins to
+                      <br /> give a reward of {rewardMagnitude} coins.
+                    </Label>
+                  )}
+                  {rewardExists && punishmentExists && <div className="mt-4" />}
+                  {punishmentExists && (
+                    <Label color="purple">
+                      Deductions: It will cost you {punishmentCost} coins
+                      <br /> to impose a deduction of {punishmentMagnitude}{" "}
+                      coins.
+                    </Label>
+                  )}
+                </div>
               </Highlighter>
             </div>
           </div>

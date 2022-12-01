@@ -34,10 +34,13 @@ export function StepTwo() {
         basePay: 1,
         multiplier: 12,
         endowment: 20,
+        punishmentExists: true,
         punishmentMagnitude: 2,
         punishmentCost: 2,
+        rewardExists: true,
+        rewardMagnitude: 2,
+        rewardCost: 2,
         allOrNothing: false,
-        punishmentExists: false,
       }}
       player={{
         _id: 10000,

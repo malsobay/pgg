@@ -6,7 +6,7 @@ import { Input } from "./Input";
 import { MockOutcome } from "./MockOutcome";
 
 export class InstructionsStepTwo extends React.Component {
-  state = { current: 0, messages: [] };
+  state = { current: 2, messages: [] };
 
   constructor(props) {
     super(props);
@@ -76,14 +76,26 @@ export class InstructionsStepTwo extends React.Component {
         submitted: false,
         contribution: 10,
         punishment: 0,
+        reward: 0,
         punish: (id, amount) => {
           console.log("amount", amount);
+
+          const changes = { reward: 0, punishment: 0 };
+
+          if (amount > 0) {
+            changes.punishment = 0;
+            changes.reward = amount;
+          } else if (amount < 0) {
+            changes.punishment = Math.abs(amount);
+            changes.reward = 0;
+          }
+
           this.setState({
             otherPlayers: this.state.otherPlayers.map((p) => {
               if (p._id === id) {
                 return {
                   ...p,
-                  punishment: amount,
+                  ...changes,
                 };
               }
 

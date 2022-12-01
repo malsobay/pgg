@@ -116,6 +116,33 @@ export const Checkmark = () => (
   </svg>
 );
 
+export const Add = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-full w-full"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <circle
+      cx="12"
+      cy="12"
+      r="11"
+      fill="#FDE68A"
+      stroke="#F59E0B"
+      strokeWidth="2"
+    />
+    <rect x="5" y="10" width="14" height="4" fill="#F59E0B" />
+    <rect
+      x="10"
+      y="19"
+      width="14"
+      height="4"
+      transform="rotate(-90 10 19)"
+      fill="#F59E0B"
+    />
+  </svg>
+);
+
 export const Deduct = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -132,33 +159,6 @@ export const Deduct = () => (
       strokeWidth="2"
     />
     <rect x="5" y="10" width="14" height="4" fill="#7C3AED" />
-    <rect
-      x="10"
-      y="19"
-      width="14"
-      height="4"
-      transform="rotate(-90 10 19)"
-      fill="#7C3AED"
-    />
-  </svg>
-);
-
-export const DeductCancel = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-full w-full"
-    viewBox="0 0 24 24"
-    fill="none"
-  >
-    <circle
-      cx="12"
-      cy="12"
-      r="11"
-      fill="#F3F4F6"
-      stroke="#9CA3AF"
-      strokeWidth="2"
-    />
-    <rect x="5" y="10" width="14" height="4" fill="#9CA3AF" />
   </svg>
 );
 

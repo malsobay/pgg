@@ -101,43 +101,106 @@ export function AvatarWithDeduction() {
         <AvatarDeduction animal={"zebra"} contributed="0" />
         <AvatarDeduction animal={"rabbit"} contributed="-32" />
 
-        <AvatarDeduction
-          animal={"walrus"}
-          contributed="20"
-          active
-          deducted={0}
-        />
-        <AvatarDeduction animal={"whale"} contributed="5" active deducted={8} />
-        <AvatarDeduction
-          animal={"moose"}
-          contributed="0"
-          active
-          deducted={240}
-        />
-
         <AvatarDeduction submitted animal={"bear"} contributed="8" />
         <AvatarDeduction submitted animal={"zebra"} contributed="0" />
         <AvatarDeduction submitted animal={"rabbit"} contributed="-32" />
+
+        {/* Reward exists */}
+
+        <AvatarDeduction
+          animal={"walrus"}
+          contributed="20"
+          rewardExists
+          added={0}
+        />
+        <AvatarDeduction
+          animal={"whale"}
+          contributed="5"
+          rewardExists
+          added={8}
+        />
+        <AvatarDeduction
+          animal={"moose"}
+          contributed="0"
+          rewardExists
+          added={240}
+        />
+
+        {/* Punishment exists */}
 
         <AvatarDeduction
           submitted
           animal={"walrus"}
           contributed="20"
-          active
+          punishmentExists
           deducted={0}
         />
         <AvatarDeduction
           submitted
           animal={"whale"}
           contributed="5"
-          active
+          punishmentExists
+          added={8}
+        />
+        <AvatarDeduction
+          submitted
+          animal={"moose"}
+          contributed="0"
+          punishmentExists
+          deducted={240}
+        />
+
+        {/* Reward and Punishment exists - ONLY ADDED */}
+
+        <AvatarDeduction
+          submitted
+          animal={"walrus"}
+          contributed="20"
+          punishmentExists
+          rewardExists
+          added={0}
+        />
+        <AvatarDeduction
+          submitted
+          animal={"whale"}
+          contributed="5"
+          punishmentExists
+          rewardExists
+          added={8}
+        />
+        <AvatarDeduction
+          submitted
+          animal={"moose"}
+          contributed="0"
+          punishmentExists
+          rewardExists
+          added={240}
+        />
+
+        {/* Reward and Punishment exists - ONLY DEDUCTED */}
+
+        <AvatarDeduction
+          submitted
+          animal={"walrus"}
+          contributed="20"
+          punishmentExists
+          rewardExists
+          deducted={0}
+        />
+        <AvatarDeduction
+          submitted
+          animal={"whale"}
+          contributed="5"
+          punishmentExists
+          rewardExists
           deducted={8}
         />
         <AvatarDeduction
           submitted
           animal={"moose"}
           contributed="0"
-          active
+          punishmentExists
+          rewardExists
           deducted={240}
         />
       </div>

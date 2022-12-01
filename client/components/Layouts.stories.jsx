@@ -145,7 +145,7 @@ export function Stage2() {
                   <AvatarDeduction
                     animal={AnimalList[i]}
                     contributed={i === 0 ? "81" : "5"}
-                    active
+                    punishmentExists
                     deducted={i === 0 || i === 8 || i === 12 ? 8 : 0}
                   />
                 </div>

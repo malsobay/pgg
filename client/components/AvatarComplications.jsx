@@ -1,5 +1,5 @@
 import React from "react";
-import { Deduct, DeductCancel } from "./assets/Assets";
+import { Add, Deduct } from "./assets/Assets";
 import { Avatar } from "./Avatar";
 import { Label } from "./Label";
 
@@ -101,43 +101,50 @@ export function AvatarDeduction({
   animal,
   contributed = "",
   deducted = 0,
-  active = false,
+  added = 0,
+  punishmentExists = false,
+  rewardExists = false,
   disabled = false,
   submitted = false,
+  onAdd = () => {},
   onDeduct = () => {},
-  onCancel = () => {},
 }) {
   const avatar = (
     <div className="w-42">
       <div className="pt-5 pb-8 px-5 relative">
         <div className="w-16">
           <Avatar
-            disabled={active && deducted > 0}
+            disabled={
+              (punishmentExists && deducted > 0) || (rewardExists && added > 0)
+            }
             submitted={submitted}
             animal={animal}
           />
         </div>
-        {active && deducted > 0 && (
+        {((punishmentExists && deducted > 0) ||
+          (rewardExists && added > 0)) && (
           <div className="absolute top-0 left-0 pb-2 w-full h-full flex justify-center items-center text-center">
-            <Label color="purple" size="2xl" shadow>
-              {deducted}
+            <Label color={deducted > 0 ? "purple" : "yellow"} size="2xl" shadow>
+              {deducted > 0 ? `-${deducted}` : added}
             </Label>
           </div>
         )}
-        {active && !disabled && (
+        {(rewardExists || (punishmentExists && deducted > 0)) && !disabled && (
           <button
-            onClick={onDeduct}
+            onClick={onAdd}
             className="absolute w-6 top-0 left-full -ml-6 hover:-top-0.5 active:top-0.5 active:shadow-none"
+            title={deducted > 0 ? "Reduce punishment" : "Reward"}
           >
-            <Deduct />
+            <Add />
           </button>
         )}
-        {active && !disabled && deducted > 0 && (
+        {(punishmentExists || (rewardExists && added > 0)) && !disabled && (
           <button
-            onClick={onCancel}
+            onClick={onDeduct}
             className="absolute w-6 top-0 right-full -mr-6 text-right hover:-top-0.5 active:top-0.5 active:shadow-none"
+            title={added > 0 ? "Reduce reward" : "Punish"}
           >
-            <DeductCancel />
+            <Deduct />
           </button>
         )}
         <div className="absolute -bottom-1 left-0 w-full text-center">

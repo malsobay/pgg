@@ -15,6 +15,9 @@ export default function Outcome({ stage, round, game, player }) {
     punishmentCost,
     punishmentExists,
     punishmentMagnitude,
+    rewardCost,
+    rewardExists,
+    rewardMagnitude,
   } = game.treatment;
 
   const otherPlayers = game.players.filter((p) => p._id !== player._id);
@@ -24,6 +27,17 @@ export default function Outcome({ stage, round, game, player }) {
   const totalReturns = round.get("totalReturns");
   const payoff = round.get("payoff");
   const cumulativePayoff = player.get("cumulativePayoff");
+  const punishments = player.round.get("punished");
+  const rewards = player.round.get("rewarded");
+
+  let totalCost = 0;
+  for (const key in punishments) {
+    totalCost += parseFloat(punishments[key]) * punishmentCost;
+  }
+
+  for (const key in rewards) {
+    totalCost += parseFloat(rewards[key]) * rewardCost;
+  }
 
   return (
     <div className="h-full grid grid-rows-[min-content_1fr]">
@@ -61,8 +75,57 @@ export default function Outcome({ stage, round, game, player }) {
         <div className="h-full grid grid-rows-1 col-start-9 col-end-13">
           <PlayerGrid>
             {otherPlayers.map((otherPlayer, i) => {
-              const punishments = player.round.get("punished");
               const punished = punishments[otherPlayer._id] || 0;
+              const added = rewards[otherPlayer._id] || 0;
+
+              const punish = (increase) => {
+                if (increase) {
+                  if (totalCost + punishmentCost >= cumulativePayoff) {
+                    alert(
+                      "You don't have enough coins to make this deduction!"
+                    );
+
+                    return;
+                  }
+
+                  punishments[otherPlayer._id] = punished + 1;
+                } else {
+                  punishments[otherPlayer._id] = punished - 1;
+                }
+
+                player.round.set("punished", punishments);
+              };
+
+              const reward = (increase) => {
+                if (increase) {
+                  if (totalCost + rewardCost >= cumulativePayoff) {
+                    alert("You don't have enough coins to make this reward!");
+
+                    return;
+                  }
+                  rewards[otherPlayer._id] = added + 1;
+                } else {
+                  rewards[otherPlayer._id] = added - 1;
+                }
+
+                player.round.set("rewarded", rewards);
+              };
+
+              const add = () => {
+                if (punished > 0) {
+                  punish(false);
+                } else {
+                  reward(true);
+                }
+              };
+
+              const deduct = () => {
+                if (added > 0) {
+                  reward(false);
+                } else {
+                  punish(true);
+                }
+              };
 
               return (
                 <div
@@ -74,44 +137,31 @@ export default function Outcome({ stage, round, game, player }) {
                       animal={otherPlayer.get("avatar")}
                       submitted={otherPlayer.stage.submitted}
                       contributed={otherPlayer.round.get("contribution")}
-                      active={punishmentExists}
                       disabled={player.stage.submitted}
+                      punishmentExists={punishmentExists}
                       deducted={punished * punishmentMagnitude}
-                      onCancel={() => {
-                        punishments[otherPlayer._id] = 0;
-                        player.round.set("punished", punishments);
-                      }}
-                      onDeduct={() => {
-                        let totalPunishmentCost = 0;
-                        for (const key in punishments) {
-                          totalPunishmentCost +=
-                            parseFloat(punishments[key]) * punishmentCost;
-                        }
-
-                        if (
-                          totalPunishmentCost >= cumulativePayoff
-                        ) {
-                          alert(
-                            "You don't have enough coins to make this deduction!"
-                          );
-
-                          return;
-                        }
-
-                        punishments[otherPlayer._id] = punished + 1;
-                        player.round.set("punished", punishments);
-                      }}
+                      rewardExists={rewardExists}
+                      added={added * rewardMagnitude}
+                      onDeduct={deduct}
+                      onAdd={add}
                     />
                   </div>
                 </div>
               );
             })}
           </PlayerGrid>
-          <div className="px-4 pb-16 text-center">
+          <div className="px-4 pb-16">
+            {rewardExists && (
+              <Label color="yellow">
+                Rewards: It will cost you {rewardCost} coins to
+                <br /> give a reward of {rewardMagnitude} coins.
+              </Label>
+            )}
+            {rewardExists && punishmentExists && <div className="mt-4" />}
             {punishmentExists && (
               <Label color="purple">
-                Deductions: It will cost you {punishmentCost} coins to impose a
-                deduction of {punishmentMagnitude} coins.
+                Deductions: It will cost you {punishmentCost} coins
+                <br /> to impose a deduction of {punishmentMagnitude} coins.
               </Label>
             )}
           </div>

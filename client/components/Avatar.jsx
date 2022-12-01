@@ -5,7 +5,7 @@ import { Checkmark } from "./assets/Assets";
 export const Avatar = ({ animal, submitted = false, disabled = false }) => {
   return (
     <div className="relative h-full w-full">
-      <div className={`${disabled ? "grayscale opacity-50" : ""}`}>
+      <div className={`${disabled ? "grayscale opacity-30" : ""}`}>
         <AnimalAvatar animal={animal} />
       </div>
       {submitted && (
