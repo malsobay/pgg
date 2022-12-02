@@ -48,12 +48,12 @@ export function AvatarScores({
         )}
         {rewardExists && (
           <>
-            <div className="absolute top-2 left-full -ml-[1.25rem]">
+            <div className="absolute top-2 left-full -ml-[1rem]">
               <Label color="gold" size="md" stroke shadow>
                 {rewardsGiven}
               </Label>
             </div>
-            <div className="absolute bottom-2 left-full -ml-[1.25rem]">
+            <div className="absolute bottom-2 left-full -ml-[1rem]">
               <Label color="gold" size="md" stroke shadow>
                 {rewardsReceived}
               </Label>

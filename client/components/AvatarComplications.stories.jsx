@@ -89,8 +89,8 @@ export function AvatarWithScore() {
         animal={"parrot"}
         punishmentsGiven="480"
         punishmentsReceived="780"
-        rewardsGiven="741"
-        rewardsReceived="489"
+        rewardsGiven="480"
+        rewardsReceived="780"
         contributed="2450"
         gains={420}
         submitted
