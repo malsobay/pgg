@@ -6,10 +6,13 @@ import { Label } from "./Label";
 export function AvatarScores({
   animal,
   gains,
-  given = "",
-  received = "",
+  punishmentExists = true,
+  punishmentsGiven = "",
+  punishmentsReceived = "",
+  rewardExists = SVGComponentTransferFunctionElement,
+  rewardsGiven = "",
+  rewardsReceived = "",
   contributed = "",
-  enableDeductions = true,
   hints = false,
   submitted = false,
 }) {
@@ -29,29 +32,45 @@ export function AvatarScores({
         <div className="w-16">
           <Avatar submitted={submitted} animal={animal} />
         </div>
-        {enableDeductions && (
+        {punishmentExists && (
           <>
-            <div className="absolute top-0 right-full -mr-3.5 text-right">
+            <div className="absolute top-2 right-full -mr-3.5 text-right">
               <Label color="purple" size="md" stroke shadow>
-                {given}
+                {punishmentsGiven}
               </Label>
             </div>
-            <div className="absolute top-0 left-full -ml-[1.25rem]">
-              <Label color="pink" size="md" stroke shadow>
-                {received}
+            <div className="absolute bottom-2 right-full -mr-3.5 text-right">
+              <Label color="purple" size="md" stroke shadow>
+                {punishmentsReceived}
               </Label>
             </div>
           </>
         )}
-        <div className="absolute bottom-0 left-0 w-full text-center">
+        {rewardExists && (
+          <>
+            <div className="absolute top-2 left-full -ml-[1.25rem]">
+              <Label color="gold" size="md" stroke shadow>
+                {rewardsGiven}
+              </Label>
+            </div>
+            <div className="absolute bottom-2 left-full -ml-[1.25rem]">
+              <Label color="gold" size="md" stroke shadow>
+                {rewardsReceived}
+              </Label>
+            </div>
+          </>
+        )}
+        <div className="absolute -top-4 left-0 w-full text-center">
           <Label color="yellow" size="md" stroke shadow>
             {contributed}
           </Label>
         </div>
+        <div className="absolute -bottom-6 left-0 w-full text-center">
+          <Label color={gainsColor} size="lg" stroke shadow>
+            <div>{gains}</div>
+          </Label>
+        </div>
       </div>
-      <Label color={gainsColor} size="xl" stroke shadow>
-        <div className="min-w-[3rem] text-right">{gains}</div>
-      </Label>
     </div>
   );
 
@@ -61,35 +80,59 @@ export function AvatarScores({
 
   return (
     <div className="pt-20 pb-20 px-24 relative">
-      {enableDeductions && (
-        <>
-          <div className="absolute w-28 text-right top-0 left-0">
+      {punishmentExists && (
+        <div>
+          <div className="absolute w-36 text-right top-22 -mt-1/2 -left-20 pr-4">
+            <div className="font-['Inter'] mb-2">
+              <Label tight color="purple" size="xs">
+                Coins spent on deductions
+              </Label>
+            </div>
             <Label color="purple" size="xs">
-              Coins spent on deductions
+              Deductions
             </Label>
-            <div className="absolute right-2 top-0 mt-14 h-6 w-0 border border-purple-600"></div>
+            <div className="font-['Inter'] mt-2">
+              <Label tight color="purple" size="xs">
+                Coins deducted by other players
+              </Label>
+            </div>
+            <div className="absolute right-0 top-0 h-full w-0 border border-purple-600"></div>
           </div>
-          <div className="absolute w-32 top-0 left-0 ml-44">
-            <Label color="pink" size="xs">
-              Coins deducted by other players
-            </Label>
-            <div className="absolute left-2.5 top-0 mt-14 h-6 w-0 border border-pink-600"></div>
-          </div>
-        </>
+        </div>
       )}
-      <div className="absolute w-32 bottom-0 ml-20 left-0 text-center">
+      {rewardExists && (
+        <div>
+          <div className="absolute w-36 text-left top-22 -mt-1/2 -right-20 pl-4">
+            <div className="font-['Inter'] mb-2">
+              <Label tight color="gold" size="xs">
+                Coins spent on rewards
+              </Label>
+            </div>
+            <Label color="gold" size="xs">
+              Rewards
+            </Label>
+            <div className="font-['Inter'] mt-2">
+              <Label tight color="gold" size="xs">
+                Coins rewarded by other players
+              </Label>
+            </div>
+            <div className="absolute left-0 top-0 h-full w-0 border border-yellow-500"></div>
+          </div>
+        </div>
+      )}
+      <div className="absolute w-32 -top-6 ml-20 left-0 text-center">
+        <div className="absolute left-1/2 top-0 mt-14 ml-0.5 h-6 w-0 border border-orange-600"></div>
         <Label color="orange" size="xs">
           Coins Contributed
         </Label>
-        <div className="absolute left-1/2 bottom-0 mb-14 ml-0.5 h-6 w-0 border border-orange-600"></div>
       </div>
 
-      <div className="absolute w-32 bottom-0 left-0 ml-56 text-left">
+      <div className="absolute w-32 -bottom-6 ml-20 left-0 text-center">
         <Label color={gainsColor} size="xs">
           Total round Gains/Losses
         </Label>
         <div
-          className={`absolute left-4 ml-0.5  bottom-0 mb-14 h-12 w-0 border ${gainsColorBorder}`}
+          className={`absolute left-1/2 bottom-0 mb-14 ml-0.5 h-6 w-0 border ${gainsColorBorder}`}
         ></div>
       </div>
       {avatar}

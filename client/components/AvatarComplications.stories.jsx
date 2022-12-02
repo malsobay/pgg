@@ -4,29 +4,35 @@ import { AvatarDeduction, AvatarScores } from "./AvatarComplications";
 export function AvatarWithScore() {
   return (
     <div className="flex flex-col justify-center items-center space-y-24">
-      <div className="grid grid-flow-row grid-cols-3 gap-8">
+      <div className="grid grid-flow-row grid-cols-3 gap-12">
         <AvatarScores animal={"sloth"} gains={8} />
         <AvatarScores animal={"elephant"} gains={0} />
         <AvatarScores animal={"moose"} gains={-32} />
 
         <AvatarScores
           animal={"crocodile"}
-          given="20"
-          received="118"
+          punishmentsGiven="20"
+          punishmentsReceived="118"
+          rewardsGiven="741"
+          rewardsReceived="11"
           contributed="0"
           gains={8}
         />
         <AvatarScores
           animal={"snake"}
-          given="5"
-          received="20"
+          punishmentsGiven="5"
+          punishmentsReceived="20"
+          rewardsGiven="0"
+          rewardsReceived="1"
           contributed="0"
           gains={0}
         />
         <AvatarScores
           animal={"moose"}
-          given="0"
-          received="78"
+          punishmentsGiven="0"
+          punishmentsReceived="78"
+          rewardsGiven="42"
+          rewardsReceived="42"
           contributed="245"
           gains={-320}
         />
@@ -38,24 +44,30 @@ export function AvatarWithScore() {
         <AvatarScores
           submitted
           animal={"crocodile"}
-          given="20"
-          received="118"
+          punishmentsGiven="20"
+          punishmentsReceived="118"
+          rewardsGiven="741"
+          rewardsReceived="11"
           contributed="0"
           gains={8}
         />
         <AvatarScores
           submitted
           animal={"snake"}
-          given="5"
-          received="20"
+          punishmentsGiven="5"
+          punishmentsReceived="20"
+          rewardsGiven="0"
+          rewardsReceived="1"
           contributed="0"
           gains={0}
         />
         <AvatarScores
           submitted
           animal={"moose"}
-          given="0"
-          received="78"
+          punishmentsGiven="0"
+          punishmentsReceived="78"
+          rewardsGiven="420"
+          rewardsReceived="742"
           contributed="245"
           gains={-320}
         />
@@ -64,8 +76,10 @@ export function AvatarWithScore() {
       <AvatarScores
         hints
         animal={"parrot"}
-        given="0"
-        received="78"
+        punishmentsGiven="0"
+        punishmentsReceived="78"
+        rewardsGiven="0"
+        rewardsReceived="11"
         contributed="0"
         gains={-320}
       />
@@ -73,20 +87,24 @@ export function AvatarWithScore() {
       <AvatarScores
         hints
         animal={"parrot"}
-        given="1480"
-        received="780"
+        punishmentsGiven="480"
+        punishmentsReceived="780"
+        rewardsGiven="741"
+        rewardsReceived="489"
         contributed="2450"
-        gains={4}
+        gains={420}
         submitted
       />
 
       <AvatarScores
         hints
         animal={"parrot"}
-        given="111"
-        received="11"
+        punishmentsGiven="1"
+        punishmentsReceived="1"
+        rewardsGiven="1"
+        rewardsReceived="1"
         contributed="11"
-        gains={11}
+        gains={-111}
         submitted
       />
     </div>

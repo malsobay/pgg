@@ -9,7 +9,7 @@ export const Avatar = ({ animal, submitted = false, disabled = false }) => {
         <AnimalAvatar animal={animal} />
       </div>
       {submitted && (
-        <div className="absolute -bottom-3 -right-2 h-[40%] w-[40%] shadow-md rounded-full bg-green-100 p-[8%]">
+        <div className="absolute -bottom-2 -right-1 h-[40%] w-[40%] shadow-md rounded-full bg-green-100 ring-green-500 ring-2 p-[8%]">
           <Checkmark />
         </div>
       )}

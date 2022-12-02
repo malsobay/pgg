@@ -31,9 +31,12 @@ export class MockSummary extends React.Component {
       endowment,
       showNRounds,
       numRounds,
+      punishmentExists,
       punishmentMagnitude,
       punishmentCost,
-      punishmentExists,
+      rewardExists,
+      rewardCost,
+      rewardMagnitude,
       showPunishmentId,
     } = treatment;
 
@@ -61,19 +64,19 @@ export class MockSummary extends React.Component {
                     hints
                     submitted={false}
                     animal={player.avatar}
-                    enableDeductions={punishmentExists}
-                    given={
+                    punishmentExists={punishmentExists}
+                    punishmentsGiven={(
                       Object.values(player.punished).reduce(
                         (a, b) => a + b,
                         0
                       ) * punishmentCost
-                    }
-                    received={
+                    ).toString()}
+                    punishmentsReceived={(
                       Object.values(player.punishedBy).reduce(
                         (a, b) => a + b,
                         0
                       ) * punishmentMagnitude
-                    }
+                    ).toString()}
                     contributed={player.contribution}
                     gains={player.roundPayoff}
                   />
@@ -91,11 +94,14 @@ export class MockSummary extends React.Component {
             {false && self === null && hovered !== null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
                 <Details
-                  punishmentExists={punishmentExists}
                   selectedPlayerID={hovered}
                   players={allPlayers}
-                  cost={punishmentCost}
-                  magnitude={punishmentMagnitude}
+                  punishmentExists={punishmentExists}
+                  punishmentCost={punishmentCost}
+                  punishmentMagnitude={punishmentMagnitude}
+                  rewardExists={rewardExists}
+                  rewardCost={rewardCost}
+                  rewardMagnitude={rewardMagnitude}
                   isSelf={false}
                   showPunishmentId={showPunishmentId}
                 />
@@ -134,15 +140,15 @@ export class MockSummary extends React.Component {
                       <AvatarScores
                         submitted={false}
                         animal={player.avatar}
-                        enableDeductions={punishmentExists}
-                        given={
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
                           Object.values(punished).reduce((a, b) => a + b, 0) *
                           punishmentCost
-                        }
-                        received={
+                        ).toString()}
+                        punishmentsReceived={(
                           Object.values(punishedBy).reduce((a, b) => a + b, 0) *
                           punishmentMagnitude
-                        }
+                        ).toString()}
                         contributed={contribution}
                         gains={roundPayoff}
                       />
@@ -155,11 +161,14 @@ export class MockSummary extends React.Component {
             {false && self !== null && hovered === null ? (
               <div className="absolute top-0 left-0 w-full h-full pointer-events-none flex items-center justify-center pb-48 bg-white/70">
                 <Details
-                  punishmentExists={punishmentExists}
                   selectedPlayerID={self}
                   players={allPlayers}
-                  cost={punishmentCost}
-                  magnitude={punishmentMagnitude}
+                  punishmentExists={punishmentExists}
+                  punishmentCost={punishmentCost}
+                  punishmentMagnitude={punishmentMagnitude}
+                  rewardExists={rewardExists}
+                  rewardCost={rewardCost}
+                  rewardMagnitude={rewardMagnitude}
                   isSelf={true}
                   showPunishmentId={showPunishmentId}
                 />
@@ -175,46 +184,73 @@ export class MockSummary extends React.Component {
 }
 
 function Details({
-  punishmentExists,
   selectedPlayerID,
   players,
-  cost,
-  magnitude,
+  punishmentExists,
+  punishmentCost,
+  punishmentMagnitude,
+  rewardExists,
+  rewardCost,
+  rewardMagnitude,
   isSelf,
   showPunishmentId,
 }) {
   console.log(selectedPlayerID, players);
   const player = players.find((p) => p._id === selectedPlayerID);
-  const punished = player.punished;
-  const punishedBy = player.punishedBy;
-  const contribution = player.contribution;
-  const roundPayoff = player.roundPayoff;
+
+  const {
+    punished,
+    punishedBy,
+    rewarded,
+    rewardedBy,
+    contribution,
+    roundPayoff,
+  } = player;
 
   const deductionsSpent = [];
   for (const playerID in punished) {
-    const amount = punished[playerID] * cost || 0;
+    const amount = punished[playerID] * punishmentCost || 0;
     if (amount === 0) continue;
-    const otherPlayer = players.find((p) => p._id.toString() === playerID);
-    deductionsSpent.push({ animal: otherPlayer.avatar, amount });
+    const otherPlayer = players.find((p) => p._id === playerID);
+    deductionsSpent.push({ animal: otherPlayer.get("avatar"), amount });
   }
 
   const deductionsReceived = [];
   for (const playerID in punishedBy) {
-    const amount = punishedBy[playerID] * magnitude || 0;
+    const amount = punishedBy[playerID] * punishmentMagnitude || 0;
     if (amount === 0) continue;
-    const otherPlayer = players.find((p) => p._id.toString() === playerID);
-    deductionsReceived.push({ animal: otherPlayer.avatar, amount });
+    const otherPlayer = players.find((p) => p._id === playerID);
+    deductionsReceived.push({ animal: otherPlayer.get("avatar"), amount });
+  }
+
+  const rewardsSpent = [];
+  for (const playerID in rewarded) {
+    const amount = rewarded[playerID] * rewardCost || 0;
+    if (amount === 0) continue;
+    const otherPlayer = players.find((p) => p._id === playerID);
+    rewardsSpent.push({ animal: otherPlayer.get("avatar"), amount });
+  }
+
+  const rewardsReceived = [];
+  for (const playerID in rewardedBy) {
+    const amount = rewardedBy[playerID] * rewardMagnitude || 0;
+    if (amount === 0) continue;
+    const otherPlayer = players.find((p) => p._id === playerID);
+    rewardsReceived.push({ animal: otherPlayer.get("avatar"), amount });
   }
 
   return (
     <DeductionDetails
       animal={player.avatar}
-      submitted={false}
+      submitted={player.stage.submitted}
       contributed={contribution}
       gains={roundPayoff}
-      enableDeductions={punishmentExists}
+      punishmentExists={punishmentExists}
       deductionsSpent={deductionsSpent}
       deductionsReceived={deductionsReceived}
+      rewardExists={rewardExists}
+      rewardsSpent={rewardsSpent}
+      rewardsReceived={rewardsReceived}
       isSelf={isSelf}
       showPunishmentId={showPunishmentId}
     />

@@ -24,6 +24,7 @@ const sizesStroke = {
 
 const colors = {
   yellow: "text-yellow-400",
+  gold: "text-yellow-500",
   green: "text-green-600",
   red: "text-red-600",
   orange: "text-orange-600",
@@ -38,6 +39,7 @@ const colors = {
 
 const colorsStroke = {
   yellow: "text-fill-yellow-300 text-stroke-orange-600",
+  gold: "text-fill-yellow-300 text-stroke-yellow-500",
   green: "text-fill-green-300 text-stroke-green-600",
   red: "text-fill-red-300 text-stroke-red-600",
   orange: "text-fill-orange-300 text-stroke-orange-600",

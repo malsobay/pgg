@@ -29,9 +29,11 @@ export default class Summary extends React.Component {
       showPunishmentId,
     } = game.treatment;
 
-    const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
+    const otherPlayers = game.players.filter((p) => p._id !== player._id);
     const punished = player.round.get("punished");
     const punishedBy = player.round.get("punishedBy");
+    const rewarded = player.round.get("rewarded");
+    const rewardedBy = player.round.get("rewardedBy");
     const contribution = player.round.get("contribution");
     const roundPayoff = player.round.get("roundPayoff");
 
@@ -49,15 +51,26 @@ export default class Summary extends React.Component {
                   hints
                   submitted={player.stage.submitted}
                   animal={player.get("avatar")}
-                  enableDeductions={punishmentExists}
-                  given={
+                  punishmentExists={punishmentExists}
+                  punishmentsGiven={(
                     Object.values(punished).reduce((a, b) => a + b, 0) *
                     punishmentCost
-                  }
-                  received={
+                  ).toString()}
+                  punishmentsReceived={(
                     Object.values(punishedBy).reduce((a, b) => a + b, 0) *
                     punishmentMagnitude
-                  }
+                  ).toString()}
+                  rewardExists={rewardExists}
+                  rewardsGiven={(showOtherSummaries
+                    ? Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                      rewardCost
+                    : ""
+                  ).toString()}
+                  rewardsReceived={(showOtherSummaries
+                    ? Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                      rewardMagnitude
+                    : ""
+                  ).toString()}
                   contributed={contribution}
                   gains={roundPayoff}
                 />
@@ -115,21 +128,28 @@ export default class Summary extends React.Component {
                     <AvatarScores
                       submitted={player.stage.submitted}
                       animal={player.get("avatar")}
-                      enableDeductions={punishmentExists}
-                      given={
-                        showOtherSummaries
-                          ? Object.values(punished).reduce((a, b) => a + b, 0) *
-                            punishmentCost
-                          : null
-                      }
-                      received={
-                        showOtherSummaries
-                          ? Object.values(punishedBy).reduce(
-                              (a, b) => a + b,
-                              0
-                            ) * punishmentMagnitude
-                          : null
-                      }
+                      punishmentExists={punishmentExists}
+                      punishmentsGiven={(showOtherSummaries
+                        ? Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        : ""
+                      ).toString()}
+                      punishmentsReceived={(showOtherSummaries
+                        ? Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        : ""
+                      ).toString()}
+                      rewardExists={rewardExists}
+                      rewardsGiven={(showOtherSummaries
+                        ? Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        : ""
+                      ).toString()}
+                      rewardsReceived={(showOtherSummaries
+                        ? Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        : ""
+                      ).toString()}
                       contributed={showOtherSummaries ? contribution : null}
                       gains={showOtherSummaries ? roundPayoff : null}
                     />
