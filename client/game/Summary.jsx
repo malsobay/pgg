@@ -116,6 +116,8 @@ export default class Summary extends React.Component {
                 const punishedBy = player.round.get("punishedBy");
                 const contribution = player.round.get("contribution");
                 const roundPayoff = player.round.get("roundPayoff");
+                const rewarded = player.round.get("rewarded");
+                const rewardedBy = player.round.get("rewardedBy");
 
                 return (
                   <div
