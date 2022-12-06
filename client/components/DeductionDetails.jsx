@@ -15,6 +15,7 @@ export function DeductionDetails({
   rewardsReceived,
   isSelf,
   showPunishmentId,
+  showRewardId
 }) {
   const totalDeductionsSpent = deductionsSpent.reduce(
     (sum, deduction) => sum + deduction.amount,
@@ -93,7 +94,7 @@ export function DeductionDetails({
             <div className="font-bold text-right">{totalRewardsSpent}</div>
           </div>
 
-          {(isSelf || showPunishmentId) && (
+          {(isSelf || showRewardId) && (
             <IndividualDeductions deductions={rewardsSpent} />
           )}
 
@@ -102,7 +103,7 @@ export function DeductionDetails({
             <div className="font-bold text-right">{totalRewardsReceived}</div>
           </div>
 
-          {showPunishmentId && (
+          {showRewardId && (
             <IndividualDeductions deductions={rewardsReceived} />
           )}
         </>

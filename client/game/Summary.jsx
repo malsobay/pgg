@@ -27,6 +27,7 @@ export default class Summary extends React.Component {
       rewardCost,
       rewardMagnitude,
       showPunishmentId,
+      showRewardId
     } = game.treatment;
 
     const otherPlayers = game.players.filter((p) => p._id !== player._id);
@@ -101,6 +102,7 @@ export default class Summary extends React.Component {
                   rewardMagnitude={rewardMagnitude}
                   isSelf={false}
                   showPunishmentId={showPunishmentId}
+                  showRewardId={showRewardId}
                 />
               </div>
             ) : (
@@ -173,6 +175,7 @@ export default class Summary extends React.Component {
                   rewardMagnitude={rewardMagnitude}
                   isSelf={true}
                   showPunishmentId={showPunishmentId}
+                  showRewardId={showRewardId}
                 />
               </div>
             ) : (
@@ -196,6 +199,7 @@ function Details({
   rewardMagnitude,
   isSelf,
   showPunishmentId,
+  showRewardId
 }) {
   const player = players.find((p) => p._id === selectedPlayerID);
   const punished = player.round.get("punished");
@@ -251,6 +255,7 @@ function Details({
       rewardsReceived={rewardsReceived}
       isSelf={isSelf}
       showPunishmentId={showPunishmentId}
+      showRewardId={showRewardId}
     />
   );
 }
