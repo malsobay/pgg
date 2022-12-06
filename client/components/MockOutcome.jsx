@@ -53,6 +53,12 @@ export class MockOutcome extends React.Component {
             paused={paused}
             showNRounds={showNRounds}
             numRounds={numRounds}
+            punishmentExists={punishmentExists}
+            rewardExists={rewardExists}
+            punishmentCost={punishmentCost}
+            punishmentMagnitude={punishmentMagnitude}
+            rewardCost={rewardCost}
+            rewardMagnitude={rewardMagnitude}
           />
         </Highlighter>
         <div className="h-full grid grid-cols-12 grid-flow-row justify-center">

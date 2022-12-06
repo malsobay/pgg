@@ -42,7 +42,7 @@ export class MockHeader extends React.Component {
   }
 
   render() {
-    const { endowment, showNRounds, numRounds } = this.props;
+    const { endowment, showNRounds, numRounds, punishmentExists, rewardExists, punishmentCost, punishmentMagnitude, rewardCost, rewardMagnitude} = this.props;
     const { num } = this.state;
     var min = Math.floor(num / 60);
     var sec = num % 60;
@@ -65,7 +65,15 @@ export class MockHeader extends React.Component {
           rightOnClick={() => this.setState({ help: true })}
         />
         {this.state.help ? (
-          <HelpModal done={() => this.setState({ help: false })} />
+          <HelpModal 
+          done={() => this.setState({ help: false })}
+          punishmentExists = {punishmentExists}
+          rewardExists = {rewardExists} 
+          punishmentCost={punishmentCost}
+          punishmentMagnitude={punishmentMagnitude}
+          rewardCost={rewardCost}
+          rewardMagnitude={rewardMagnitude}
+          />
         ) : null}
       </div>
     );

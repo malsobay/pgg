@@ -27,7 +27,8 @@ export class MockContribution extends React.Component {
     } = this.props;
     const { contribution } = this.state;
 
-    const { multiplier, endowment, allOrNothing, showNRounds, numRounds } =
+    const { multiplier, endowment, allOrNothing, showNRounds, numRounds, 
+      punishmentExists, rewardExists, punishmentCost, punishmentMagnitude, rewardCost, rewardMagnitude } =
       treatment;
 
     return (
@@ -38,6 +39,12 @@ export class MockContribution extends React.Component {
             paused={paused}
             showNRounds={showNRounds}
             numRounds={numRounds}
+            punishmentExists={punishmentExists}
+            rewardExists={rewardExists}
+            punishmentCost={punishmentCost}
+            punishmentMagnitude={punishmentMagnitude}
+            rewardCost={rewardCost}
+            rewardMagnitude={rewardMagnitude}
           />
         </Highlighter>
 

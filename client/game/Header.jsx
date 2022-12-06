@@ -31,7 +31,13 @@ export class HeaderWithTimer extends React.Component {
           rightOnClick={() => this.setState({ help: true })}
         />
         {this.state.help ? (
-          <HelpModal done={() => this.setState({ help: false })} />
+          <HelpModal done={() => this.setState({ help: false })} 
+          punishmentExists={game.treatment.punishmentExists} 
+          rewardExists={game.treatment.rewardExists}
+          punishmentCost={game.treatment.punishmentCost}
+          punishmentMagnitude={game.treatment.punishmentMagnitude}
+          rewardCost={game.treatment.rewardCost}
+          rewardMagnitude={game.treatment.rewardMagnitude}/>
         ) : null}
       </div>
     );
