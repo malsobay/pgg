@@ -150,7 +150,13 @@ class Quizz extends React.Component {
     const { treatment } = this.props;
     const incorrect = [];
 
-    const val = 2 * treatment.punishmentMagnitude;
+    if(treatment.punishmentExists){
+      var val = 2 * treatment.punishmentMagnitude;
+    }
+    else{
+      var val = 2 * treatment.rewardMagnitude;
+    }
+    
     if (this.state.coins !== val.toString()) {
       incorrect.push("coins");
     }
@@ -171,8 +177,9 @@ class Quizz extends React.Component {
   render() {
     const { treatment } = this.props;
     const { coins, incorrect } = this.state;
-
-    if (!treatment.punishmentExists) {
+    const punishmentExists = treatment.punishmentExists; 
+    const rewardExists = treatment.rewardExists; 
+    if (!punishmentExists & !rewardExists) {
       this.props.next();
     }
 
@@ -181,11 +188,11 @@ class Quizz extends React.Component {
         <h1>Questions</h1>
 
         <p>
-          Each deduction you impose on another player deducts{" "}
-          {treatment.punishmentMagnitude} coins from them, and costs you{" "}
-          {treatment.punishmentCost} coins. If you spend{" "}
-          {2 * treatment.punishmentCost} coins to deduct from another player,
-          how many coins will be deducted from them?
+          Each {punishmentExists?"deduction":"reward"} you put on another player {punishmentExists?"deducts ":"gives "}
+          {punishmentExists?treatment.punishmentMagnitude:treatment.rewardMagnitude} coins {punishmentExists?"from":"to"} them, and costs you{" "}
+          {punishmentExists?treatment.punishmentCost:treatment.rewardCost} coins. If you spend{" "}
+          {punishmentExists?2 * treatment.punishmentCost:2 * treatment.rewardCost} coins to {punishmentExists?"deduct from":"reward"} another player,
+          how many coins will be {punishmentExists?"deducted from":"given to"} them?
         </p>
 
         <Input
