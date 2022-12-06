@@ -80,7 +80,7 @@ export default function Outcome({ stage, round, game, player }) {
 
               const punish = (increase) => {
                 if (increase) {
-                  if (totalCost + punishmentCost >= cumulativePayoff) {
+                  if (totalCost + punishmentCost > cumulativePayoff) {
                     alert(
                       "You don't have enough coins to make this deduction!"
                     );
@@ -98,7 +98,7 @@ export default function Outcome({ stage, round, game, player }) {
 
               const reward = (increase) => {
                 if (increase) {
-                  if (totalCost + rewardCost >= cumulativePayoff) {
+                  if (totalCost + rewardCost > cumulativePayoff) {
                     alert("You don't have enough coins to make this reward!");
 
                     return;
