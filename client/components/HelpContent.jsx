@@ -73,7 +73,7 @@ export function HelpContent({ done, punishmentExists, rewardExists, punishmentCo
             and each reward will give {rewardMagnitude} coins to the targeted player.
           </p>:""}
 
-          {(rewardExists | punishmentExists) ? <p>The associated costs are deducted from your cumulative rewards (the money in your piggy bank).</p>:""}
+          {(rewardExists | punishmentExists) ? <p>The associated costs are deducted from your cumulative earnings (the money in your piggy bank).</p>:""}
 
           <h1>Calculating your total payoff for a single round:</h1>
           <p>

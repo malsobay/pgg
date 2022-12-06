@@ -6,7 +6,7 @@ import { Input } from "./Input";
 import { MockOutcome } from "./MockOutcome";
 
 export class InstructionsStepTwo extends React.Component {
-  state = { current: 2, messages: [] };
+  state = { current: 0, messages: [] };
 
   constructor(props) {
     super(props);
@@ -52,7 +52,7 @@ export class InstructionsStepTwo extends React.Component {
             </p>
             {(punishmentExists && !rewardAndPunishment) ? 
               <p>
-                You can click + on any player's avatar to add a deduction, and -
+                You can click - on any player's avatar to add a deduction, and +
                 to remove deductions. The total coins deducted from a player are
                 shown on the player's avatar. Try it out.
               </p>:""}
