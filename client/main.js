@@ -1,18 +1,22 @@
 import Empirica from "meteor/empirica:core";
-import { render } from "react-dom";
-import ExitSurvey from "./exit/ExitSurvey";
-import Thanks from "./exit/Thanks";
-import Sorry from "./exit/Sorry";
-import About from "./game/pages/about/About";
-import Round from "./game/Round";
-import Consent from "./intro/Consent";
-import InstructionStepOne from "./intro/InstructionStepOne";
-import InstructionStepTwo from "./intro/InstructionStepTwo";
-import QuizCopy from "./intro/QuizCopy";
-import Quiz from "./intro/Quiz";
-import NewPlayer from "./intro/NewPlayer";
 import React from "react";
+import { render } from "react-dom";
+import { dev } from "../dev";
+import Consent from "./components/Consent";
+import DevHelp from "./components/DevHelp";
+import { InstructionsStepOne } from "./components/InstructionsStepOne";
+import { InstructionsStepThree } from "./components/InstructionsStepThree";
+import { InstructionsStepTwo } from "./components/InstructionsStepTwo";
+import NewPlayer from "./components/NewPlayer";
+import ExitSurvey from "./exit/ExitSurvey";
+import Sorry from "./exit/Sorry";
+import Thanks from "./exit/Thanks";
+import About from "./game/About";
+import Round from "./game/Round";
+import { pickRandomNum } from "./utils";
 
+Empirica.header(DevHelp);
+Empirica.breadcrumb(() => null);
 
 // Set the About Component you want to use for the About dialog (optional).
 Empirica.about(About);
@@ -27,13 +31,73 @@ Empirica.newPlayer(NewPlayer);
 // At this point they have been assigned a treatment. You can return
 // different instruction steps depending on the assigned treatment.
 
-Empirica.introSteps((game, treatment) => {
-  const steps = [InstructionStepOne];
+class StepOne extends React.Component {
+  render() {
+    const { onNext, game } = this.props;
 
-  if (treatment.punishmentExists) {
-    steps.push(InstructionStepTwo);
+    return (
+      <InstructionsStepOne
+        onNext={onNext}
+        treatment={game.treatment}
+        player={{
+          _id: 10000,
+          avatar: "elephant",
+        }}
+      />
+    );
   }
-  steps.push(Quiz);
+}
+
+class StepTwo extends React.Component {
+  render() {
+    const { onNext, game } = this.props;
+
+    return (
+      <InstructionsStepTwo
+        onNext={onNext}
+        treatment={game.treatment}
+        player={{
+          _id: 10000,
+          avatar: "elephant",
+          punished: {},
+        }}
+      />
+    );
+  }
+}
+
+class StepThree extends React.Component {
+  constructor(props) {
+    super(props);
+    this.contribution = pickRandomNum(0, props.game.treatment.endowment);
+  }
+
+  render() {
+    const { onNext, game } = this.props;
+    return (
+      <InstructionsStepThree
+        onNext={onNext}
+        treatment={game.treatment}
+        player={{
+          _id: 10000,
+          avatar: "elephant",
+          punished: {},
+          punishedBy: {},
+          rewarded: {},
+          rewardedBy: {},
+          contribution: this.contribution,
+        }}
+      />
+    );
+  }
+}
+
+Empirica.introSteps((game, treatment) => {
+  if (dev) {
+    return [];
+  }
+
+  const steps = [StepOne, StepTwo, StepThree];
 
   return steps;
 });
@@ -63,16 +127,27 @@ Empirica.exitSteps((game, player) => {
   return [ExitSurvey, Thanks];
 });
 
-const Breadcrumb = ({ round, stage, game }) => (
-  <ul className="bp3-breadcrumbs round-nav">
-    <li><a className="bp3-breadcrumb" tabIndex="0">Round {round.index + 1}{game.treatment.showNRounds ? "/"+game.treatment.numRounds : ""}</a></li>
-    {round.stages.map(s => (
-      <li key={s.name} className={s.name === stage.name ? "bp3-breadcrumb-current" : "bp3-breadcrumb"}>{s.displayName}</li>
-    ))}
-  </ul>
-);
-Empirica.breadcrumb(Breadcrumb);
-
+// const Breadcrumb = ({ round, stage, game }) => (
+//   <ul className="bp3-breadcrumbs round-nav">
+//     <li>
+//       <a className="bp3-breadcrumb" tabIndex="0">
+//         Round {round.index + 1}
+//         {game.treatment.showNRounds ? "/" + game.treatment.numRounds : ""}
+//       </a>
+//     </li>
+//     {round.stages.map((s) => (
+//       <li
+//         key={s.name}
+//         className={
+//           s.name === stage.name ? "bp3-breadcrumb-current" : "bp3-breadcrumb"
+//         }
+//       >
+//         {s.displayName}
+//       </li>
+//     ))}
+//   </ul>
+// );
+// Empirica.breadcrumb(Breadcrumb);
 
 // Start the app render tree.
 // NB: This must be called after any other Empirica calls (Empirica.round(),

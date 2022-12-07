@@ -1,0 +1,416 @@
+treatments:
+  - name: pilot2_wave2_t0
+    factorIds:
+      - H4jr2EnLmpowKhHzn
+      - YYibsCEv2itQWqTra
+      - PEbAtDy6893A568MQ
+      - dPyS4eNSHCDjRoJ4Q
+      - 3Z4sQQ24ybyREqiuy
+      - 6GZ74t7WKPWNZ5iz9
+      - evpm3zTmi9rDqTG2i
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - shAiyCh2upe4KZXjS
+      - 3gCGgsFJbdF8awMYg
+      - jG88upiFmXZjL6fph
+  - name: pilot2_wave2_t1
+    factorIds:
+      - nhz3rycie6NQZJSqZ
+      - uEwNSdTtsLvuxTAkM
+      - FkDgbPLc9ZyQP8hfY
+      - dPyS4eNSHCDjRoJ4Q
+      - e4nW2wCRS4bo6kTPu
+      - yr6NXDYfKpA9YwMSE
+      - evpm3zTmi9rDqTG2i
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - MocHJfjn6TZ9fsPKw
+      - CErFmY9wGmobFGvx4
+      - jG88upiFmXZjL6fph
+  - name: pilot2_wave2_t2
+    factorIds:
+      - GBSYotvYopuggsvFa
+      - B7QYRXNJtpsDZjh6f
+      - FkDgbPLc9ZyQP8hfY
+      - dPyS4eNSHCDjRoJ4Q
+      - 4mha9Gk5g87m3m2ds
+      - sjE9Pcm8S54MRLhk3
+      - bWn5xeY3J5J3wGh4H
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - shAiyCh2upe4KZXjS
+      - CErFmY9wGmobFGvx4
+      - jG88upiFmXZjL6fph
+  - name: pilot2_wave2_t3
+    factorIds:
+      - nhz3rycie6NQZJSqZ
+      - fMnRuYtfaTJ4Cq7rE
+      - PEbAtDy6893A568MQ
+      - dPyS4eNSHCDjRoJ4Q
+      - sNoAB29mwqR9CbQwb
+      - r4x2Q73Lpvi7qSpq7
+      - pqAcfkPenry6HJ5Er
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - MocHJfjn6TZ9fsPKw
+      - 3gCGgsFJbdF8awMYg
+      - jG88upiFmXZjL6fph
+  - name: pilot2_wave2_t4
+    factorIds:
+      - H4jr2EnLmpowKhHzn
+      - YYibsCEv2itQWqTra
+      - PEbAtDy6893A568MQ
+      - dPyS4eNSHCDjRoJ4Q
+      - 3Z4sQQ24ybyREqiuy
+      - 6GZ74t7WKPWNZ5iz9
+      - evpm3zTmi9rDqTG2i
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - shAiyCh2upe4KZXjS
+      - 3gCGgsFJbdF8awMYg
+      - ddzeWMWapvdnF6W6i
+  - name: pilot2_wave2_t5
+    factorIds:
+      - nhz3rycie6NQZJSqZ
+      - uEwNSdTtsLvuxTAkM
+      - FkDgbPLc9ZyQP8hfY
+      - dPyS4eNSHCDjRoJ4Q
+      - e4nW2wCRS4bo6kTPu
+      - yr6NXDYfKpA9YwMSE
+      - evpm3zTmi9rDqTG2i
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - MocHJfjn6TZ9fsPKw
+      - CErFmY9wGmobFGvx4
+      - ddzeWMWapvdnF6W6i
+  - name: pilot2_wave2_t6
+    factorIds:
+      - GBSYotvYopuggsvFa
+      - B7QYRXNJtpsDZjh6f
+      - FkDgbPLc9ZyQP8hfY
+      - dPyS4eNSHCDjRoJ4Q
+      - 4mha9Gk5g87m3m2ds
+      - sjE9Pcm8S54MRLhk3
+      - bWn5xeY3J5J3wGh4H
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - shAiyCh2upe4KZXjS
+      - CErFmY9wGmobFGvx4
+      - ddzeWMWapvdnF6W6i
+  - name: pilot2_wave2_t7
+    factorIds:
+      - nhz3rycie6NQZJSqZ
+      - fMnRuYtfaTJ4Cq7rE
+      - PEbAtDy6893A568MQ
+      - dPyS4eNSHCDjRoJ4Q
+      - sNoAB29mwqR9CbQwb
+      - r4x2Q73Lpvi7qSpq7
+      - pqAcfkPenry6HJ5Er
+      - yfGhx63ALGtgfJWgG
+      - ctsyL6LNvfiuS3Qt2
+      - G9at4yyTdZKmCGLRK
+      - daoMgPWLmWCdah2TC
+      - mSz9hBuLtMPwyFLtT
+      - MocHJfjn6TZ9fsPKw
+      - 3gCGgsFJbdF8awMYg
+      - ddzeWMWapvdnF6W6i
+factorTypes:
+  - _id: C8GYFm4xdShZWynpF
+    name: playerCount
+    description: The Number of players participating in the given game.
+    required: true
+    type: Integer
+    min: 1
+  - _id: NbzEouqaPGrq2ddkG
+    name: numRounds
+    description: add description here
+    required: true
+    type: Integer
+  - _id: 3kprPPKrohAJris58
+    name: showNRounds
+    description: add description here
+    required: true
+    type: Boolean
+  - _id: PPKyJ5PbH29iHfAYw
+    name: endowment
+    description: add description here
+    required: true
+    type: Integer
+  - _id: gsHgyYkhGruESCNpL
+    name: multiplier
+    description: add description here
+    required: true
+    type: Number
+  - _id: ZNxipoFdCpnnEGd3x
+    name: punishmentCost
+    description: add description here
+    required: true
+    type: Number
+  - _id: rANcND6sGZkDtjLNa
+    name: punishmentMagnitude
+    description: add description here
+    required: true
+    type: Number
+  - _id: 6va85YWDEjfLRAGzd
+    name: basePay
+    description: add description here
+    required: true
+    type: Integer
+  - _id: 24K5h29aLdrCD7Y29
+    name: conversionRate
+    description: add description here
+    required: true
+    type: Integer
+  - _id: dhhm9vkK5t7y7CNEE
+    name: contributionDuration
+    description: add description here
+    required: true
+    type: Integer
+  - _id: dXSPn3wxrLGYu2KJk
+    name: outcomeDuration
+    description: add description here
+    required: true
+    type: Integer
+  - _id: ic2pH6apMgeTP3noT
+    name: summaryDuration
+    description: add description here
+    required: true
+    type: Integer
+  - _id: zKhE63a23D3wQy6Dp
+    name: showOtherSummaries
+    description: add description here
+    required: true
+    type: Boolean
+  - _id: fXqytvt26XxJiTgLC
+    name: showPunishmentId
+    description: add description here
+    required: true
+    type: Boolean
+  - _id: 3ekoAEoaJHqtxLRxG
+    name: punishmentExists
+    description: add description here
+    required: true
+    type: Boolean
+  - _id: NxfrdZmGZH5sSwkkG
+    name: allOrNothing
+    description: add description here
+    required: true
+    type: Boolean
+  - _id: hcC5fTGdKq7N36ahc
+    name: chat
+    description: add description here
+    required: true
+    type: Boolean
+  - _id: JBQW8rG7YuiJrJWw7
+    name: rewardExists
+    description: Can players reward each other?
+    required: true
+    type: Boolean
+  - _id: FLvEbCuyoLBi54Gd2
+    name: rewardCost
+    description: The cost of each unit of reward
+    required: true
+    type: Integer
+    min: 0
+  - _id: RwTv3k9e2tbEEoMEt
+    name: rewardMagnitude
+    description: The magnitude of each reward given.
+    required: true
+    type: Integer
+    min: 1
+factors:
+  - _id: PEbAtDy6893A568MQ
+    name: 'true'
+    value: true
+    factorTypeId: 3kprPPKrohAJris58
+  - _id: FkDgbPLc9ZyQP8hfY
+    name: 'false'
+    value: false
+    factorTypeId: 3kprPPKrohAJris58
+  - _id: shAiyCh2upe4KZXjS
+    name: 'true'
+    value: true
+    factorTypeId: zKhE63a23D3wQy6Dp
+  - _id: MocHJfjn6TZ9fsPKw
+    name: 'false'
+    value: false
+    factorTypeId: zKhE63a23D3wQy6Dp
+  - _id: CErFmY9wGmobFGvx4
+    name: 'true'
+    value: true
+    factorTypeId: fXqytvt26XxJiTgLC
+  - _id: 3gCGgsFJbdF8awMYg
+    name: 'false'
+    value: false
+    factorTypeId: fXqytvt26XxJiTgLC
+  - _id: jG88upiFmXZjL6fph
+    name: 'true'
+    value: true
+    factorTypeId: 3ekoAEoaJHqtxLRxG
+  - _id: ddzeWMWapvdnF6W6i
+    name: 'false'
+    value: false
+    factorTypeId: 3ekoAEoaJHqtxLRxG
+  - _id: H4jr2EnLmpowKhHzn
+    name: '2'
+    value: 2
+    factorTypeId: C8GYFm4xdShZWynpF
+  - _id: nhz3rycie6NQZJSqZ
+    name: '6'
+    value: 6
+    factorTypeId: C8GYFm4xdShZWynpF
+  - _id: GBSYotvYopuggsvFa
+    name: '10'
+    value: 10
+    factorTypeId: C8GYFm4xdShZWynpF
+  - _id: YYibsCEv2itQWqTra
+    name: '20'
+    value: 20
+    factorTypeId: NbzEouqaPGrq2ddkG
+  - _id: uEwNSdTtsLvuxTAkM
+    name: '50'
+    value: 50
+    factorTypeId: NbzEouqaPGrq2ddkG
+  - _id: B7QYRXNJtpsDZjh6f
+    name: '10'
+    value: 10
+    factorTypeId: NbzEouqaPGrq2ddkG
+  - _id: fMnRuYtfaTJ4Cq7rE
+    name: '30'
+    value: 30
+    factorTypeId: NbzEouqaPGrq2ddkG
+  - _id: dPyS4eNSHCDjRoJ4Q
+    name: '20'
+    value: 20
+    factorTypeId: PPKyJ5PbH29iHfAYw
+  - _id: 3Z4sQQ24ybyREqiuy
+    name: '1.0'
+    value: 1
+    factorTypeId: gsHgyYkhGruESCNpL
+  - _id: e4nW2wCRS4bo6kTPu
+    name: '2.0'
+    value: 2
+    factorTypeId: gsHgyYkhGruESCNpL
+  - _id: 4mha9Gk5g87m3m2ds
+    name: '3.0'
+    value: 3
+    factorTypeId: gsHgyYkhGruESCNpL
+  - _id: sNoAB29mwqR9CbQwb
+    name: '5.2'
+    value: 5.2
+    factorTypeId: gsHgyYkhGruESCNpL
+  - _id: 6GZ74t7WKPWNZ5iz9
+    name: '2.0'
+    value: 2
+    factorTypeId: ZNxipoFdCpnnEGd3x
+  - _id: yr6NXDYfKpA9YwMSE
+    name: '4.0'
+    value: 4
+    factorTypeId: ZNxipoFdCpnnEGd3x
+  - _id: sjE9Pcm8S54MRLhk3
+    name: '1.0'
+    value: 1
+    factorTypeId: ZNxipoFdCpnnEGd3x
+  - _id: r4x2Q73Lpvi7qSpq7
+    name: '3.0'
+    value: 3
+    factorTypeId: ZNxipoFdCpnnEGd3x
+  - _id: evpm3zTmi9rDqTG2i
+    name: '6.0'
+    value: 6
+    factorTypeId: rANcND6sGZkDtjLNa
+  - _id: bWn5xeY3J5J3wGh4H
+    name: '2.0'
+    value: 2
+    factorTypeId: rANcND6sGZkDtjLNa
+  - _id: pqAcfkPenry6HJ5Er
+    name: '11.0'
+    value: 11
+    factorTypeId: rANcND6sGZkDtjLNa
+  - _id: yfGhx63ALGtgfJWgG
+    name: '3'
+    value: 3
+    factorTypeId: 6va85YWDEjfLRAGzd
+  - _id: ctsyL6LNvfiuS3Qt2
+    name: '300'
+    value: 300
+    factorTypeId: 24K5h29aLdrCD7Y29
+  - _id: G9at4yyTdZKmCGLRK
+    name: '45'
+    value: 45
+    factorTypeId: dhhm9vkK5t7y7CNEE
+  - _id: daoMgPWLmWCdah2TC
+    name: '45'
+    value: 45
+    factorTypeId: dXSPn3wxrLGYu2KJk
+  - _id: mSz9hBuLtMPwyFLtT
+    name: '45'
+    value: 45
+    factorTypeId: ic2pH6apMgeTP3noT
+  - _id: F9AARkrrhAg83iNn9
+    name: 'true'
+    value: true
+    factorTypeId: NxfrdZmGZH5sSwkkG
+  - _id: Ghwktubg6nsh5pn9G
+    name: 'false'
+    value: false
+    factorTypeId: NxfrdZmGZH5sSwkkG
+  - _id: jPoAcH6byBfaf5Wjo
+    name: 'true'
+    value: true
+    factorTypeId: hcC5fTGdKq7N36ahc
+  - _id: h6SsqmmdC7MyHMinW
+    name: 'false'
+    value: false
+    factorTypeId: hcC5fTGdKq7N36ahc
+  - _id: bT5nf4nvcRE8dRWp8
+    name: 'true'
+    value: true
+    factorTypeId: JBQW8rG7YuiJrJWw7
+  - _id: Ktfpi2SN7iseHwec8
+    name: 'false'
+    value: false
+    factorTypeId: JBQW8rG7YuiJrJWw7
+  - _id: npBmP28JWgFeaLSz8
+    name: '2'
+    value: 2
+    factorTypeId: FLvEbCuyoLBi54Gd2
+  - _id: BviJseJifzgZmPqoB
+    name: '5'
+    value: 5
+    factorTypeId: FLvEbCuyoLBi54Gd2
+  - _id: t5aPdaD2dtYrP7PQn
+    name: '6'
+    value: 6
+    factorTypeId: RwTv3k9e2tbEEoMEt
+  - _id: PLtYQJYvEEe67D5Li
+    name: '12'
+    value: 12
+    factorTypeId: RwTv3k9e2tbEEoMEt
+lobbyConfigs:
+  - name: 10min_fail_wave2
+    timeoutType: lobby
+    timeoutInSeconds: 600
+    timeoutStrategy: fail
+    gameLobbyIds: []

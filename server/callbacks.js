@@ -1,5 +1,37 @@
-import { ALIGN_LEFT } from "@blueprintjs/core/lib/esm/common/classes";
 import Empirica from "meteor/empirica:core";
+
+export const AnimalList = [
+  "sloth",
+  "gorilla",
+  "duck",
+  "chicken",
+  "dog",
+  "parrot",
+  "moose",
+  "rabbit",
+  "owl",
+  "chick",
+  "snake",
+  "crocodile",
+  "cow",
+  "pinguin",
+  "monkey",
+  "frog",
+  "elephant",
+  "whale",
+  "horse",
+  "walrus",
+  "rhino",
+  "giraffe",
+  "pig",
+  "buffalo",
+  "zebra",
+  "narwhal",
+  "bear",
+  "goat",
+  "hippo",
+  "panda",
+];
 
 // onGameStart is triggered opnce per game before the game starts, and before
 // the first onRoundStart. It receives the game and list of all the players in
@@ -8,7 +40,7 @@ Empirica.onGameStart((game) => {
   game.set("justStarted", true);
   game.players.forEach((player, i) => {
     /*player.set("avatar", `/avatars/jdenticon/${player._id}`);*/
-    player.set("avatar", `/avatars/${i}.png`);
+    player.set("avatar", AnimalList[i]);
     player.set("avatarId", i);
     player.set("cumulativePayoff", game.treatment.endowment);
   });
@@ -23,8 +55,10 @@ Empirica.onRoundStart((game, round) => {
   game.players.forEach((player, i) => {
     player.round.set("endowment", game.treatment.endowment);
     player.round.set("punishedBy", {});
-    player.round.set("contribution", 0);
     player.round.set("punished", {});
+    player.round.set("rewardedBy", {});
+    player.round.set("rewarded", {});
+    player.round.set("contribution", 0);
   });
 });
 
@@ -40,6 +74,7 @@ Empirica.onStageEnd((game, round, stage) => {
   } //player.stage.set values but wait to update until round end
   if (stage.name == "outcome") {
     computePunishmentCosts(game, round);
+    computeRewards(game, round);
     computeIndividualPayoff(game, round);
   }
 });
@@ -118,6 +153,50 @@ function computePunishmentCosts(game, round) {
   });
 }
 
+function computeRewards(game, round) {
+  game.players.forEach((player) => {
+    const rewarded = player.round.get("rewarded");
+    const rewardedKeys = Object.keys(rewarded);
+    
+    let cost = 0;
+    for (const key of rewardedKeys) {
+      if (rewarded[key] != "0") {
+        amount = rewarded[key];
+        cost += parseFloat(amount) * game.treatment.rewardCost;
+      } else {
+      }
+    }
+
+    let rewardedBy = {};
+
+    player.round.set("costs", parseFloat(player.round.get("costs")) + cost);
+
+    const otherPlayers = _.reject(game.players, (p) => p._id === player._id);
+    otherPlayers.forEach((otherPlayer) => {
+      const otherPlayerRewarded = otherPlayer.round.get("rewarded");
+      if (Object.keys(otherPlayerRewarded).includes(player._id)) {
+        rewardedBy[otherPlayer._id] = otherPlayerRewarded[player._id];
+        console.log(rewardedBy);
+      }
+    });
+
+    player.round.set("rewardedBy", rewardedBy);
+    rewardedBy = player.round.get("rewardedBy");
+    
+    let receivedRewards = 0;
+    const rewardedByKeys = Object.keys(rewardedBy);
+    for (const key of rewardedByKeys) {
+      if (rewardedBy[key] != "0") {
+        amount = rewardedBy[key];
+        receivedRewards += parseFloat(amount);
+      }
+    }
+    const rewards =
+      parseFloat(receivedRewards) * game.treatment.rewardMagnitude;
+    player.round.set("rewards", rewards);
+  });
+}
+
 // computes players' individual payoff (round payoff minus punishment costs and penalties)
 function computeIndividualPayoff(game, round) {
   game.players.forEach((player) => {
@@ -127,9 +206,11 @@ function computeIndividualPayoff(game, round) {
       parseFloat(game.treatment.endowment) - parseFloat(contribution);
     player.round.set("remainingEndowment", remainingEndowment);
     const penalties = player.round.get("penalties");
+    const rewards = player.round.get("rewards");
     const costs = player.round.get("costs");
     const roundPayoff =
       parseFloat(payoff) +
+      parseFloat(rewards) +
       parseFloat(remainingEndowment) -
       parseFloat(penalties) -
       parseFloat(costs);
