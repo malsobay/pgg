@@ -73,16 +73,18 @@ export function AvatarWithScore() {
         />
       </div>
 
-      <AvatarScores
-        hints
-        animal={"parrot"}
-        punishmentsGiven="0"
-        punishmentsReceived="78"
-        rewardsGiven="0"
-        rewardsReceived="11"
-        contributed="0"
-        gains={-320}
-      />
+      <div className="border">
+        <AvatarScores
+          hints
+          animal={"parrot"}
+          punishmentsGiven="0"
+          punishmentsReceived="78"
+          rewardsGiven="0"
+          rewardsReceived="11"
+          contributed="0"
+          gains={-320}
+        />
+      </div>
 
       <AvatarScores
         hints

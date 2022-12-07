@@ -1,33 +1,109 @@
 import React from "react";
 import { AnimalList } from "../components/assets/AnimalsAvatar";
 import { Button } from "../components/NormalButton";
-import { pickRandom } from "../utils";
+import { pickRandom, pickRandomNum } from "../utils";
 import { Input } from "./Input";
 import { MockSummary } from "./MockSummary";
 
-function genPunishments(player, players) {
-  const punished = {};
-  const punishedBy = {};
+function distribute(length, value) {
+  if (length <= 1) return [value];
+  const half = Math.floor(length / 2);
+  const dist = Math.floor(Math.random() * value);
+
+  return distribute(half, dist).concat(distribute(length - half, value - dist));
+}
+
+function genRP(player, players, budget) {
+  const given = {};
+  const budgets = distribute(players.length - 1, budget);
+
   for (const player2 of players) {
     if (player2 === player) {
       continue;
     }
 
-    if (Math.random() < 0.3) {
-      punished[player2._id] = pickRandom([2, 4, 6, 8, 10, 12]);
-    } else {
-      punished[player2._id] = 0;
+    given[player2._id] = budgets.pop();
+  }
+
+  return given;
+}
+
+function applyRPReceived(player, allPlayers, treatment) {
+  player.punishedBy = {};
+  player.rewardedBy = {};
+
+  const { punishmentMagnitude, rewardMagnitude } = treatment;
+
+  for (const player2 of allPlayers) {
+    if (player2 === player) {
+      continue;
     }
 
-    if (Math.random() < 0.3) {
-      punishedBy[player2._id] = pickRandom([2, 4, 6, 8, 10, 12]);
-    } else {
-      punishedBy[player2._id] = 0;
+    const { punished, rewarded } = player2;
+
+    if (punished[player._id]) {
+      player.punishedBy[player2._id] = punished[player._id];
+    }
+
+    if (rewarded[player._id]) {
+      player.rewardedBy[player2._id] = rewarded[player._id];
     }
   }
 
-  player.punished = punished;
-  player.punishedBy = punishedBy;
+  for (const [id, amount] of Object.entries(player.punishedBy)) {
+    player.roundNet -= amount * punishmentMagnitude;
+  }
+
+  for (const [id, amount] of Object.entries(player.rewardedBy)) {
+    player.roundNet += amount * rewardMagnitude;
+  }
+}
+
+function applyContributions(player, treatment) {
+  const { endowment } = treatment;
+
+  player.contribution = pickRandomNum(0, endowment);
+}
+
+function applyValues(player, allPlayers, treatment, roundPayoff) {
+  const { punishmentExists, punishmentCost, rewardExists, rewardCost } =
+    treatment;
+
+  player.roundGross = roundPayoff - player.contribution;
+
+  player.punished = {};
+  player.punishedBy = {};
+  player.rewarded = {};
+  player.rewardedBy = {};
+
+  if (player.roundGross <= 0) {
+    return;
+  }
+
+  player.roundNet = player.roundGross;
+
+  // 80% chance of applying rewards or punishments
+  if (Math.random() > 0.8) {
+    return;
+  }
+
+  // Budget between 10% and 100% of roundGross
+  const budget = player.roundGross * pickRandomNum(0.1, 1);
+
+  // Split budget between rewards and punishments
+  const rewardBudget = Math.floor(budget * Math.random());
+  const punishmentBudget = budget - rewardBudget;
+
+  if (punishmentExists && punishmentBudget > 0) {
+    player.punished = genRP(player, allPlayers, punishmentBudget);
+  }
+
+  if (rewardExists && rewardBudget > 0) {
+    player.rewarded = genRP(player, allPlayers, rewardBudget);
+  }
+
+  player.roundNet -= punishmentBudget * punishmentCost;
+  player.roundNet -= rewardBudget * rewardCost;
 }
 
 export class InstructionsStepThree extends React.Component {
@@ -36,38 +112,49 @@ export class InstructionsStepThree extends React.Component {
   constructor(props) {
     super(props);
 
-    const { playerCount, punishmentExists } = props.treatment;
-    const playerAvatar = props.player.avatar;
-    const exclude = [playerAvatar];
+    const { treatment, player } = props;
+    const { playerCount, multiplier, punishmentExists, rewardExists } =
+      treatment;
+    const exclude = [player.avatar];
 
     const otherPlayers = [];
     for (let i = 0; i < playerCount - 1; i++) {
       const avatar = pickRandom(AnimalList, exclude);
       exclude.push(avatar);
 
-      const contribution = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
       otherPlayers.push({
         _id: i,
         avatar,
         submitted: false,
-        punished: {},
-        punishedBy: {},
-        contribution,
-        roundPayoff: props.roundPayoff - contribution,
       });
     }
 
-    const allPlayers = [props.player, ...otherPlayers];
+    const currentPlayer = { ...props.player };
 
-    if (punishmentExists) {
-      for (const player of otherPlayers) {
-        genPunishments(player, allPlayers);
-      }
+    const allPlayers = [currentPlayer, ...otherPlayers];
 
-      genPunishments(props.player, allPlayers);
+    let roundContributions = 0;
+    for (const player of allPlayers) {
+      applyContributions(player, props.treatment);
+      roundContributions += player.contribution;
     }
 
-    this.state = { ...this.state, otherPlayers };
+    const roundPayoff = Math.floor(
+      (roundContributions * multiplier) / playerCount
+    );
+
+    for (const player of allPlayers) {
+      applyValues(player, allPlayers, props.treatment, roundPayoff);
+    }
+
+    for (const player of allPlayers) {
+      applyRPReceived(player, allPlayers, props.treatment);
+    }
+
+    // console.log(JSON.stringify(currentPlayer, null, "  "));
+    // console.log(JSON.stringify(otherPlayers, null, "  "));
+
+    this.state = { ...this.state, currentPlayer, otherPlayers };
 
     this.steps = [
       {
@@ -92,15 +179,16 @@ export class InstructionsStepThree extends React.Component {
         ),
         nextText: "Great",
       },
-      {
-        modal: "quizz",
-      },
     ];
+
+    if (punishmentExists || rewardExists) {
+      this.steps.push({ modal: "quizz" });
+    }
   }
 
   render() {
     const { onNext, treatment, player, paused } = this.props;
-    const { current, messages, otherPlayers } = this.state;
+    const { current, messages, otherPlayers, currentPlayer } = this.state;
 
     let step = this.steps[current];
 
@@ -112,7 +200,7 @@ export class InstructionsStepThree extends React.Component {
             next: () => this.setState({ current: this.state.current + 1 }),
           }}
           treatment={treatment}
-          player={player}
+          player={currentPlayer}
           otherPlayers={otherPlayers}
           paused={paused}
           messages={messages}
@@ -150,13 +238,12 @@ class Quizz extends React.Component {
     const { treatment } = this.props;
     const incorrect = [];
 
-    if(treatment.punishmentExists){
+    if (treatment.punishmentExists) {
       var val = 2 * treatment.punishmentMagnitude;
-    }
-    else{
+    } else {
       var val = 2 * treatment.rewardMagnitude;
     }
-    
+
     if (this.state.coins !== val.toString()) {
       incorrect.push("coins");
     }
@@ -175,12 +262,20 @@ class Quizz extends React.Component {
   };
 
   render() {
-    const { treatment } = this.props;
+    const { treatment, next } = this.props;
     const { coins, incorrect } = this.state;
-    const punishmentExists = treatment.punishmentExists; 
-    const rewardExists = treatment.rewardExists; 
-    if (!punishmentExists & !rewardExists) {
-      this.props.next();
+    const {
+      punishmentExists,
+      punishmentMagnitude,
+      punishmentCost,
+      rewardExists,
+      rewardMagnitude,
+      rewardCost,
+    } = treatment;
+
+    if (!punishmentExists && !rewardExists) {
+      next();
+      return null;
     }
 
     return (
@@ -188,11 +283,14 @@ class Quizz extends React.Component {
         <h1>Questions</h1>
 
         <p>
-          Each {punishmentExists?"deduction":"reward"} you put on another player {punishmentExists?"deducts ":"gives "}
-          {punishmentExists?treatment.punishmentMagnitude:treatment.rewardMagnitude} coins {punishmentExists?"from":"to"} them, and costs you{" "}
-          {punishmentExists?treatment.punishmentCost:treatment.rewardCost} coins. If you spend{" "}
-          {punishmentExists?2 * treatment.punishmentCost:2 * treatment.rewardCost} coins to {punishmentExists?"deduct from":"reward"} another player,
-          how many coins will be {punishmentExists?"deducted from":"given to"} them?
+          Each {punishmentExists ? "deduction" : "reward"} you put on another
+          player {punishmentExists ? "deducts " : "gives "}
+          {punishmentExists ? punishmentMagnitude : rewardMagnitude} coins{" "}
+          {punishmentExists ? "from" : "to"} them, and costs you{" "}
+          {punishmentExists ? punishmentCost : rewardCost} coins. If you spend{" "}
+          {punishmentExists ? 2 * punishmentCost : 2 * rewardCost} coins to{" "}
+          {punishmentExists ? "deduct from" : "reward"} another player, how many
+          coins will be {punishmentExists ? "deducted from" : "given to"} them?
         </p>
 
         <Input

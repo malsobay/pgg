@@ -1,19 +1,19 @@
-import React from "react";
 import Empirica from "meteor/empirica:core";
+import React from "react";
 import { render } from "react-dom";
 import { dev } from "../dev";
+import Consent from "./components/Consent";
 import DevHelp from "./components/DevHelp";
 import { InstructionsStepOne } from "./components/InstructionsStepOne";
 import { InstructionsStepThree } from "./components/InstructionsStepThree";
 import { InstructionsStepTwo } from "./components/InstructionsStepTwo";
+import NewPlayer from "./components/NewPlayer";
 import ExitSurvey from "./exit/ExitSurvey";
 import Sorry from "./exit/Sorry";
 import Thanks from "./exit/Thanks";
 import About from "./game/About";
 import Round from "./game/Round";
-import Consent from "./components/Consent";
-import NewPlayer from "./components/NewPlayer";
-import { pickRandom } from "./utils";
+import { pickRandomNum } from "./utils";
 
 Empirica.header(DevHelp);
 Empirica.breadcrumb(() => null);
@@ -69,8 +69,7 @@ class StepTwo extends React.Component {
 class StepThree extends React.Component {
   constructor(props) {
     super(props);
-    this.roundPayoff = 15;
-    this.contribution = pickRandom([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    this.contribution = pickRandomNum(0, props.game.treatment.endowment);
   }
 
   render() {
@@ -79,14 +78,14 @@ class StepThree extends React.Component {
       <InstructionsStepThree
         onNext={onNext}
         treatment={game.treatment}
-        roundPayoff={this.roundPayoff}
         player={{
           _id: 10000,
           avatar: "elephant",
           punished: {},
           punishedBy: {},
+          rewarded: {},
+          rewardedBy: {},
           contribution: this.contribution,
-          roundPayoff: this.roundPayoff - this.contribution,
         }}
       />
     );
@@ -98,7 +97,8 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
-  const steps = [StepOne, StepTwo, StepThree];
+  const steps = [StepThree];
+  // const steps = [StepOne, StepTwo, StepThree];
 
   return steps;
 });

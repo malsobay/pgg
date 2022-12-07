@@ -4,3 +4,7 @@ export function pickRandom(list, exclude = []) {
   const index = Math.floor(Math.random() * filtered.length);
   return filtered[index];
 }
+
+export function pickRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}

@@ -153,11 +153,17 @@ class HighlighterBox extends React.Component {
     let className = "fixed";
 
     if (pad) {
+      let padding = 20;
+      // if pad is a number
+      if (typeof pad === "number") {
+        padding = pad;
+      }
+
       style = {
-        height: rect.height + 40,
-        width: rect.width + 40,
-        left: Math.max(rect.left - 20, 0),
-        top: Math.max(rect.top - 20, 0),
+        height: rect.height + padding * 2,
+        width: rect.width + padding * 2,
+        left: Math.max(rect.left - padding, 0),
+        top: Math.max(rect.top - padding, 0),
       };
     }
 

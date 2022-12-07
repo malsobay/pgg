@@ -50,24 +50,34 @@ export class InstructionsStepTwo extends React.Component {
               Below each player's avatar is the number of coins they contributed
               to the public fund.
             </p>
-            {(punishmentExists && !rewardAndPunishment) ? 
+            {punishmentExists && !rewardAndPunishment ? (
               <p>
                 You can click - on any player's avatar to add a deduction, and +
                 to remove deductions. The total coins deducted from a player are
                 shown on the player's avatar. Try it out.
-              </p>:""}
-            {(rewardExists && !rewardAndPunishment) ? 
-            <p>
-              You can click + on any player's avatar to add a reward, and -
-              to remove rewards. The total coins awarded to a player are
-              shown on the player's avatar. Try it out.
-            </p>:""}
-            {(rewardAndPunishment) ? 
-            <p>
-              You can click + on any player's avatar to add a reward, and -
-              to remove rewards (and add deductions). The total coins rewarded/deducted for each player are
-              shown on the player's avatar. Try it out.
-            </p>:""}
+              </p>
+            ) : (
+              ""
+            )}
+            {rewardExists && !rewardAndPunishment ? (
+              <p>
+                You can click + on any player's avatar to add a reward, and - to
+                remove rewards. The total coins awarded to a player are shown on
+                the player's avatar. Try it out.
+              </p>
+            ) : (
+              ""
+            )}
+            {rewardAndPunishment ? (
+              <p>
+                You can click + on any player's avatar to add a reward, and - to
+                remove rewards (and add deductions). The total coins
+                rewarded/deducted for each player are shown on the player's
+                avatar. Try it out.
+              </p>
+            ) : (
+              ""
+            )}
           </div>
         ),
         nextText: "Sweet",

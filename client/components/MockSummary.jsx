@@ -22,7 +22,6 @@ export class MockSummary extends React.Component {
       highlight,
       messages,
       onMessage,
-      roundPayoff,
       otherPlayers,
     } = this.props;
     const { hovered, self } = this.state;
@@ -65,7 +64,7 @@ export class MockSummary extends React.Component {
                 onMouseEnter={() => this.setState({ self: player._id })}
                 onMouseLeave={() => this.setState({ self: null })}
               >
-                <Highlighter name="you" pad highlight={highlight}>
+                <Highlighter name="you" pad={80} highlight={highlight}>
                   <AvatarScores
                     hints
                     submitted={false}
@@ -83,8 +82,21 @@ export class MockSummary extends React.Component {
                         0
                       ) * punishmentMagnitude
                     ).toString()}
+                    rewardExists={rewardExists}
+                    rewardsGiven={(
+                      Object.values(player.rewarded).reduce(
+                        (a, b) => a + b,
+                        0
+                      ) * rewardCost
+                    ).toString()}
+                    rewardsReceived={(
+                      Object.values(player.rewardedBy).reduce(
+                        (a, b) => a + b,
+                        0
+                      ) * rewardMagnitude
+                    ).toString()}
                     contributed={player.contribution}
-                    gains={player.roundPayoff}
+                    gains={player.roundNet}
                   />
                 </Highlighter>
               </div>
@@ -128,10 +140,14 @@ export class MockSummary extends React.Component {
             <Highlighter name="players" highlight={highlight}>
               <PlayerGrid key={15}>
                 {otherPlayers.map((player, i) => {
-                  const punished = player.punished;
-                  const punishedBy = player.punishedBy;
-                  const contribution = player.contribution;
-                  const roundPayoff = player.roundPayoff;
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
 
                   return (
                     <div
@@ -155,8 +171,17 @@ export class MockSummary extends React.Component {
                           Object.values(punishedBy).reduce((a, b) => a + b, 0) *
                           punishmentMagnitude
                         ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
                         contributed={contribution}
-                        gains={roundPayoff}
+                        gains={roundNet}
                       />
                     </div>
                   );
@@ -201,17 +226,10 @@ function Details({
   isSelf,
   showPunishmentId,
 }) {
-  console.log(selectedPlayerID, players);
   const player = players.find((p) => p._id === selectedPlayerID);
 
-  const {
-    punished,
-    punishedBy,
-    rewarded,
-    rewardedBy,
-    contribution,
-    roundPayoff,
-  } = player;
+  const { punished, punishedBy, rewarded, rewardedBy, contribution, roundNet } =
+    player;
 
   const deductionsSpent = [];
   for (const playerID in punished) {
@@ -250,7 +268,7 @@ function Details({
       animal={player.avatar}
       submitted={player.stage.submitted}
       contributed={contribution}
-      gains={roundPayoff}
+      gains={roundNet}
       punishmentExists={punishmentExists}
       deductionsSpent={deductionsSpent}
       deductionsReceived={deductionsReceived}
