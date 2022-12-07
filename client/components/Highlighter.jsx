@@ -103,9 +103,24 @@ class HighlighterBox extends React.Component {
   }
 
   updateTooltip() {
-    const { rect, highlight } = this.props;
+    const { rect, highlight, name } = this.props;
+
+    const shouldHighlight = highlight.step && highlight.step.component === name;
+    const shouldHide = !shouldHighlight && Boolean(highlight.step);
+
+    if (shouldHide) {
+      if (this.popper) {
+        this.popper?.destroy();
+        this.popper = null;
+        console.log("Tooltip destroy 0");
+      }
+
+      return;
+    }
 
     if (this.popper) {
+      this.popper.update();
+
       return;
     }
 
@@ -128,13 +143,14 @@ class HighlighterBox extends React.Component {
     } else if (this.popper) {
       this.popper?.destroy();
       this.popper = null;
+      console.log("Tooltip destroy 1");
     }
   }
 
   componentWillUnmount() {
     this.popper?.destroy();
     this.popper = null;
-    console.log("destyroy2");
+    console.log("Tooltip destroy 2");
   }
 
   render() {
@@ -198,7 +214,18 @@ class HighlighterBox extends React.Component {
               <div className="prose prose-slate prose-p:text-gray-500 prose-p:font-['Inter'] prose-headings:text-orange-600 overflow-auto">
                 {highlight.step.content}
               </div>
-              <div>
+              <div className="space-x-2">
+                {highlight.back && (
+                  <button
+                    className="bg-orange-500 text-white rounded-lg px-4 py-2 mt-4"
+                    onClick={() => {
+                      highlight.back();
+                    }}
+                  >
+                    Back
+                  </button>
+                )}
+
                 {!highlight.step.nonext && (
                   <button
                     className="bg-orange-500 text-white rounded-lg px-4 py-2 mt-4"

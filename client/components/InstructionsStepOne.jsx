@@ -151,6 +151,10 @@ export class InstructionsStepOne extends React.Component {
           highlight={{
             step: step?.component ? step : null,
             next: () => this.setState({ current: this.state.current + 1 }),
+            back:
+              current === 0
+                ? ""
+                : () => this.setState({ current: current - 1 }),
           }}
           treatment={treatment}
           player={player}
@@ -175,7 +179,15 @@ export class InstructionsStepOne extends React.Component {
                     treatment={treatment}
                   />
                 ) : step.modal === "quizz" ? (
-                  <Quizz treatment={treatment} next={() => onNext()} />
+                  <Quizz
+                    treatment={treatment}
+                    next={() => onNext()}
+                    back={
+                      current === 0
+                        ? ""
+                        : () => this.setState({ current: current - 1 })
+                    }
+                  />
                 ) : null}
               </div>
             </div>
@@ -217,7 +229,7 @@ class Quizz extends React.Component {
   };
 
   render() {
-    const { treatment } = this.props;
+    const { treatment, back } = this.props;
     const { playerCount, coins, incorrect } = this.state;
 
     return (
@@ -256,7 +268,11 @@ class Quizz extends React.Component {
           </div>
         ) : null}
 
-        <p className="space-x-4 pt-8 pb-16">
+        <p className="flex space-x-4 pt-8 pb-16">
+          <Button type="button" onClick={back}>
+            Back
+          </Button>
+
           <Button fullWidth type="submit">
             Got it
           </Button>

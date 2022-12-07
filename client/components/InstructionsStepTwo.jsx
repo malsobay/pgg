@@ -143,6 +143,10 @@ export class InstructionsStepTwo extends React.Component {
           highlight={{
             step: step?.component ? step : null,
             next: () => this.setState({ current: this.state.current + 1 }),
+            back:
+              current === 0
+                ? ""
+                : () => this.setState({ current: current - 1 }),
           }}
           treatment={treatment}
           player={player}

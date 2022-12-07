@@ -187,7 +187,7 @@ export class InstructionsStepThree extends React.Component {
   }
 
   render() {
-    const { onNext, treatment, player, paused } = this.props;
+    const { onNext, treatment, paused } = this.props;
     const { current, messages, otherPlayers, currentPlayer } = this.state;
 
     let step = this.steps[current];
@@ -197,7 +197,11 @@ export class InstructionsStepThree extends React.Component {
         <MockSummary
           highlight={{
             step: step?.component ? step : null,
-            next: () => this.setState({ current: this.state.current + 1 }),
+            next: () => this.setState({ current: current + 1 }),
+            back:
+              current === 0
+                ? ""
+                : () => this.setState({ current: current - 1 }),
           }}
           treatment={treatment}
           player={currentPlayer}

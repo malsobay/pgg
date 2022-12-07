@@ -97,8 +97,7 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
-  const steps = [StepThree];
-  // const steps = [StepOne, StepTwo, StepThree];
+  const steps = [StepOne, StepTwo, StepThree];
 
   return steps;
 });
