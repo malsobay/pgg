@@ -58,7 +58,7 @@ export class MockSummary extends React.Component {
           />
         </Highlighter>
         <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
-          <div className="h-full relative col-start-1 col-end-6 lg:col-end-4">
+          <div className="h-full relative col-start-1 col-end-6 xl:col-end-4">
             <div className="h-full relative flex flex-col items-center justify-center pb-48">
               <div
                 onMouseEnter={() => this.setState({ self: player._id })}
@@ -136,9 +136,432 @@ export class MockSummary extends React.Component {
               onMessage={onMessage}
             />
           </div>
-          <div className="h-full relative col-start-6 lg:col-start-4 col-end-13 pl-32">
+          <div className="h-full relative col-start-6 xl:col-start-4 col-end-13 pl-32">
             <Highlighter name="players" highlight={highlight}>
               <PlayerGrid>
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
+                {otherPlayers.map((player, i) => {
+                  const {
+                    punished,
+                    punishedBy,
+                    rewarded,
+                    rewardedBy,
+                    contribution,
+                    roundNet,
+                  } = player;
+
+                  return (
+                    <div
+                      dir="ltr"
+                      key={player._id}
+                      className="w-full h-full flex justify-center items-center"
+                      onMouseEnter={() =>
+                        this.setState({ hovered: player._id })
+                      }
+                      onMouseLeave={() => this.setState({ hovered: null })}
+                    >
+                      <AvatarScores
+                        submitted={false}
+                        animal={player.avatar}
+                        punishmentExists={punishmentExists}
+                        punishmentsGiven={(
+                          Object.values(punished).reduce((a, b) => a + b, 0) *
+                          punishmentCost
+                        ).toString()}
+                        punishmentsReceived={(
+                          Object.values(punishedBy).reduce((a, b) => a + b, 0) *
+                          punishmentMagnitude
+                        ).toString()}
+                        rewardExists={rewardExists}
+                        rewardsGiven={(
+                          Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                          rewardCost
+                        ).toString()}
+                        rewardsReceived={(
+                          Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                          rewardMagnitude
+                        ).toString()}
+                        contributed={contribution}
+                        gains={roundNet}
+                      />
+                    </div>
+                  );
+                })}
                 {otherPlayers.map((player, i) => {
                   const {
                     punished,
