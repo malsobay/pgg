@@ -1,7 +1,7 @@
 import React from "react";
 import { AnimalList } from "../components/assets/AnimalsAvatar";
 import { Button } from "../components/NormalButton";
-import { pickRandom } from "../utils";
+import { pickRandom, pickRandomNum } from "../utils";
 import { Input } from "./Input";
 import { MockOutcome } from "./MockOutcome";
 
@@ -11,10 +11,12 @@ export class InstructionsStepTwo extends React.Component {
   constructor(props) {
     super(props);
 
-    const { playerCount, punishmentExists, rewardExists } = props.treatment;
-    const rewardAndPunishment = punishmentExists & rewardExists;
-    const playerAvatar = props.player.avatar;
-    const exclude = [playerAvatar];
+    const { player, treatment } = props;
+    const { playerCount, endowment, punishmentExists, rewardExists } =
+      treatment;
+    const rewardAndPunishment = punishmentExists && rewardExists;
+    const exclude = [player.avatar];
+    const currentPlayer = { ...player };
 
     this.steps = [
       {
@@ -96,7 +98,7 @@ export class InstructionsStepTwo extends React.Component {
         _id: i,
         avatar,
         submitted: false,
-        contribution: 10,
+        contribution: pickRandomNum(0, endowment),
         punishment: 0,
         reward: 0,
         punish: (id, amount) => {
@@ -128,14 +130,25 @@ export class InstructionsStepTwo extends React.Component {
       });
     }
 
-    this.state = { ...this.state, otherPlayers };
+    currentPlayer.contribution = pickRandomNum(0, endowment);
+
+    this.state = { ...this.state, currentPlayer, otherPlayers };
   }
 
   render() {
-    const { onNext, treatment, player, paused } = this.props;
-    const { current, messages, otherPlayers } = this.state;
+    const { onNext, treatment, paused } = this.props;
+    const { current, messages, currentPlayer, otherPlayers } = this.state;
+    const { playerCount, multiplier } = treatment;
 
     let step = this.steps[current];
+
+    const total =
+      otherPlayers.reduce((sum, p) => p.contribution + sum, 0) +
+      currentPlayer.contribution;
+    const totalReturns = total * multiplier;
+
+    // console.log(JSON.stringify(currentPlayer, null, "  "));
+    // console.log(JSON.stringify(otherPlayers, null, "  "));
 
     return (
       <div className="relative h-full">
@@ -149,7 +162,7 @@ export class InstructionsStepTwo extends React.Component {
                 : () => this.setState({ current: current - 1 }),
           }}
           treatment={treatment}
-          player={player}
+          player={currentPlayer}
           otherPlayers={otherPlayers}
           paused={paused}
           messages={messages}
@@ -158,9 +171,9 @@ export class InstructionsStepTwo extends React.Component {
               messages: [...messages, message],
             });
           }}
-          totalContributions={10}
-          totalReturns={10}
-          payoff={10}
+          totalContributions={total}
+          totalReturns={totalReturns}
+          payoff={totalReturns / playerCount}
           cumulativePayoff={10}
         />
         {step?.modal ? (

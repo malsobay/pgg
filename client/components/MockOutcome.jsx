@@ -10,8 +10,6 @@ import { PlayerGrid } from "./PlayerGrid";
 import { You } from "./You";
 
 export class MockOutcome extends React.Component {
-  state = { contribution: 0 };
-
   constructor(props) {
     super(props);
   }
@@ -29,7 +27,6 @@ export class MockOutcome extends React.Component {
       payoff,
       otherPlayers,
     } = this.props;
-    const { contribution } = this.state;
 
     const {
       multiplier,
@@ -79,8 +76,8 @@ export class MockOutcome extends React.Component {
           <div className="flex flex-col h-full items-center justify-center col-start-4 col-end-9">
             <CoinResults
               highlight={highlight}
-              contributedYou={contribution}
-              contributedOthers={totalContributions - contribution}
+              contributedYou={player.contribution}
+              contributedOthers={totalContributions - player.contribution}
               contributedTotal={totalContributions}
               contributedMultiplied={totalReturns}
               multiplier={multiplier}
@@ -107,7 +104,7 @@ export class MockOutcome extends React.Component {
                 {otherPlayers.map((otherPlayer, i) => {
                   return (
                     <div
-                      key={player._id}
+                      key={otherPlayer._id}
                       className="flex justify-center items-center"
                     >
                       <div dir="ltr" className="w-[6.5rem]">
