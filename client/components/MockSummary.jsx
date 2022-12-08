@@ -138,7 +138,7 @@ export class MockSummary extends React.Component {
           </div>
           <div className="h-full relative col-start-4 col-end-13 pl-32">
             <Highlighter name="players" highlight={highlight}>
-              <PlayerGrid key={15}>
+              <PlayerGrid>
                 {otherPlayers.map((player, i) => {
                   const {
                     punished,
