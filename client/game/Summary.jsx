@@ -27,7 +27,7 @@ export default class Summary extends React.Component {
       rewardCost,
       rewardMagnitude,
       showPunishmentId,
-      showRewardId
+      showRewardId,
     } = game.treatment;
 
     const otherPlayers = game.players.filter((p) => p._id !== player._id);
@@ -42,7 +42,7 @@ export default class Summary extends React.Component {
       <div className="h-full grid grid-rows-[min-content_1fr]">
         <Header player={player} game={game} round={round} stage={stage} />
         <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
-          <div className="h-full relative col-start-1 col-end-4">
+          <div className="h-full relative col-start-1 col-end-6 lg:col-end-4">
             <div className="h-full relative flex flex-col items-center justify-center pb-48">
               <div
                 onMouseEnter={() => this.setState({ self: player._id })}
@@ -111,8 +111,8 @@ export default class Summary extends React.Component {
 
             <ChatView game={game} player={player} />
           </div>
-          <div className="h-full relative col-start-4 col-end-13 pl-32">
-            <PlayerGrid key={15}>
+          <div className="h-full relative col-start-6 lg:col-start-4 col-end-13 pl-32">
+            <PlayerGrid>
               {otherPlayers.map((player, i) => {
                 const punished = player.round.get("punished");
                 const punishedBy = player.round.get("punishedBy");
@@ -199,7 +199,7 @@ function Details({
   rewardMagnitude,
   isSelf,
   showPunishmentId,
-  showRewardId
+  showRewardId,
 }) {
   const player = players.find((p) => p._id === selectedPlayerID);
   const punished = player.round.get("punished");
