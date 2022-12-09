@@ -7,7 +7,6 @@ export const PlayerGrid = ({ children }) => {
     rows = "grid-rows-5";
   } else if (children.length > 9) {
     rows = "grid-rows-4";
-    ypad = "py-[15%]";
   } else if (children.length > 4) {
     rows = "grid-rows-3";
     ypad = "py-[15%]";
