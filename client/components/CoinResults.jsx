@@ -75,7 +75,7 @@ export const CoinResults = ({
               <ArrowNumber
                 direction="NW"
                 showNumber
-                number={received}
+                number={Math.round(received)}
                 color="green"
                 dim
               />
@@ -85,7 +85,7 @@ export const CoinResults = ({
                 direction="NE"
                 text={playerCount > 2 ? "each" : ""}
                 showNumber
-                number={received}
+                number={Math.round(received)}
                 color="green"
                 dim
                 // double
