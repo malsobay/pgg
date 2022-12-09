@@ -27,9 +27,19 @@ export class MockContribution extends React.Component {
     } = this.props;
     const { contribution } = this.state;
 
-    const { multiplier, endowment, allOrNothing, showNRounds, numRounds, 
-      punishmentExists, rewardExists, punishmentCost, punishmentMagnitude, rewardCost, rewardMagnitude } =
-      treatment;
+    const {
+      multiplier,
+      endowment,
+      allOrNothing,
+      showNRounds,
+      numRounds,
+      punishmentExists,
+      rewardExists,
+      punishmentCost,
+      punishmentMagnitude,
+      rewardCost,
+      rewardMagnitude,
+    } = treatment;
 
     return (
       <div className="h-full grid grid-rows-[min-content_1fr]">

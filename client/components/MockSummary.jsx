@@ -57,8 +57,8 @@ export class MockSummary extends React.Component {
             rewardMagnitude={rewardMagnitude}
           />
         </Highlighter>
-        <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
-          <div className="h-full relative col-start-1 col-end-4">
+        <div className="h-full grid grid-cols-[500px_1fr] grid-flow-row justify-center">
+          <div className="h-full relative">
             <div className="h-full relative flex flex-col items-center justify-center pb-48">
               <div
                 onMouseEnter={() => this.setState({ self: player._id })}
@@ -136,9 +136,9 @@ export class MockSummary extends React.Component {
               onMessage={onMessage}
             />
           </div>
-          <div className="h-full relative col-start-4 col-end-13 pl-32">
+          <div className="h-full relative pl-16">
             <Highlighter name="players" highlight={highlight}>
-              <PlayerGrid key={15}>
+              <PlayerGrid>
                 {otherPlayers.map((player, i) => {
                   const {
                     punished,

@@ -10,8 +10,6 @@ import { PlayerGrid } from "./PlayerGrid";
 import { You } from "./You";
 
 export class MockOutcome extends React.Component {
-  state = { contribution: 0 };
-
   constructor(props) {
     super(props);
   }
@@ -29,7 +27,6 @@ export class MockOutcome extends React.Component {
       payoff,
       otherPlayers,
     } = this.props;
-    const { contribution } = this.state;
 
     const {
       multiplier,
@@ -61,8 +58,8 @@ export class MockOutcome extends React.Component {
             rewardMagnitude={rewardMagnitude}
           />
         </Highlighter>
-        <div className="h-full grid grid-cols-12 grid-flow-row justify-center">
-          <div className="h-full relative col-start-1 col-end-4">
+        <div className="h-full grid grid-cols-[300px_500px_1fr] grid-flow-row justify-center">
+          <div className="h-full relative">
             <div className="h-full relative flex items-center justify-center pb-48">
               <Highlighter name="you" pad highlight={highlight}>
                 <You submitted={false} animal={player.avatar} />
@@ -76,11 +73,11 @@ export class MockOutcome extends React.Component {
               onMessage={onMessage}
             />
           </div>
-          <div className="flex flex-col h-full items-center justify-center col-start-4 col-end-9">
+          <div className="flex flex-col h-full items-center justify-center">
             <CoinResults
               highlight={highlight}
-              contributedYou={contribution}
-              contributedOthers={totalContributions - contribution}
+              contributedYou={player.contribution}
+              contributedOthers={totalContributions - player.contribution}
               contributedTotal={totalContributions}
               contributedMultiplied={totalReturns}
               multiplier={multiplier}
@@ -101,13 +98,13 @@ export class MockOutcome extends React.Component {
               </div>
             )}
           </div>
-          <div className="h-full grid grid-rows-1 col-start-9 col-end-13">
+          <div className="h-full grid grid-rows-1">
             <Highlighter name="players" highlight={highlight}>
               <PlayerGrid>
                 {otherPlayers.map((otherPlayer, i) => {
                   return (
                     <div
-                      key={player._id}
+                      key={otherPlayer._id}
                       className="flex justify-center items-center"
                     >
                       <div dir="ltr" className="w-[6.5rem]">
