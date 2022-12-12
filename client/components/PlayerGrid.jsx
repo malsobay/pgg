@@ -15,8 +15,12 @@ export const PlayerGrid = ({ children }) => {
     ypad = "py-[15%]";
   }
 
-  const className =
+  let className =
     "h-full pr-16 grid grid-flow-col bg-white items-center text-center";
+
+  if (children.length >= 13) {
+    className += " [&>*]:scale-75";
+  }
 
   return (
     <div dir="rtl" className={`${rows} ${className} ${ypad}`}>

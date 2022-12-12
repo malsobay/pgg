@@ -58,7 +58,7 @@ export class MockOutcome extends React.Component {
             rewardMagnitude={rewardMagnitude}
           />
         </Highlighter>
-        <div className="h-full grid grid-cols-[300px_500px_1fr] grid-flow-row justify-center">
+        <div className="h-full grid grid-cols-[280px_600px_1fr] grid-flow-row justify-center">
           <div className="h-full relative">
             <div className="h-full relative flex items-center justify-center pb-48">
               <Highlighter name="you" pad highlight={highlight}>

@@ -28,6 +28,57 @@ function genRP(player, players, budget) {
   return given;
 }
 
+function applyContributions(player, treatment) {
+  const { endowment } = treatment;
+
+  player.contribution = pickRandomNum(0, endowment);
+}
+
+function applyValues(player, allPlayers, treatment, roundPayoff) {
+  const { punishmentExists, punishmentCost, rewardExists, rewardCost } =
+    treatment;
+
+  player.roundGross = roundPayoff - player.contribution;
+
+  player.punished = {};
+  player.punishedBy = {};
+  player.rewarded = {};
+  player.rewardedBy = {};
+
+  player.roundNet = player.roundGross;
+
+  if (player.roundGross <= 0) {
+    return;
+  }
+
+  // 80% chance of applying rewards or punishments
+  if (Math.random() > 0.8) {
+    return;
+  }
+
+  // The budget is a random percentage of roundGross
+  const budget = Math.floor(player.roundGross * Math.random());
+
+  if (budget === 0) {
+    return;
+  }
+
+  // Split budget between rewards and punishments
+  const rewardBudget = Math.floor(budget * Math.random());
+  const punishmentBudget = budget - rewardBudget;
+
+  if (punishmentExists && punishmentBudget > 0) {
+    player.punished = genRP(player, allPlayers, punishmentBudget);
+  }
+
+  if (rewardExists && rewardBudget > 0) {
+    player.rewarded = genRP(player, allPlayers, rewardBudget);
+  }
+
+  player.roundNet -= punishmentBudget * punishmentCost;
+  player.roundNet -= rewardBudget * rewardCost;
+}
+
 function applyRPReceived(player, allPlayers, treatment) {
   player.punishedBy = {};
   player.rewardedBy = {};
@@ -57,53 +108,6 @@ function applyRPReceived(player, allPlayers, treatment) {
   for (const [id, amount] of Object.entries(player.rewardedBy)) {
     player.roundNet += amount * rewardMagnitude;
   }
-}
-
-function applyContributions(player, treatment) {
-  const { endowment } = treatment;
-
-  player.contribution = pickRandomNum(0, endowment);
-}
-
-function applyValues(player, allPlayers, treatment, roundPayoff) {
-  const { punishmentExists, punishmentCost, rewardExists, rewardCost } =
-    treatment;
-
-  player.roundGross = roundPayoff - player.contribution;
-
-  player.punished = {};
-  player.punishedBy = {};
-  player.rewarded = {};
-  player.rewardedBy = {};
-
-  if (player.roundGross <= 0) {
-    return;
-  }
-
-  player.roundNet = player.roundGross;
-
-  // 80% chance of applying rewards or punishments
-  if (Math.random() > 0.8) {
-    return;
-  }
-
-  // Budget between 10% and 100% of roundGross
-  const budget = player.roundGross * pickRandomNum(0.1, 1);
-
-  // Split budget between rewards and punishments
-  const rewardBudget = Math.floor(budget * Math.random());
-  const punishmentBudget = budget - rewardBudget;
-
-  if (punishmentExists && punishmentBudget > 0) {
-    player.punished = genRP(player, allPlayers, punishmentBudget);
-  }
-
-  if (rewardExists && rewardBudget > 0) {
-    player.rewarded = genRP(player, allPlayers, rewardBudget);
-  }
-
-  player.roundNet -= punishmentBudget * punishmentCost;
-  player.roundNet -= rewardBudget * rewardCost;
 }
 
 export class InstructionsStepThree extends React.Component {
