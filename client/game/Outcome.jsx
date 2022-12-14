@@ -43,13 +43,30 @@ export default function Outcome({ stage, round, game, player }) {
     <div className="h-full grid grid-rows-[min-content_1fr]">
       <Header player={player} game={game} round={round} stage={stage} />
       <div className="h-full grid grid-cols-[280px_600px_1fr] grid-flow-row justify-center">
-        <div className="h-full relative">
-          <div className="h-full relative flex items-center justify-center pb-48">
+        <div className="h-full relative flex flex-col items-center justify-center">
+          <div className="relative">
             <You
               submitted={player.stage.submitted}
               animal={player.get("avatar")}
             />
+
+            <div className="px-4 pt-16">
+              {rewardExists && (
+                <Label color="yellow" size="md">
+                  Rewards: It will cost you {rewardCost} coins to give a reward
+                  of {rewardMagnitude} coins.
+                </Label>
+              )}
+              {rewardExists && punishmentExists && <div className="mt-4" />}
+              {punishmentExists && (
+                <Label color="purple" size="md">
+                  Deductions: It will cost you {punishmentCost} coins to impose
+                  a deduction of {punishmentMagnitude} coins.
+                </Label>
+              )}
+            </div>
           </div>
+
           <ChatView game={game} player={player} />
         </div>
         <div className="flex flex-col h-full items-center justify-center">
@@ -150,21 +167,6 @@ export default function Outcome({ stage, round, game, player }) {
               );
             })}
           </PlayerGrid>
-          <div className="px-4 pb-16">
-            {rewardExists && (
-              <Label color="yellow">
-                Rewards: It will cost you {rewardCost} coins to
-                <br /> give a reward of {rewardMagnitude} coins.
-              </Label>
-            )}
-            {rewardExists && punishmentExists && <div className="mt-4" />}
-            {punishmentExists && (
-              <Label color="purple">
-                Deductions: It will cost you {punishmentCost} coins
-                <br /> to impose a deduction of {punishmentMagnitude} coins.
-              </Label>
-            )}
-          </div>
         </div>
       </div>
     </div>

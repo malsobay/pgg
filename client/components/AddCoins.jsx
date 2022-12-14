@@ -42,7 +42,7 @@ export function AddCoins({
             onClick={onClick}
           />
         ))}
-      <div className="w-52 pt-8">
+      <div className="xl:w-44 2xl:w-52 pt-8">
         <Bowl money={contributed} multiplier={multiplier} />
       </div>
       {!submitted && <Button onClick={onSubmit}>I'm done</Button>}
@@ -85,7 +85,7 @@ export function AddCoinsArrows({
   onClick,
 }) {
   return (
-    <div className="h-48 flex items-center space-x-4">
+    <div className="h-24 2xl:h-48 flex items-center space-x-4">
       <AddButton
         amount={10}
         disabled={!canRemove10}
@@ -98,7 +98,7 @@ export function AddCoinsArrows({
         onClick={() => onClick(-1)}
       />
       <div className="w-4 relative flex justify-center pointer-events-none">
-        <div className="absolute -top-20 w-44 shrink-0 rotate-180">
+        <div className="absolute -top-16 2xl:-top-24 w-32 2xl:w-44 shrink-0 rotate-180">
           <Arrow></Arrow>
         </div>
       </div>
@@ -127,7 +127,7 @@ export function AddCoinsAllOrNothingArrows({
 }) {
   console.log(amount);
   return (
-    <div className="h-48 flex items-center space-x-4">
+    <div className="h-24 2xl:h-48 flex items-center space-x-4">
       <AddButton
         amount={amount}
         disabled={!canRemove}
@@ -136,7 +136,7 @@ export function AddCoinsAllOrNothingArrows({
         freeWidth
       />
       <div className="w-4 relative flex justify-center pointer-events-none">
-        <div className="absolute -top-20 w-44 shrink-0 rotate-180">
+        <div className="absolute -top-16 2xl:-top-20 w-32 2xl:w-44 shrink-0 rotate-180">
           <Arrow></Arrow>
         </div>
       </div>
