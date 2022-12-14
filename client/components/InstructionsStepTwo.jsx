@@ -173,7 +173,7 @@ export class InstructionsStepTwo extends React.Component {
           }}
           totalContributions={total}
           totalReturns={totalReturns}
-          payoff={totalReturns / playerCount}
+          payoff={Math.floor(totalReturns / playerCount)}
           cumulativePayoff={10}
         />
         {step?.modal ? (
@@ -181,7 +181,15 @@ export class InstructionsStepTwo extends React.Component {
             <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto max-w-prose overflow-auto">
               <div className="prose prose-slate prose-p:text-gray-500 prose-p:font-['Inter'] prose-ul:font-['Inter'] prose-headings:text-orange-600">
                 {step.modal === "quizz" ? (
-                  <Quizz treatment={treatment} next={() => onNext()} />
+                  <Quizz
+                    treatment={treatment}
+                    next={() => onNext()}
+                    back={
+                      current === 0
+                        ? ""
+                        : () => this.setState({ current: current - 1 })
+                    }
+                  />
                 ) : null}
               </div>
             </div>
@@ -216,7 +224,7 @@ class Quizz extends React.Component {
   };
 
   render() {
-    const { treatment } = this.props;
+    const { back } = this.props;
     const { coins, incorrect } = this.state;
 
     return (
@@ -252,7 +260,11 @@ class Quizz extends React.Component {
             Some answers were incorrect. Try again.
           </div>
         ) : null}
-        <p className="space-x-4 pt-8 pb-16">
+        <p className="flex space-x-4 pt-8 pb-16">
+          <Button type="button" onClick={back}>
+            Back
+          </Button>
+
           <Button fullWidth type="submit">
             Got it
           </Button>

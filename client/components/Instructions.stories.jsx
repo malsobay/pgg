@@ -65,6 +65,8 @@ export function StepThree() {
         endowment: 20,
         punishmentMagnitude: 2,
         punishmentCost: 2,
+        rewardMagnitude: 2,
+        rewardCost: 2,
         allOrNothing: false,
       }}
       roundPayoff={roundPayoff}
