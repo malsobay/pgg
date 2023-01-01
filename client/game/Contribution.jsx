@@ -24,7 +24,7 @@ export default function Contribution({ stage, round, game, player }) {
               animal={player.get("avatar")}
             />
           </div>
-          <ChatView game={game} player={player} />
+          <ChatView game={game} player={player} stage={stage} round={round}/>
         </div>
         <div className="h-full flex items-center justify-center col-start-4 col-end-9">
           <AddCoins

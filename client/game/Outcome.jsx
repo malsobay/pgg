@@ -50,7 +50,7 @@ export default function Outcome({ stage, round, game, player }) {
               animal={player.get("avatar")}
             />
           </div>
-          <ChatView game={game} player={player} />
+          <ChatView game={game} player={player} stage={stage} round={round}/>
         </div>
         <div className="flex flex-col h-full items-center justify-center">
           <CoinResults
