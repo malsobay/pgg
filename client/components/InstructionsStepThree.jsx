@@ -185,9 +185,7 @@ export class InstructionsStepThree extends React.Component {
       },
     ];
 
-    if (punishmentExists || rewardExists) {
-      this.steps.push({ modal: "quizz" });
-    }
+    this.steps.push({ modal: "quizz" });
   }
 
   render() {
@@ -195,7 +193,7 @@ export class InstructionsStepThree extends React.Component {
     const { current, messages, otherPlayers, currentPlayer } = this.state;
 
     let step = this.steps[current];
-
+    
     return (
       <div className="relative h-full">
         <MockSummary
@@ -226,7 +224,7 @@ export class InstructionsStepThree extends React.Component {
           <div className="z-40 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
             <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto max-w-prose overflow-auto">
               <div className="prose prose-slate prose-p:text-gray-500 prose-p:font-['Inter'] prose-ul:font-['Inter'] prose-headings:text-orange-600">
-                {step.modal === "quizz" ? (
+                {step.modal === "quizz" ?  (
                   <Quizz treatment={treatment} next={() => onNext()} />
                 ) : null}
               </div>
@@ -282,8 +280,7 @@ class Quizz extends React.Component {
     } = treatment;
 
     if (!punishmentExists && !rewardExists) {
-      next();
-      return null;
+      this.props.next();
     }
 
     return (
