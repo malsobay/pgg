@@ -37,6 +37,7 @@ export class MockSummary extends React.Component {
       rewardCost,
       rewardMagnitude,
       showPunishmentId,
+      chat,
     } = treatment;
 
     const allPlayers = [player, ...otherPlayers];
@@ -131,6 +132,7 @@ export class MockSummary extends React.Component {
             <MockChatView
               name="chat"
               highlight={highlight}
+              showChat={chat}
               messages={messages}
               player={player}
               onMessage={onMessage}

@@ -39,6 +39,7 @@ export class MockContribution extends React.Component {
       punishmentMagnitude,
       rewardCost,
       rewardMagnitude,
+      chat,
     } = treatment;
 
     return (
@@ -69,6 +70,7 @@ export class MockContribution extends React.Component {
             <MockChatView
               name="chat"
               highlight={highlight}
+              showChat={chat}
               messages={messages}
               player={player}
               onMessage={onMessage}
