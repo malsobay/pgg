@@ -2,7 +2,18 @@ import React from "react";
 import { Chat } from "./Chat";
 import { Highlighter } from "./Highlighter";
 
-export function MockChatView({ player, messages, onMessage, name, highlight }) {
+export function MockChatView({
+  player,
+  messages,
+  onMessage,
+  name,
+  highlight,
+  showChat,
+}) {
+  if (!showChat) {
+    return null;
+  }
+
   return (
     <div className="h-full w-full absolute bottom-0 left-0 pointer-events-none pgg-chat">
       <div className="pr-20 h-full ">
