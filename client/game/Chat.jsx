@@ -1,7 +1,7 @@
 import React from "react";
 import { Chat } from "../components/Chat";
 
-export function ChatView({ game, player }) {
+export function ChatView({ game, player, stage, round }) {
   if (!game.treatment.chat) {
     return null;
   }
@@ -25,6 +25,7 @@ export function ChatView({ game, player }) {
                 text,
                 avatar: player.get("avatar"),
                 playerId: player._id,
+                gamePhase: `Round ${round.index} - ${stage.name}`,
                 id: randID(),
                 timestamp: Date.now(),
               },

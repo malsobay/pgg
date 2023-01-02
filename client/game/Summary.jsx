@@ -109,7 +109,7 @@ export default class Summary extends React.Component {
               ""
             )}
 
-            <ChatView game={game} player={player} />
+            <ChatView game={game} player={player} stage={stage} round={round}/>
           </div>
           <div className="h-full relative pl-16">
             <PlayerGrid>
