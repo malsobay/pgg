@@ -1,14 +1,14 @@
 import React from "react";
 
 const sizes = {
-  xs: "text-[16px]",
-  sm: "text-[20px]",
-  md: "text-[24px]",
-  lg: "text-[32px]",
-  xl: "text-[42px]",
-  "2xl": "text-[54px]",
-  "3xl": "text-[64px]",
-  "4xl": "text-[84px]",
+  xs: "text-[14px] 2xl:text-[16px]",
+  sm: "text-[18px] 2xl:text-[20px]",
+  md: "text-[22px] 2xl:text-[24px]",
+  lg: "text-[30px] 2xl:text-[32px]",
+  xl: "text-[40px] 2xl:text-[42px]",
+  "2xl": "text-[52px] 2xl:text-[54px]",
+  "3xl": "text-[62px] 2xl:text-[64px]",
+  "4xl": "text-[82px] 2xl:text-[84px]",
 };
 
 const sizesStroke = {
