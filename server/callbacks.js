@@ -49,16 +49,28 @@ Empirica.onGameStart((game) => {
 // onRoundStart is triggered before each round starts, and before onStageStart.
 // It receives the same options as onGameStart, and the round that is starting.
 Empirica.onRoundStart((game, round) => {
+  switch(game.treatment.allOrNothing){
+    case false:
+      var contributionProp = game.treatment.defaultContribProp; 
+    case true:
+      if(parseInt(game.treatment.defaultContribProp) == 1){
+        var contributionProp = 1;
+      }
+      else{
+        var contributionProp = 0;
+      }
+      
+  }
   round.set("totalContributions", 0);
   round.set("totalReturns", 0);
   round.set("payoff", 0);
   game.players.forEach((player, i) => {
-    player.round.set("endowment", game.treatment.endowment);
+    player.round.set("endowment", game.treatment.endowment - parseInt(game.treatment.endowment * contributionProp));
     player.round.set("punishedBy", {});
     player.round.set("punished", {});
     player.round.set("rewardedBy", {});
     player.round.set("rewarded", {});
-    player.round.set("contribution", 0);
+    player.round.set("contribution", parseInt(game.treatment.endowment * contributionProp));
   });
 });
 
