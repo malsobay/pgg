@@ -12,6 +12,7 @@ export function AddCoins({
   contributed,
   multiplier,
   onClick,
+  remainderMode = true,
   allOrNothing = false,
   allOrNothingAmount = 0,
   onSubmit = () => console.log("I'm done"),
@@ -33,12 +34,24 @@ export function AddCoins({
             canRemove={contributed > 0}
             onClick={onClick}
           />
+        ) : remainderMode ? (
+          <AddCoinsArrows
+            canAdd1={purse - contributed > 0}
+            canAddMultiple={purse - contributed > 0}
+            addMultipleAmount={
+              purse - contributed < 10 ? purse - contributed : 10
+            }
+            canRemove1={contributed > 0}
+            canRemoveMultiple={contributed > 0}
+            removeMultipleAmount={contributed >= 10 ? 10 : contributed}
+            onClick={onClick}
+          />
         ) : (
           <AddCoinsArrows
             canAdd1={purse - contributed > 0}
-            canAdd10={purse - contributed > 9}
+            canAddMultiple={purse - contributed > 9}
             canRemove1={contributed > 0}
-            canRemove10={contributed > 9}
+            canRemoveMultiple={contributed > 9}
             onClick={onClick}
           />
         ))}
@@ -79,17 +92,19 @@ export function AddCoinsPurse({ amount }) {
 
 export function AddCoinsArrows({
   canAdd1 = false,
-  canAdd10 = false,
+  canAddMultiple = false,
+  addMultipleAmount = 10,
   canRemove1 = false,
-  canRemove10 = false,
+  canRemoveMultiple = false,
+  removeMultipleAmount = 10,
   onClick,
 }) {
   return (
     <div className="h-24 2xl:h-48 flex items-center space-x-4">
       <AddButton
-        amount={10}
-        disabled={!canRemove10}
-        onClick={() => onClick(-10)}
+        amount={removeMultipleAmount}
+        disabled={!canRemoveMultiple}
+        onClick={() => onClick(-removeMultipleAmount)}
         dark
       />
       <AddButton
@@ -109,9 +124,9 @@ export function AddCoinsArrows({
         down
       />
       <AddButton
-        amount={10}
-        disabled={!canAdd10}
-        onClick={() => onClick(10)}
+        amount={addMultipleAmount}
+        disabled={!canAddMultiple}
+        onClick={() => onClick(addMultipleAmount)}
         down
         dark
       />
