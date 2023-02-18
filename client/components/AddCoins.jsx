@@ -13,6 +13,7 @@ export function AddCoins({
   multiplier,
   onClick,
   remainderMode = true,
+  remainderDisplay10 = true,
   allOrNothing = false,
   allOrNothingAmount = 0,
   onSubmit = () => console.log("I'm done"),
@@ -41,9 +42,19 @@ export function AddCoins({
             addMultipleAmount={
               purse - contributed < 10 ? purse - contributed : 10
             }
+            displayAddMultipleAmount={
+              purse - contributed < 10 && !remainderDisplay10
+                ? purse - contributed
+                : 10
+            }
             canRemove1={contributed > 0}
             canRemoveMultiple={contributed > 0}
             removeMultipleAmount={contributed >= 10 ? 10 : contributed}
+            displayRemoveMultipleAmount={
+              purse - contributed < 10 && !remainderDisplay10
+                ? purse - contributed
+                : 10
+            }
             onClick={onClick}
           />
         ) : (
@@ -94,15 +105,17 @@ export function AddCoinsArrows({
   canAdd1 = false,
   canAddMultiple = false,
   addMultipleAmount = 10,
+  displayAddMultipleAmount = 10,
   canRemove1 = false,
   canRemoveMultiple = false,
   removeMultipleAmount = 10,
+  displayRemoveMultipleAmount = 10,
   onClick,
 }) {
   return (
     <div className="h-24 2xl:h-48 flex items-center space-x-4">
       <AddButton
-        amount={removeMultipleAmount}
+        amount={displayRemoveMultipleAmount}
         disabled={!canRemoveMultiple}
         onClick={() => onClick(-removeMultipleAmount)}
         dark
@@ -124,7 +137,7 @@ export function AddCoinsArrows({
         down
       />
       <AddButton
-        amount={addMultipleAmount}
+        amount={displayAddMultipleAmount}
         disabled={!canAddMultiple}
         onClick={() => onClick(addMultipleAmount)}
         down
