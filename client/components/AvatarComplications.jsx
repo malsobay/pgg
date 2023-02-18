@@ -3,6 +3,10 @@ import { Add, Deduct } from "./assets/Assets";
 import { Avatar } from "./Avatar";
 import { Label } from "./Label";
 
+function prependSign(value, sign) {
+  return parseInt(value) > 0 ? `${sign}${value}` : value;
+}
+
 export function AvatarScores({
   animal,
   gains,
@@ -36,12 +40,12 @@ export function AvatarScores({
           <>
             <div className="absolute top-2 right-full -mr-3.5 text-right">
               <Label color="purple" size="md" stroke shadow>
-                {punishmentsGiven}
+                {prependSign(punishmentsGiven, "-")}
               </Label>
             </div>
             <div className="absolute bottom-2 right-full -mr-3.5 text-right">
               <Label color="purple" size="md" stroke shadow>
-                {punishmentsReceived}
+                {prependSign(punishmentsReceived, "-")}
               </Label>
             </div>
           </>
@@ -50,19 +54,19 @@ export function AvatarScores({
           <>
             <div className="absolute top-2 left-full -ml-[1rem]">
               <Label color="gold" size="md" stroke shadow>
-                {rewardsGiven}
+                {prependSign(rewardsGiven, "-")}
               </Label>
             </div>
             <div className="absolute bottom-2 left-full -ml-[1rem]">
               <Label color="gold" size="md" stroke shadow>
-                {rewardsReceived}
+                {prependSign(rewardsReceived, "+")}
               </Label>
             </div>
           </>
         )}
         <div className="absolute -top-4 left-0 w-full text-center">
           <Label color="yellow" size="md" stroke shadow>
-            {contributed}
+            {prependSign(contributed, "-")}
           </Label>
         </div>
         <div className="absolute -bottom-6 left-0 w-full text-center">
