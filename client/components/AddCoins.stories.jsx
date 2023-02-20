@@ -89,9 +89,9 @@ export function Elements() {
       <AddCoinsArrows
         onClick={(amount) => console.log(`Added ${amount}`)}
         canAdd1
-        canAdd10
+        canAddMultiple
         canRemove1
-        canRemove10
+        canRemoveMultiple
       />
       <AddCoinsArrows
         onClick={(amount) => console.log(`Added ${amount}`)}
@@ -100,8 +100,8 @@ export function Elements() {
       />
       <AddCoinsArrows
         onClick={(amount) => console.log(`Added ${amount}`)}
-        canAdd10
-        canRemove10
+        canAddMultiple
+        canRemoveMultiple
       />
     </div>
   );

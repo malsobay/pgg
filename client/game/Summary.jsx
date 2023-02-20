@@ -109,9 +109,12 @@ export default class Summary extends React.Component {
               ""
             )}
 
-            <ChatView game={game} player={player} stage={stage} round={round}/>
+            <ChatView game={game} player={player} stage={stage} round={round} />
           </div>
           <div className="h-full relative pl-16">
+            <div className="p-2 text-center rounded bg-pink-100 text-pink-600">
+              Payoff. Coins received by all players: {round.get("payoff")}
+            </div>
             <PlayerGrid>
               {otherPlayers.map((player, i) => {
                 const punished = player.round.get("punished");

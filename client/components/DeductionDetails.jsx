@@ -2,6 +2,10 @@ import React from "react";
 import { Avatar } from "./Avatar";
 import { Label } from "./Label";
 
+function prependSign(value, sign) {
+  return parseInt(value) > 0 ? `${sign}${value}` : value;
+}
+
 export function DeductionDetails({
   animal,
   submitted = false,
@@ -15,7 +19,7 @@ export function DeductionDetails({
   rewardsReceived,
   isSelf,
   showPunishmentId,
-  showRewardId
+  showRewardId,
 }) {
   const totalDeductionsSpent = deductionsSpent.reduce(
     (sum, deduction) => sum + deduction.amount,
@@ -51,8 +55,10 @@ export function DeductionDetails({
           <table className="w-full">
             <tbody>
               <tr className="text-purple-600">
-                <td className="">Coins Contributed</td>
-                <td className="font-bold text-right">{contributed}</td>
+                <td className="">Coins Contribution</td>
+                <td className="font-bold text-right">
+                  {prependSign(contributed, "-")}
+                </td>
               </tr>
               <tr className={gains >= 0 ? "text-green-600" : "text-red-600"}>
                 <td className="">Round Gains/Losses</td>
@@ -67,22 +73,24 @@ export function DeductionDetails({
         <>
           <div className="mt-8 flex justify-between text-orange-600 border-b border-orange-600">
             <div className="">Coins spent on deductions</div>
-            <div className="font-bold text-right">{totalDeductionsSpent}</div>
+            <div className="font-bold text-right">
+              {prependSign(totalDeductionsSpent, "-")}
+            </div>
           </div>
 
           {(isSelf || showPunishmentId) && (
-            <IndividualDeductions deductions={deductionsSpent} />
+            <IndividualDeductions deductions={deductionsSpent} sign="-" />
           )}
 
           <div className="mt-6 flex justify-between text-orange-600 border-b border-orange-600">
             <div className="">Coins deducted by other players</div>
             <div className="font-bold text-right">
-              {totalDeductionsReceived}
+              {prependSign(totalDeductionsReceived, "-")}
             </div>
           </div>
 
           {showPunishmentId && (
-            <IndividualDeductions deductions={deductionsReceived} />
+            <IndividualDeductions deductions={deductionsReceived} sign="-" />
           )}
         </>
       )}
@@ -91,20 +99,24 @@ export function DeductionDetails({
         <>
           <div className="mt-8 flex justify-between text-orange-600 border-b border-orange-600">
             <div className="">Coins spent on rewards</div>
-            <div className="font-bold text-right">{totalRewardsSpent}</div>
+            <div className="font-bold text-right">
+              {prependSign(totalRewardsSpent, "-")}
+            </div>
           </div>
 
           {(isSelf || showRewardId) && (
-            <IndividualDeductions deductions={rewardsSpent} />
+            <IndividualDeductions deductions={rewardsSpent} sign="-" />
           )}
 
           <div className="mt-6 flex justify-between text-orange-600 border-b border-orange-600">
             <div className="">Coins rewarded by other players</div>
-            <div className="font-bold text-right">{totalRewardsReceived}</div>
+            <div className="font-bold text-right">
+              {prependSign(totalRewardsReceived, "+")}
+            </div>
           </div>
 
           {showRewardId && (
-            <IndividualDeductions deductions={rewardsReceived} />
+            <IndividualDeductions deductions={rewardsReceived} sign="+" />
           )}
         </>
       )}
@@ -112,7 +124,7 @@ export function DeductionDetails({
   );
 }
 
-function IndividualDeductions({ deductions }) {
+function IndividualDeductions({ deductions, sign }) {
   if (deductions.length === 0) {
     return <div className="mt-4 text-gray-400">None</div>;
   }
@@ -127,7 +139,9 @@ function IndividualDeductions({ deductions }) {
             </div>
             <div className="capitalize">{deduction.animal}</div>
           </div>
-          <div className="font-bold text-right">{deduction.amount}</div>
+          <div className="font-bold text-right">
+            {prependSign(deduction.amount, sign)}
+          </div>
         </div>
       ))}
     </div>
