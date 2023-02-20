@@ -304,6 +304,7 @@ function Intro({ next, treatment }) {
       <img
         className="public-fund-img"
         src="experiment/images/explanation.png"
+        width="50%"
       />
 
       <p>

@@ -113,7 +113,7 @@ export default class Summary extends React.Component {
           </div>
           <div className="h-full relative pl-16">
             <div className="p-2 text-center rounded bg-pink-100 text-pink-600">
-              Payoff. Coins received by all players: {round.get("payoff")}
+              Payoff received by all players from the pool: {round.get("payoff")} coins
             </div>
             <PlayerGrid>
               {otherPlayers.map((player, i) => {
