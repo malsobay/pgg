@@ -62,15 +62,13 @@ export default class Summary extends React.Component {
                     punishmentMagnitude
                   ).toString()}
                   rewardExists={rewardExists}
-                  rewardsGiven={(showOtherSummaries
-                    ? Object.values(rewarded).reduce((a, b) => a + b, 0) *
+                  rewardsGiven={(
+                    Object.values(rewarded).reduce((a, b) => a + b, 0) *
                       rewardCost
-                    : ""
                   ).toString()}
-                  rewardsReceived={(showOtherSummaries
-                    ? Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
+                  rewardsReceived={(
+                    Object.values(rewardedBy).reduce((a, b) => a + b, 0) *
                       rewardMagnitude
-                    : ""
                   ).toString()}
                   contributed={contribution}
                   gains={roundPayoff}

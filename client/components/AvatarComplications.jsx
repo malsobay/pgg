@@ -13,7 +13,7 @@ export function AvatarScores({
   punishmentExists = true,
   punishmentsGiven = "",
   punishmentsReceived = "",
-  rewardExists = SVGComponentTransferFunctionElement,
+  rewardExists = true,
   rewardsGiven = "",
   rewardsReceived = "",
   contributed = "",
