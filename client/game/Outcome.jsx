@@ -82,7 +82,7 @@ export default function Outcome({ stage, round, game, player }) {
           />
           {player.stage.submitted ? (
             <Label color="gray">
-              You have submitted your deductions. Waiting on the other players
+              Waiting on the other players...
             </Label>
           ) : (
             <div className="w-full px-32">
