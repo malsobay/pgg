@@ -6,6 +6,8 @@ import { Label } from "../components/Label";
 import { PlayerGrid } from "../components/PlayerGrid";
 import { ChatView } from "./Chat";
 import Header from "./Header";
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 
 export default class Summary extends React.Component {
   state = { hovered: null, self: null };
@@ -45,8 +47,24 @@ export default class Summary extends React.Component {
           <div className="h-full relative">
             <div className="h-full relative flex flex-col items-center justify-center pb-48">
               <div
-                onMouseEnter={() => this.setState({ self: player._id })}
-                onMouseLeave={() => this.setState({ self: null })}
+                onMouseEnter={() => {
+                  this.setState({ self: player._id });
+                  game.append("log",{
+                    verb:"viewOwnSummary", 
+                    playerId:player._id, 
+                    roundIndex:round.index, 
+                    stage:stage.name, 
+                    timestamp:moment(TimeSync.serverTime(null, 1000))});
+                }}
+                onMouseLeave={() => {
+                  this.setState({ self: null });
+                  game.append("log",{
+                    verb:"exitOwnSummary", 
+                    playerId:player._id, 
+                    roundIndex:round.index, 
+                    stage:stage.name, 
+                    timestamp:moment(TimeSync.serverTime(null, 1000))});
+                }}
               >
                 <AvatarScores
                   hints
@@ -114,25 +132,43 @@ export default class Summary extends React.Component {
               Payoff received by all players from the pool: {round.get("payoff")} coins
             </div>
             <PlayerGrid>
-              {otherPlayers.map((player, i) => {
-                const punished = player.round.get("punished");
-                const punishedBy = player.round.get("punishedBy");
-                const contribution = player.round.get("contribution");
-                const roundPayoff = player.round.get("roundPayoff");
-                const rewarded = player.round.get("rewarded");
-                const rewardedBy = player.round.get("rewardedBy");
+              {otherPlayers.map((otherPlayer, i) => {
+                const punished = otherPlayer.round.get("punished");
+                const punishedBy = otherPlayer.round.get("punishedBy");
+                const contribution = otherPlayer.round.get("contribution");
+                const roundPayoff = otherPlayer.round.get("roundPayoff");
+                const rewarded = otherPlayer.round.get("rewarded");
+                const rewardedBy = otherPlayer.round.get("rewardedBy");
 
                 return (
                   <div
                     dir="ltr"
-                    key={player._id}
+                    key={otherPlayer._id}
                     className="w-full h-full flex justify-center items-center"
-                    onMouseEnter={() => this.setState({ hovered: player._id })}
-                    onMouseLeave={() => this.setState({ hovered: null })}
+                    onMouseEnter={() => {
+                      this.setState({ hovered: otherPlayer._id });
+                      game.append("log",{
+                        verb:"viewOtherSummary", 
+                        playerId:player._id, 
+                        targetPlayerId:otherPlayer._id, 
+                        roundIndex:round.index, 
+                        stage:stage.name, 
+                        timestamp:moment(TimeSync.serverTime(null, 1000))});
+                    }}
+                    onMouseLeave={() => {
+                      this.setState({ hovered: null });
+                      game.append("log",{
+                        verb:"exitOtherSummary", 
+                        playerId:player._id, 
+                        targetPlayerId:otherPlayer._id, 
+                        roundIndex:round.index, 
+                        stage:stage.name, 
+                        timestamp:moment(TimeSync.serverTime(null, 1000))});
+                    }}
                   >
                     <AvatarScores
-                      submitted={player.stage.submitted}
-                      animal={player.get("avatar")}
+                      submitted={otherPlayer.stage.submitted}
+                      animal={otherPlayer.get("avatar")}
                       punishmentExists={punishmentExists}
                       punishmentsGiven={(showOtherSummaries
                         ? Object.values(punished).reduce((a, b) => a + b, 0) *
