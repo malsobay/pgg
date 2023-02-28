@@ -6,6 +6,8 @@ import { PlayerGrid } from "../components/PlayerGrid";
 import { You } from "../components/You";
 import { ChatView } from "./Chat";
 import Header from "./Header";
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 
 export default function Contribution({ stage, round, game, player }) {
   const multiplier = game.treatment.multiplier;
@@ -40,6 +42,14 @@ export default function Contribution({ stage, round, game, player }) {
             allOrNothing={game.treatment.allOrNothing}
             allOrNothingAmount={endowment}
             onClick={(amount) => {
+              game.append("log",{
+                verb:"contributionChange", 
+                playerId:player._id, 
+                fromValue:player.round.get("contribution"), 
+                toValue:contribution+amount, 
+                roundIndex:round.index, 
+                stage:stage.name, 
+                timestamp:moment(TimeSync.serverTime(null, 1000))})
               player.round.set("contribution", contribution + amount);
             }}
             onSubmit={(amount) => {
