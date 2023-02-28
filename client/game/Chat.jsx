@@ -1,5 +1,7 @@
 import React from "react";
 import { Chat } from "../components/Chat";
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 
 export function ChatView({ game, player, stage, round }) {
   if (!game.treatment.chat) {
@@ -27,7 +29,7 @@ export function ChatView({ game, player, stage, round }) {
                 playerId: player._id,
                 gamePhase: `Round ${round.index} - ${stage.name}`,
                 id: randID(),
-                timestamp: Date.now(),
+                timestamp: moment(TimeSync.serverTime(null, 1000)),
               },
             ]);
           }}
