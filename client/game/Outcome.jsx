@@ -7,6 +7,8 @@ import { PlayerGrid } from "../components/PlayerGrid";
 import { You } from "../components/You";
 import { ChatView } from "./Chat";
 import Header from "./Header";
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 
 export default function Outcome({ stage, round, game, player }) {
   const {
@@ -107,8 +109,25 @@ export default function Outcome({ stage, round, game, player }) {
                   }
 
                   punishments[otherPlayer._id] = punished + 1;
+                  
+                  game.append("log",{
+                    verb:"addPunishment", 
+                    playerId:player._id, 
+                    targetPlayerId:otherPlayer._id, 
+                    roundIndex:round.index, 
+                    stage:stage.name, 
+                    timestamp:moment(TimeSync.serverTime(null, 1000))});
+                  
                 } else {
                   punishments[otherPlayer._id] = punished - 1;
+
+                  game.append("log",{
+                    verb:"removePunishment", 
+                    playerId:player._id, 
+                    targetPlayerId:otherPlayer._id, 
+                    roundIndex:round.index, 
+                    stage:stage.name, 
+                    timestamp:moment(TimeSync.serverTime(null, 1000))});
                 }
 
                 player.round.set("punished", punishments);
@@ -122,8 +141,25 @@ export default function Outcome({ stage, round, game, player }) {
                     return;
                   }
                   rewards[otherPlayer._id] = added + 1;
+
+                  game.append("log",{
+                    verb:"addReward", 
+                    playerId:player._id, 
+                    targetPlayerId:otherPlayer._id, 
+                    roundIndex:round.index, 
+                    stage:stage.name, 
+                    timestamp:moment(TimeSync.serverTime(null, 1000))});
+                  
                 } else {
                   rewards[otherPlayer._id] = added - 1;
+
+                  game.append("log",{
+                    verb:"removeReward", 
+                    playerId:player._id, 
+                    targetPlayerId:otherPlayer._id, 
+                    roundIndex:round.index, 
+                    stage:stage.name, 
+                    timestamp:moment(TimeSync.serverTime(null, 1000))});
                 }
 
                 player.round.set("rewarded", rewards);
