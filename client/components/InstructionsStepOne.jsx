@@ -11,7 +11,7 @@ export class InstructionsStepOne extends React.Component {
   constructor(props) {
     super(props);
 
-    const { playerCount } = props.treatment;
+    const { playerCount, defaultContribProp, endowment} = props.treatment;
     const playerAvatar = props.player.avatar;
     const exclude = [playerAvatar];
 
@@ -50,7 +50,7 @@ export class InstructionsStepOne extends React.Component {
             <p>
               In the contribution stage, use the arrow buttons to decide how
               many of the coins you are given in each round you want to
-              contribute to the public fund. Try it out.
+              contribute to the public fund (the bowl); the default contribution is {parseInt(defaultContribProp*endowment)} coins. Try using the buttons to change your contribution.
             </p>
             <p>
               When you have decided how many coins to contribute, be sure to

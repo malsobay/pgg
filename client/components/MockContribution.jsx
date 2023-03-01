@@ -9,7 +9,7 @@ import { MockChatView } from "./MockChat";
 import { MockHeader } from "./MockHeader";
 
 export class MockContribution extends React.Component {
-  state = { contribution: 0 };
+  state = { contribution: parseInt(this.props.treatment.endowment * this.props.treatment.defaultContribProp)};
 
   constructor(props) {
     super(props);
@@ -25,8 +25,7 @@ export class MockContribution extends React.Component {
       onMessage,
       otherPlayers,
     } = this.props;
-    const { contribution } = this.state;
-
+    
     const {
       multiplier,
       endowment,
@@ -39,8 +38,10 @@ export class MockContribution extends React.Component {
       punishmentMagnitude,
       rewardCost,
       rewardMagnitude,
-      chat,
+      chat
     } = treatment;
+
+    const { contribution } = this.state;
 
     return (
       <div className="h-full grid grid-rows-[min-content_1fr]">
