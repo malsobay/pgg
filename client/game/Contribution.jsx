@@ -49,10 +49,16 @@ export default function Contribution({ stage, round, game, player }) {
                 toValue:contribution+amount, 
                 roundIndex:round.index, 
                 stage:stage.name, 
-                timestamp:moment(TimeSync.serverTime(null, 1000))})
+                timestamp:moment(TimeSync.serverTime(null, 1000))});
               player.round.set("contribution", contribution + amount);
             }}
             onSubmit={(amount) => {
+              game.append("log",{
+                verb:"submit", 
+                playerId:player._id, 
+                roundIndex:round.index, 
+                stage:stage.name, 
+                timestamp:moment(TimeSync.serverTime(null, 1000))});
               player.stage.submit();
             }}
           />

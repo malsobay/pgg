@@ -98,7 +98,14 @@ export default class Summary extends React.Component {
                     You have submitted. Waiting on the other players
                   </Label>
                 ) : (
-                  <Button onClick={() => player.stage.submit()}>
+                  <Button onClick={() => {
+                    game.append("log",{
+                      verb:"submit", 
+                      playerId:player._id, 
+                      roundIndex:round.index, 
+                      stage:stage.name, 
+                      timestamp:moment(TimeSync.serverTime(null, 1000))});
+                    player.stage.submit();}}>
                     I'm done
                   </Button>
                 )}

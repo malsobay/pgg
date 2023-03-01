@@ -88,7 +88,14 @@ export default function Outcome({ stage, round, game, player }) {
             </Label>
           ) : (
             <div className="w-full px-32">
-              <Button onClick={() => player.stage.submit()}>I'm done</Button>
+              <Button onClick={() => {
+                game.append("log",{
+                  verb:"submit", 
+                  playerId:player._id, 
+                  roundIndex:round.index, 
+                  stage:stage.name, 
+                  timestamp:moment(TimeSync.serverTime(null, 1000))});
+                player.stage.submit();}}>I'm done</Button>
             </div>
           )}
         </div>
