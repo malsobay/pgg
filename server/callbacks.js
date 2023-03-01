@@ -1,4 +1,7 @@
 import Empirica from "meteor/empirica:core";
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
+
 
 export const AnimalList = [
   "sloth",
@@ -38,6 +41,8 @@ export const AnimalList = [
 // the game.
 Empirica.onGameStart((game) => {
   game.set("justStarted", true);
+  game.set("gameStartTimestamp", Date.now());
+
   game.players.forEach((player, i) => {
     /*player.set("avatar", `/avatars/jdenticon/${player._id}`);*/
     player.set("avatar", AnimalList[i]);
@@ -61,13 +66,14 @@ Empirica.onRoundStart((game, round) => {
   //     }   
   // }
 
-  var contributionProp = game.treatment.defaultContribProp;
+  // round.set("roundStartTimestamp", moment(TimeSync.serverTime(null, 1000)));
 
+  var contributionProp = game.treatment.defaultContribProp;
+  
   round.set("totalContributions", 0);
   round.set("totalReturns", 0);
   round.set("payoff", 0);
   game.players.forEach((player, i) => {
-    player.round.set("endowment", game.treatment.endowment - parseInt(game.treatment.endowment * contributionProp));
     player.round.set("punishedBy", {});
     player.round.set("punished", {});
     player.round.set("rewardedBy", {});
@@ -78,11 +84,14 @@ Empirica.onRoundStart((game, round) => {
 
 // onStageStart is triggered before each stage starts.
 // It receives the same options as onRoundStart, and the stage that is starting.
-Empirica.onStageStart((game, round, stage) => {});
+Empirica.onStageStart((game, round, stage) => {
+  // stage.set("stageStartTimestamp", moment(TimeSync.serverTime(null, 1000)));
+});
 
 // onStageEnd is triggered after each stage.
 // It receives the same options as onRoundEnd, and the stage that just ended.
 Empirica.onStageEnd((game, round, stage) => {
+  // stage.set("stageEndTimestamp", moment(TimeSync.serverTime(null, 1000)));
   if (stage.name == "contribution") {
     computePayoff(game, round);
   } //player.stage.set values but wait to update until round end
@@ -96,6 +105,7 @@ Empirica.onStageEnd((game, round, stage) => {
 // onRoundEnd is triggered after each round.
 // It receives the same options as onGameEnd, and the round that just ended.
 Empirica.onRoundEnd((game, round) => {
+  // round.set("roundEndTimestamp", moment(TimeSync.serverTime(null, 1000)));
   game.players.forEach((player) => {
     const prevCumulativePayoff = player.get("cumulativePayoff");
     const roundPayoff = player.round.get("roundPayoff");
@@ -107,6 +117,7 @@ Empirica.onRoundEnd((game, round) => {
 // onGameEnd is triggered when the game ends.
 // It receives the same options as onGameStart.
 Empirica.onGameEnd((game) => {
+  // game.set("gameEndTimestamp", moment(TimeSync.serverTime(null, 1000)));
   computeTotalPayoff(game);
   convertPayoff(game);
 });
