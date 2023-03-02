@@ -66,7 +66,7 @@ Empirica.onRoundStart((game, round) => {
   //     }   
   // }
 
-  // round.set("roundStartTimestamp", moment(TimeSync.serverTime(null, 1000)));
+  round.set("roundStartTimestamp", Date.now());
 
   var contributionProp = game.treatment.defaultContribProp;
   
@@ -85,13 +85,13 @@ Empirica.onRoundStart((game, round) => {
 // onStageStart is triggered before each stage starts.
 // It receives the same options as onRoundStart, and the stage that is starting.
 Empirica.onStageStart((game, round, stage) => {
-  // stage.set("stageStartTimestamp", moment(TimeSync.serverTime(null, 1000)));
+  stage.set("stageStartTimestamp", Date.now());
 });
 
 // onStageEnd is triggered after each stage.
 // It receives the same options as onRoundEnd, and the stage that just ended.
 Empirica.onStageEnd((game, round, stage) => {
-  // stage.set("stageEndTimestamp", moment(TimeSync.serverTime(null, 1000)));
+  stage.set("stageEndTimestamp", Date.now());
   if (stage.name == "contribution") {
     computePayoff(game, round);
   } //player.stage.set values but wait to update until round end
@@ -105,7 +105,7 @@ Empirica.onStageEnd((game, round, stage) => {
 // onRoundEnd is triggered after each round.
 // It receives the same options as onGameEnd, and the round that just ended.
 Empirica.onRoundEnd((game, round) => {
-  // round.set("roundEndTimestamp", moment(TimeSync.serverTime(null, 1000)));
+  round.set("roundEndTimestamp", Date.now());
   game.players.forEach((player) => {
     const prevCumulativePayoff = player.get("cumulativePayoff");
     const roundPayoff = player.round.get("roundPayoff");
@@ -117,7 +117,7 @@ Empirica.onRoundEnd((game, round) => {
 // onGameEnd is triggered when the game ends.
 // It receives the same options as onGameStart.
 Empirica.onGameEnd((game) => {
-  // game.set("gameEndTimestamp", moment(TimeSync.serverTime(null, 1000)));
+  game.set("gameEndTimestamp", Date.now());
   computeTotalPayoff(game);
   convertPayoff(game);
 });
