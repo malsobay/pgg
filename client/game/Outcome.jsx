@@ -13,7 +13,6 @@ import moment from "moment";
 export default function Outcome({ stage, round, game, player }) {
   const {
     multiplier,
-    playerCount,
     punishmentCost,
     punishmentExists,
     punishmentMagnitude,
@@ -22,6 +21,7 @@ export default function Outcome({ stage, round, game, player }) {
     rewardMagnitude,
   } = game.treatment;
 
+  const playerCount = game.players.length; 
   const otherPlayers = game.players.filter((p) => p._id !== player._id);
 
   const totalContributions = round.get("totalContributions");
