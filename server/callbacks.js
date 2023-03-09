@@ -1,6 +1,4 @@
 import Empirica from "meteor/empirica:core";
-import { TimeSync } from "meteor/mizzao:timesync";
-import moment from "moment";
 
 
 export const AnimalList = [
