@@ -5,18 +5,26 @@ export function AddingCoins() {
   return (
     <div className="grid grid-cols-3 grid-flow-row h-full justify-center">
       <AddingCoinsTester purse={20} multiplier={3} />
-      <AddingCoinsTester purse={2500} multiplier={32} />
+      <AddingCoinsTester
+        purse={2500}
+        multiplier={32}
+        goDown
+        remainderMode={false}
+      />
       <AddingCoinsTester
         purse={123}
         multiplier={1}
         allOrNothing
         allOrNothingAmount={123}
+        addLabels={false}
+        useArrows
       />
       <AddingCoinsTester
         purse={1}
         multiplier={1}
         allOrNothing
         allOrNothingAmount={1}
+        useArrows
       />
       <AddingCoinsTester
         purse={20}
@@ -32,11 +40,24 @@ export function AddingCoins() {
 class AddingCoinsTester extends React.Component {
   state = { contributed: 0 };
   render() {
-    const { purse, multiplier, submitted, allOrNothing, allOrNothingAmount } =
-      this.props;
+    const {
+      purse,
+      multiplier,
+      submitted,
+      allOrNothing,
+      allOrNothingAmount,
+      remainderMode = true,
+      goDown = false,
+      addLabels = true,
+      useArrows = false,
+    } = this.props;
     return (
       <div className="h-screen flex justify-center">
         <AddCoins
+          remainderMode={remainderMode}
+          useArrows={useArrows}
+          goDown={goDown}
+          addLabels={addLabels}
           allOrNothingAmount={allOrNothingAmount}
           allOrNothing={allOrNothing}
           header={`You can contribute up to ${purse} coins this round`}
