@@ -84,6 +84,10 @@ Empirica.onRoundStart((game, round) => {
 // It receives the same options as onRoundStart, and the stage that is starting.
 Empirica.onStageStart((game, round, stage) => {
   stage.set("stageStartTimestamp", Date.now());
+
+  if(_.reject(game.players, (p) => p.get("exited")).length == 1){
+    _.reject(game.players, (p) => p.get("exited"))[0].exit("otherPlayersLeft")
+  };
 });
 
 // onStageEnd is triggered after each stage.

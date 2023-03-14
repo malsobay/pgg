@@ -7,7 +7,7 @@ function playerLeft(player) {
 }
 
 const warningTime = 15;
-const idleTimeDifferentTab = 25;
+const idleTimeDifferentTab = 15;
 
 export default class IdleToast extends React.Component {
     constructor(props) {
