@@ -1,9 +1,11 @@
 import React from "react";
 import {  AlertToaster } from "meteor/empirica:core";
 
+
 import Contribution from "./Contribution.jsx";
 import Outcome from "./Outcome.jsx";
 import Summary from "./Summary.jsx";
+import IdleToast from "../components/Idle.jsx";
 
 const roundSound = new Audio("sounds/round-sound.mp3");
 const gameSound = new Audio("sounds/bell.mp3");
@@ -63,6 +65,7 @@ export default class Round extends React.Component {
 
     return (
       <div className="w-full h-full font-sans">
+        {<IdleToast {...this.props}/>}
         {stage.name === "contribution" && <Contribution {...this.props} />}
         {stage.name === "outcome" && <Outcome {...this.props} />}
         {stage.name === "summary" && <Summary {...this.props} />}
