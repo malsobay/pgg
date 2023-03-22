@@ -14,7 +14,7 @@ export function AddCoins({
   onClick,
   goDown = false,
   addLabels = true,
-  useArrows = false,
+  useArrows = true,
   remainderMode = true,
   remainderDisplay10 = true,
   allOrNothing = false,
@@ -204,7 +204,7 @@ export function AddCoinsArrows({
             goDown ? "rotate-180" : ""
           }`}
         >
-          <Arrow></Arrow>
+          {/* <Arrow></Arrow> */}
         </div>
       </div>
       <AddButton
