@@ -1,5 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
+import { Button } from "./FunButton";
 
 function playerLeft(player) {
     player.set("exited", true)
@@ -7,7 +8,7 @@ function playerLeft(player) {
 }
 
 const warningTime = 15;
-const idleTimeDifferentTab = 15;
+const idleTimeDifferentTab = 30;
 
 export default class IdleToast extends React.Component {
     constructor(props) {
@@ -27,31 +28,17 @@ export default class IdleToast extends React.Component {
 
         if( (lastActivity + (warningTime + idleTimeDifferentTab)*1000) < (Date.parse(stage.startTimeAt) + stage.durationInSeconds * 1000) ){
             return(
-                <ReactModal 
-                        isOpen={true}
-                        style={{
-                            overlay: {
-                            top: 55,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            backgroundColor: 'rgba(93, 93, 93, 0.75)'
-                            },
-                            content: {
-                            top: '270px',
-                            left: '300px',
-                            right: '300px',
-                            bottom: '300px',
-                            padding: '20px'
-                            }
-                        }}> 
+                <div className="z-40 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
+                    <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto overflow-auto">
+                        <div className="prose max-w-none prose-slate prose-p:text-gray-500 prose-p:font-['Inter'] prose-headings:text-orange-600">
                         <p style={{fontSize: '15px'}}>
                             You are idle. Please indicate your presence by returning to this screen, clicking the button, and 
                             maintaining mouse and keyboard activity. You will be logged out in {this.state.remainingTime} seconds.
-                        </p> 
-                        <button onClick={this.changeIdleFalse}> I'm Active </button>
-                    </ReactModal>
-
+                        </p><br/><br/>
+                        <center><Button onClick={this.changeIdleFalse} style={{"width":50}}> I'm Active </Button></center>
+                        </div>
+                    </div>
+                </div>
             )
         }
         else {
