@@ -13,7 +13,7 @@ export default function Contribution({ stage, round, game, player }) {
   const multiplier = game.treatment.multiplier;
   const contribution = player.round.get("contribution") || 0;
   const endowment = game.treatment.endowment;
-  const otherPlayers = game.players.filter((p) => p._id !== player._id);
+  const otherPlayers = _.reject(game.players, (p) => p.get("exited")).filter((p) => p._id !== player._id);
 
   return (
     <div className="h-full grid grid-rows-[min-content_1fr]">

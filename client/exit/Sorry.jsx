@@ -28,6 +28,14 @@ export default class Sorry extends Component {
       msg =
         "Unfortunately, you did not meet the conditions required to play the game. Please submit the task with the code CGUQ2ZQU, and you will be compensated for your time via partial payment. ";
     }
+    if (player.exitReason === "idleTimedOut") {
+      msg =
+        "You were detected to be idle and have been removed from the game.";
+    }
+    if (player.exitReason === "otherPlayersLeft") {
+      msg =
+        "Unfortunately, all other players have either disconnected or been removed for being idle. You will be compensated based on your performance up until this point in the game.";
+    }
     // Only for dev
     if (!game && Meteor.isDevelopment) {
       msg =

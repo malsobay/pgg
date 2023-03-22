@@ -21,8 +21,8 @@ export default function Outcome({ stage, round, game, player }) {
     rewardMagnitude,
   } = game.treatment;
 
-  const playerCount = game.players.length; 
-  const otherPlayers = game.players.filter((p) => p._id !== player._id);
+  const playerCount = _.reject(game.players, (p) => p.get("exited")).length; 
+  const otherPlayers = _.reject(game.players, (p) => p.get("exited")).filter((p) => p._id !== player._id);
 
   const totalContributions = round.get("totalContributions");
   const contribution = player.round.get("contribution");

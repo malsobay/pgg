@@ -32,7 +32,7 @@ export default class Summary extends React.Component {
       showRewardId,
     } = game.treatment;
 
-    const otherPlayers = game.players.filter((p) => p._id !== player._id);
+    const otherPlayers = _.reject(game.players, (p) => p.get("exited")).filter((p) => p._id !== player._id);
     const punished = player.round.get("punished");
     const punishedBy = player.round.get("punishedBy");
     const rewarded = player.round.get("rewarded");
@@ -118,7 +118,7 @@ export default class Summary extends React.Component {
                   punishmentExists={punishmentExists}
                   rewardExists={rewardExists}
                   selectedPlayerID={hovered}
-                  players={game.players}
+                  players={_.reject(game.players, (p) => p.get("exited"))}
                   punishmentCost={punishmentCost}
                   punishmentMagnitude={punishmentMagnitude}
                   rewardCost={rewardCost}
@@ -212,7 +212,7 @@ export default class Summary extends React.Component {
                   punishmentExists={punishmentExists}
                   rewardExists={rewardExists}
                   selectedPlayerID={self}
-                  players={game.players}
+                  players={_.reject(game.players, (p) => p.get("exited"))}
                   punishmentCost={punishmentCost}
                   punishmentMagnitude={punishmentMagnitude}
                   rewardCost={rewardCost}
