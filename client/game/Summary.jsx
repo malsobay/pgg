@@ -49,7 +49,7 @@ export default class Summary extends React.Component {
               <div
                 onMouseEnter={() => {
                   this.setState({ self: player._id });
-                  game.append("log",{
+                  player.log("log",{
                     verb:"viewOwnSummary", 
                     playerId:player._id, 
                     roundIndex:round.index, 
@@ -58,7 +58,7 @@ export default class Summary extends React.Component {
                 }}
                 onMouseLeave={() => {
                   this.setState({ self: null });
-                  game.append("log",{
+                  player.log("log",{
                     verb:"exitOwnSummary", 
                     playerId:player._id, 
                     roundIndex:round.index, 
@@ -99,7 +99,7 @@ export default class Summary extends React.Component {
                   </Label>
                 ) : (
                   <Button onClick={() => {
-                    game.append("log",{
+                    player.log("log",{
                       verb:"submit", 
                       playerId:player._id, 
                       roundIndex:round.index, 
@@ -154,7 +154,7 @@ export default class Summary extends React.Component {
                     className="w-full h-full flex justify-center items-center"
                     onMouseEnter={() => {
                       this.setState({ hovered: otherPlayer._id });
-                      game.append("log",{
+                      player.log("log",{
                         verb:"viewOtherSummary", 
                         playerId:player._id, 
                         targetPlayerId:otherPlayer._id, 
@@ -164,7 +164,7 @@ export default class Summary extends React.Component {
                     }}
                     onMouseLeave={() => {
                       this.setState({ hovered: null });
-                      game.append("log",{
+                      player.log("log",{
                         verb:"exitOtherSummary", 
                         playerId:player._id, 
                         targetPlayerId:otherPlayer._id, 

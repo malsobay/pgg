@@ -89,7 +89,7 @@ export default function Outcome({ stage, round, game, player }) {
           ) : (
             <div className="w-full px-32">
               <Button onClick={() => {
-                game.append("log",{
+                player.log("log",{
                   verb:"submit", 
                   playerId:player._id, 
                   roundIndex:round.index, 
@@ -117,7 +117,7 @@ export default function Outcome({ stage, round, game, player }) {
 
                   punishments[otherPlayer._id] = punished + 1;
                   
-                  game.append("log",{
+                  player.log("log",{
                     verb:"addPunishment", 
                     playerId:player._id, 
                     targetPlayerId:otherPlayer._id, 
@@ -128,7 +128,7 @@ export default function Outcome({ stage, round, game, player }) {
                 } else {
                   punishments[otherPlayer._id] = punished - 1;
 
-                  game.append("log",{
+                  player.log("log",{
                     verb:"removePunishment", 
                     playerId:player._id, 
                     targetPlayerId:otherPlayer._id, 
@@ -149,7 +149,7 @@ export default function Outcome({ stage, round, game, player }) {
                   }
                   rewards[otherPlayer._id] = added + 1;
 
-                  game.append("log",{
+                  player.log("log",{
                     verb:"addReward", 
                     playerId:player._id, 
                     targetPlayerId:otherPlayer._id, 
@@ -160,7 +160,7 @@ export default function Outcome({ stage, round, game, player }) {
                 } else {
                   rewards[otherPlayer._id] = added - 1;
 
-                  game.append("log",{
+                  player.log("log",{
                     verb:"removeReward", 
                     playerId:player._id, 
                     targetPlayerId:otherPlayer._id, 

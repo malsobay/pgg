@@ -42,7 +42,7 @@ export default function Contribution({ stage, round, game, player }) {
             allOrNothing={game.treatment.allOrNothing}
             allOrNothingAmount={endowment}
             onClick={(amount) => {
-              game.append("log",{
+              player.log("log",{
                 verb:"contributionChange", 
                 playerId:player._id, 
                 fromValue:player.round.get("contribution"), 
@@ -53,7 +53,7 @@ export default function Contribution({ stage, round, game, player }) {
               player.round.set("contribution", contribution + amount);
             }}
             onSubmit={(amount) => {
-              game.append("log",{
+              player.log("log",{
                 verb:"submit", 
                 playerId:player._id, 
                 roundIndex:round.index, 
