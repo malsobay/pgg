@@ -25,7 +25,7 @@ const setTimeout = function(player) {
         
         AlertToaster.show({message: "Oops, one of the other players disconnected! The game will continue without them."}); 
         player.set('exited', true);
-        player.exit("Oops, it looks like there was a connection problem, and you couldn't finish the experiment!")
+        player.exit("offlineTimedOut")
         
       }, offlineTimeLimit * 1000)) //TODO longer
     }

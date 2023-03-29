@@ -30,11 +30,15 @@ export default class Sorry extends Component {
     }
     if (player.exitReason === "idleTimedOut") {
       msg =
-        "You were detected to be idle and have been removed from the game.";
+        "You were detected to be idle and have been removed from the game. Please submit the task with the code IX4MDNU2.";
+    }
+    if (player.exitReason === "offlineTimedOut") {
+      msg =
+        "You were detected to be offline and have been removed from the game. Please submit the task with the code OX4MDNU2.";
     }
     if (player.exitReason === "otherPlayersLeft") {
       msg =
-        "Unfortunately, all other players have either disconnected or been removed for being idle. You will be compensated based on your performance up until this point in the game.";
+        "Unfortunately, all other players have either disconnected or been removed for being idle. You will be compensated based on your performance up until this point in the game. Please submit the task with the code OPLM3NU2.";
     }
     // Only for dev
     if (!game && Meteor.isDevelopment) {
