@@ -53,8 +53,9 @@ export default class ExitSurvey extends React.Component {
           <p>
             You will receive a base payment of <strong>${basePay}</strong>, in
             addition to a performance bonus of <strong>${earnings}</strong>, for
-            a total of <strong>${totalPay}</strong>.
+            a total of <strong>${totalPay}</strong>. You will also receive a bonus to compensate for time spent waiting in the lobby, at a rate of $15/hr. 
           </p>
+          <p>Please do not share information about this experiment with anyone else, as it compromises the integrity of the experiment.</p>
           {/*
           <p>
             Your final <strong>bonus</strong> is $7 in addition of the{" "}
