@@ -172,7 +172,7 @@ export class InstructionsStepTwo extends React.Component {
             });
           }}
           totalContributions={total}
-          totalReturns={totalReturns}
+          totalReturns={Math.floor(totalReturns)}
           payoff={Math.floor(totalReturns / playerCount)}
           cumulativePayoff={10}
         />
