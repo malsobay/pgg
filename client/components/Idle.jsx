@@ -1,14 +1,22 @@
 import React from "react";
 import ReactModal from "react-modal";
 import { Button } from "./FunButton";
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
+
 
 function playerLeft(player) {
+    player.log("idleExit", {
+        verb:"idleExit", 
+        playerId:player._id, 
+        timestamp:moment(TimeSync.serverTime(null, 1000))});
+        
     player.set("exited", true)
     player.exit("idleTimedOut");
 }
 
 const warningTime = 15;
-const idleTimeDifferentTab = 30;
+const idleTimeDifferentTab = 20;
 
 export default class IdleToast extends React.Component {
     constructor(props) {
@@ -22,6 +30,7 @@ export default class IdleToast extends React.Component {
             lastActive: ""
         }
     }
+    
 
     beginCountDown(stage) {
         const lastActivity = this.state.lastActive;
@@ -53,10 +62,16 @@ export default class IdleToast extends React.Component {
         } else {
             playerLeft(player);
         }
-    }
+    };
 
     changeIdleTrueDelay = () => {
+        const { player } = this.props;
         if (!this.state.delayStarted && !this.state.idle) {
+            player.log("idleStart", {
+                verb:"idleStart", 
+                playerId:player._id, 
+                timestamp:moment(TimeSync.serverTime(null, 1000))});
+
             this.setState({
                 delayStarted : true, 
                 delayID : setTimeout(
@@ -71,7 +86,7 @@ export default class IdleToast extends React.Component {
                 lastActive: new Date().getTime()
             })
         } 
-    }
+    };
 
     stopDelay = () => {
         if (this.state.delayStarted) {
@@ -81,23 +96,30 @@ export default class IdleToast extends React.Component {
                 delayID: "", 
             })
         }
-    }
+    };
 
     changeIdleFalse = () => {
+        const { player } = this.props;
+        player.log("idleEnd", {
+            verb:"idleEnd", 
+            playerId:player._id, 
+            timestamp:moment(TimeSync.serverTime(null, 1000))});
+
         clearTimeout(this.state.clockID);
         this.setState({
             idle : false, 
             remainingTime : warningTime,
             lastActive: new Date().getTime()
         })
-    }
+    };
 
     render() {
-        const { player, stage } = this.props;
+        const { player, stage, game } = this.props;
         if (player !== undefined) {
             (player.idle) ? 
                 this.changeIdleTrueDelay() : this.stopDelay()
         } 
+
         return (
             <div> 
                 {this.state.idle ?  
