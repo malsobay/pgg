@@ -323,7 +323,6 @@ function AddButton({
     }
   }
 
-  console.log(amountFinal);
 
   return (
     <button className={className} onClick={onClick} disabled={disabled}>
