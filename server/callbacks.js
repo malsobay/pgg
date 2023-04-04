@@ -1,6 +1,5 @@
 import Empirica from "meteor/empirica:core";
 
-
 export const AnimalList = [
   "sloth",
   "gorilla",
@@ -88,6 +87,19 @@ Empirica.onStageStart((game, round, stage) => {
   if(_.reject(game.players, (p) => p.get("exited")).length == 1){
     _.reject(game.players, (p) => p.get("exited"))[0].exit("otherPlayersLeft")
   };
+  
+  if (stage.index != 0){
+    _.reject(game.players, (p) => p.get("exited")).forEach(player => {
+      if (Date.now() - Date.parse(player.get("lastTick")) > game.treatment.contributionDuration * 1.5 * 1000){
+        player.set('exited', true);
+        player.exit("offlineTimedOut");
+        console.log(`Player ${player._id} removed for being offline.`)
+      }
+    })
+  }
+  
+
+
 });
 
 // onStageEnd is triggered after each stage.
