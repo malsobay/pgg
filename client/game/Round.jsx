@@ -6,6 +6,7 @@ import Contribution from "./Contribution.jsx";
 import Outcome from "./Outcome.jsx";
 import Summary from "./Summary.jsx";
 import IdleToast from "../components/Idle.jsx";
+let timerID = ""
 
 const roundSound = new Audio("sounds/round-sound.mp3");
 const gameSound = new Audio("sounds/bell.mp3");
@@ -23,7 +24,11 @@ export default class Round extends React.Component {
       roundSound.play();
     }
 
-    setInterval(() => player.set("lastTick", new Date(Tracker.nonreactive(TimeSync.serverTime))), 3000);
+    timerID = setInterval(() => player.set("lastTick", new Date(Tracker.nonreactive(TimeSync.serverTime)).valueOf()), 3000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(timerID)
   }
   
   render() {

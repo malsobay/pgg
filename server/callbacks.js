@@ -90,7 +90,7 @@ Empirica.onStageStart((game, round, stage) => {
   
   if (stage.index != 0){
     _.reject(game.players, (p) => p.get("exited")).forEach(player => {
-      if (Date.now() - Date.parse(player.get("lastTick")) > game.treatment.contributionDuration * 1.5 * 1000){
+      if (Date.now() - player.get("lastTick") > game.treatment.contributionDuration * 1.5 * 1000){
         player.set('exited', true);
         player.exit("offlineTimedOut");
         console.log(`Player ${player._id} removed for being offline.`)
