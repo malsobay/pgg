@@ -31,6 +31,10 @@ You can now run the app on your local machine with:
 meteor
 ```
 
+NOTE: If you see the `SyntaxError: Unexpected end of JSON input` error on
+startup, try running `rm -rf ./node_modules/resolve/test/resolver/malformed_package_json`.
+You will need to run the `rm` again after each run of `meteor npm install`.
+
 This can take a few minutes.
 
 This will start the app that you can access as a participant:
