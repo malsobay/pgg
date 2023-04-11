@@ -15,6 +15,7 @@
     "moment": "^2.29.4",
     "react": "16.5.2",
     "react-dom": "16.5.2",
+    "react-modal": "^3.16.1",
     "react-router-dom": "4.3.1",
     "simpl-schema": "1.10.2"
   },
