@@ -255,7 +255,7 @@ export function AddCoinsAllOrNothingArrows({
             goDown ? "rotate-180" : ""
           }`}
         >
-          <Arrow></Arrow>
+          {/* <Arrow></Arrow> */}
         </div>
       </div>
       <AddButton
