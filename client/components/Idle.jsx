@@ -118,15 +118,15 @@ export default class IdleToast extends React.Component {
   };
 
   componentDidUpdate() {
-    const { player } = this.props;
+    const { player, stage} = this.props;
     if (player !== undefined) {
-      player.idle ? this.changeIdleTrueDelay() : this.stopDelay();
+      (player.idle && stage.index != 0) ? this.changeIdleTrueDelay() : this.stopDelay();
     }
   }
 
   render() {
     const { stage } = this.props;
 
-    return <div>{(this.state.idle && stage.index != 0) ? this.beginCountDown(stage) : null}</div>;
+    return <div>{this.state.idle ? this.beginCountDown(stage) : null}</div>;
   }
 }
