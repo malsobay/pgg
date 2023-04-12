@@ -1,8 +1,8 @@
 import { TimeSync } from "meteor/mizzao:timesync";
 import moment from "moment";
 import React from "react";
-import { dev } from "../../dev";
 import { Button } from "./FunButton";
+import {warningTime, idleTimeDifferentTab} from "../../constants"
 
 function playerLeft(player) {
   player.log("idleExit", {
@@ -14,10 +14,6 @@ function playerLeft(player) {
   player.set("exited", true);
   player.exit("idleTimedOut");
 }
-
-const warningTime = dev ? 50000 : 15;
-const idleTimeDifferentTab = dev ? 50000 : 20;
-
 export default class IdleToast extends React.Component {
   constructor(props) {
     super(props);

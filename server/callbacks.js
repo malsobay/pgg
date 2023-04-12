@@ -1,4 +1,5 @@
 import Empirica from "meteor/empirica:core";
+import { numStagesRemoveOffline } from "../constants";
 
 export const AnimalList = [
   "sloth",
@@ -90,7 +91,7 @@ Empirica.onStageStart((game, round, stage) => {
   
   if (stage.index != 0){
     _.reject(game.players, (p) => p.get("exited")).forEach(player => {
-      if (Date.now() - player.get("lastTick") > game.treatment.contributionDuration * 1.5 * 1000){
+      if (Date.now() - player.get("lastTick") > game.treatment.contributionDuration * numStagesRemoveOffline * 1000){
         player.log("offlineExit", {
           verb:"offlineExit", 
           playerId:player._id, 

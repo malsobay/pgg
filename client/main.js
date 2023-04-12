@@ -18,7 +18,7 @@ import TimedAccess from "./exit/TimedAccess.jsx"
 
 Empirica.header(DevHelp);
 Empirica.breadcrumb(() => null);
-Empirica.noBatch(TimedAccess)
+Empirica.noBatch(TimedAccess);
 
 // Set the About Component you want to use for the About dialog (optional).
 Empirica.about(About);
