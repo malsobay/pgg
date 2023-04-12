@@ -127,6 +127,6 @@ export default class IdleToast extends React.Component {
   render() {
     const { stage } = this.props;
 
-    return <div>{this.state.idle ? this.beginCountDown(stage) : null}</div>;
+    return <div>{(this.state.idle && stage.index != 0) ? this.beginCountDown(stage) : null}</div>;
   }
 }
