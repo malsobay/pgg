@@ -5,12 +5,14 @@ import { Button } from "./FunButton";
 import {warningTime, idleTimeDifferentTab} from "../../constants"
 
 function playerLeft(player) {
-  player.log("idleExit", {
-    verb: "idleExit",
-    playerId: player._id,
-    timestamp: moment(TimeSync.serverTime(null, 1000)),
-  });
-
+  if (!player.get("exited")){
+    player.log("idleExit", {
+      verb: "idleExit",
+      playerId: player._id,
+      timestamp: moment(TimeSync.serverTime(null, 1000)),
+    });
+  }
+  
   player.set("exited", true);
   player.exit("idleTimedOut");
 }
