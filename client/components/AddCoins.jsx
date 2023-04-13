@@ -14,7 +14,7 @@ export function AddCoins({
   onClick,
   goDown = false,
   addLabels = true,
-  useArrows = true,
+  useArrows = false,
   remainderMode = true,
   remainderDisplay10 = true,
   allOrNothing = false,
@@ -187,6 +187,8 @@ export function AddCoinsArrows({
 }) {
   return (
     <div className="h-24 2xl:h-48 flex items-center space-x-4">
+      <p>Contribute
+        less</p>
       <AddButton
         amount={displayRemoveMultipleAmount}
         disabled={!canRemoveMultiple}
@@ -226,6 +228,8 @@ export function AddCoinsArrows({
         dark
         useArrows={useArrows}
       />
+      <p>Contribute
+        more</p>
     </div>
   );
 }
@@ -240,6 +244,8 @@ export function AddCoinsAllOrNothingArrows({
 }) {
   return (
     <div className="h-24 2xl:h-48 flex items-center space-x-4">
+      <p>Contribute
+        less</p>
       <AddButton
         amount={amount}
         disabled={!canRemove}
@@ -267,6 +273,8 @@ export function AddCoinsAllOrNothingArrows({
         freeWidth
         useArrows={useArrows}
       />
+      <p>Contribute
+        more</p>
     </div>
   );
 }
