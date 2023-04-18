@@ -2,13 +2,15 @@ import React from "react";
 
 import { Alert, Intent, NonIdealState } from "@blueprintjs/core";
 import { IconNames } from "@blueprintjs/icons";
-
+import LobbyIdle from "../components/LobbyIdle.jsx";
 import { CoreWrapper } from "meteor/empirica:core/ui/components/Helpers.jsx";
 
 import {
   endPlayerTimeoutWait,
   extendPlayerTimeoutWait
 } from "meteor/empirica:core/api/players/methods.js";
+
+let timerID = null; 
 
 export default class CustomGameLobby extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
@@ -27,7 +29,7 @@ export default class CustomGameLobby extends React.Component {
     const { gameLobby, treatment, timedOut, lobbyConfig, player } = this.props;
 
     const total = treatment.factor("playerCount").value;
-    const exisiting = gameLobby.playerIds.length;
+    const exisiting = gameLobby.playerIds.length; 
 
     if (exisiting >= total) {
       return (
@@ -51,6 +53,7 @@ export default class CustomGameLobby extends React.Component {
     return (
       <CoreWrapper>
         <div className="game-lobby">
+        {<LobbyIdle {...this.props} />}
           <NonIdealState
             icon={IconNames.TIME}
             title="Lobby"
