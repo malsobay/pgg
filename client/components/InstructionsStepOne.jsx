@@ -335,7 +335,7 @@ function Intro({ next, treatment }) {
           participation in the game, in addition to $1 per{" "}
           {treatment.conversionRate} coins earned. To receive the bonus payment,
           please be sure to stay for all rounds of the game; the exit survey
-          marks the end of the game and contains the code for submission. If you
+          marks the end of the game. If you
           are detected to be idle or go offline, you forfeit the bonus amount.
         </strong>
       </p>
