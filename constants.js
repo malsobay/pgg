@@ -1,7 +1,16 @@
 import { dev } from "./dev.js";
-export const warningTime = dev ? 50000 : 15;
-export const idleTimeDifferentTab = dev ? 50000 : 25;
-export const lobbyWarningTime = dev ? 50000 : 30;
-export const lobbyIdleTimeDifferentTab = dev ? 50000 : 5;
+
+// Idle detection params
+export const warningTime = dev ? 50000 : 30;
+export const idleTriggerTime = 50; 
+// export const idleTimeDifferentTab = dev ? 50000 : 10;
+
+// Lobby idle detection params
+export const lobbyWarningTime = dev ? 50000 : 45;
+export const lobbyIdleTimeDifferentTab = dev ? 50000 : 45;
+
+// Offline detection params 
 export const numStagesRemoveOffline = 3; 
-export const experimentDate = 1681539730000;
+
+// Experiment date 
+export const experimentDate = 1682010000000;
