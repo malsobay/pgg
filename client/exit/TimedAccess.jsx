@@ -23,7 +23,6 @@ export default class TimedAccess extends React.Component {
               There are currently no available experiments. The next batch of experiments will be available in:
             </p>
             <h1><Countdown date={experimentDate} /></h1>
-            <h2>at 1:00 PM ET on Friday, April 9th 2023</h2>
           </div>
         }
       />
