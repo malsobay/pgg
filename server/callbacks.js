@@ -46,6 +46,7 @@ Empirica.onGameStart((game) => {
     player.set("avatar", AnimalList[i]);
     player.set("avatarId", i);
     player.set("cumulativePayoff", game.treatment.endowment);
+    player.set("lastInteraction", game.get("gameStartTimestamp"))
   });
 });
 
