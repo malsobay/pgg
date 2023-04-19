@@ -42,15 +42,22 @@ export default class Round extends React.Component {
     clearInterval(timerID);
   }
 
+  
+
+
   render() {
     const { stage, game, player } = this.props;
-
+    
     return (
-      <div className="w-full h-full font-sans">
+      <div className="w-full h-full font-sans" onMouseDown={_.throttle(function(){
+        player.set("lastInteraction", new Date(Tracker.nonreactive(TimeSync.serverTime)).valueOf())
+      }, 1000)}>
+
         {<IdleToast {...this.props} />}
         {stage.name === "contribution" && <Contribution {...this.props} />}
         {stage.name === "outcome" && <Outcome {...this.props} />}
         {stage.name === "summary" && <Summary {...this.props} />}
+        
       </div>
     );
   }

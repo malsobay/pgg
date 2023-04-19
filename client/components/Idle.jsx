@@ -2,7 +2,7 @@ import { TimeSync } from "meteor/mizzao:timesync";
 import moment from "moment";
 import React from "react";
 import { Button } from "./FunButton";
-import {warningTime, idleTimeDifferentTab} from "../../constants"
+import {warningTime, idleTriggerTime} from "../../constants"
 
 function playerLeft(player) {
   if (!player.get("exited")){
@@ -31,12 +31,6 @@ export default class IdleToast extends React.Component {
 
   beginCountDown(stage) {
     const lastActivity = this.state.lastActive;
-
-    if (
-      typeof lastActivity !== "string" &&
-      lastActivity + (warningTime + idleTimeDifferentTab) * 1000 <
-        Date.parse(stage.startTimeAt) + stage.durationInSeconds * 1000
-    ) {
       return (
         <div className="z-40 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
           <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto overflow-auto">
@@ -56,9 +50,6 @@ export default class IdleToast extends React.Component {
           </div>
         </div>
       );
-    } else {
-      return null;
-    }
   }
 
   decrTime = () => {
@@ -81,13 +72,8 @@ export default class IdleToast extends React.Component {
 
       this.setState({
         delayStarted: true,
-        delayID: setTimeout(() => {
-          this.setState({
-            idle: true,
-            clockID: setInterval(this.decrTime, 1000),
-          });
-          this.stopDelay();
-        }, idleTimeDifferentTab * 1000),
+        idle: true,
+        clockID: setInterval(this.decrTime, 1000),
         lastActive: new Date().getTime(),
       });
     }
@@ -122,13 +108,13 @@ export default class IdleToast extends React.Component {
   componentDidUpdate() {
     const { player, stage} = this.props;
     if (player !== undefined) {
-      (player.idle && stage.index != 0) ? this.changeIdleTrueDelay() : this.stopDelay();
+      ((moment(TimeSync.serverTime(null, 1000)) - player.get("lastInteraction") > idleTriggerTime * 1000) 
+      && stage.index != 0) ? this.changeIdleTrueDelay() : this.stopDelay();
     }
   }
 
   render() {
-    const { stage } = this.props;
-
+    const { stage, player} = this.props;
     return <div>{this.state.idle ? this.beginCountDown(stage) : null}</div>;
   }
 }
