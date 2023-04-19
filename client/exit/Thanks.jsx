@@ -8,8 +8,7 @@ export default class Thanks extends React.Component {
         <div className="w-1/2 prose">
           <h4>Finished!</h4>
           <p>
-            Thank you for participating! Please submit the following code:{" "}
-            <strong>C2A8NL83</strong>
+            Thank you for participating! Your bonus will be processed shortly.
           </p>
         </div>
       </div>

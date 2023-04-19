@@ -45,10 +45,10 @@ export default class ExitSurvey extends React.Component {
       <Centered>
         <div className="prose pb-8">
           <h1> Exit Survey </h1>
-          <p>
+          {/* <p>
             Please submit the following code to receive your bonus:{" "}
             <strong>C2A8NL83</strong>
-          </p>
+          </p> */}
           {/*<p>Earnings: {earnings}</p>*/}
           <p>
             You will receive a participation bonus of <strong>${basePay}</strong>, in
