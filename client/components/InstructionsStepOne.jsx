@@ -210,13 +210,13 @@ class Quizz extends React.Component {
     event.preventDefault();
     const incorrect = [];
     if (
-      this.state.playerCount !==
-      (this.props.treatment.playerCount - 1).toString()
+      parseInt(this.state.playerCount) !==
+      (this.props.treatment.playerCount - 1)
     ) {
       incorrect.push("playerCount");
     }
 
-    if (this.state.coins !== "6") {
+    if (parseInt(this.state.coins) !== 6) {
       incorrect.push("coins");
     }
 
@@ -251,6 +251,7 @@ class Quizz extends React.Component {
           handleUpdate={this.handleUpdate}
           required
           error={incorrect.includes("playerCount")}
+          placeholder="Please answer using only numbers."
         />
 
         <p>
@@ -265,6 +266,7 @@ class Quizz extends React.Component {
           handleUpdate={this.handleUpdate}
           required
           error={incorrect.includes("coins")}
+          placeholder="Please answer using only numbers."
         />
 
         {incorrect.length > 0 ? (

@@ -250,7 +250,7 @@ class Quizz extends React.Component {
       var val = 2 * treatment.rewardMagnitude;
     }
 
-    if (this.state.coins !== val.toString()) {
+    if (parseInt(this.state.coins) !== val) {
       incorrect.push("coins");
     }
 
@@ -304,6 +304,7 @@ class Quizz extends React.Component {
           handleUpdate={this.handleUpdate}
           required
           error={incorrect.includes("coins")}
+          placeholder="Please answer using only numbers."
         />
 
         {incorrect.length > 0 ? (
