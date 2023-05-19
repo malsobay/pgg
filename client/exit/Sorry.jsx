@@ -8,12 +8,15 @@ export default class Sorry extends Component {
     const { player, game } = this.props;
     const basePay = game.treatment.basePay;
     let msg;
+    let code;
     switch (player.exitStatus) {
       case "gameFull":
         msg = `Unfortunately, all games are full. You are still eligible to participate in future sessions, and will be compensated for showing up on time.`;
+        code = "C5LWTCFM";
         break;
       case "gameLobbyTimedOut":
         msg = `Unfortunately, not enough players joined to begin the game. You will be compensated for your time via partial payment.`;
+        code = "C5LWTCFM";
         break;
       case "playerEndedLobbyWait":
         msg =
@@ -30,19 +33,23 @@ export default class Sorry extends Component {
     }
     if (player.exitReason === "idleTimedOut") {
       msg =
-        "You were detected to be idle and have been removed from the game.";
+        `You were detected to be idle and have been removed from the game.`;
+      code = "IX4MDNU2";
     }
     if (player.exitReason === "lobbyIdleTimedOut") {
       msg =
-        "You were detected to be idle and have been removed from the game.";
+      `You were detected to be idle and have been removed from the game.`;
+      code = "LIX4MDNU2";
     }
     if (player.exitReason === "offlineTimedOut") {
       msg =
-        "You were detected to be offline and have been removed from the game.";
+        `You were detected to be offline and have been removed from the game.`;
+        code = "OX4MDNU2";
     }
     if (player.exitReason === "otherPlayersLeft") {
       msg =
-        "Unfortunately, all other players have either disconnected or been removed for being idle. You will be compensated based on your performance up until this point in the game.";
+        `Unfortunately, all other players have either disconnected or been removed for being idle. You will be compensated based on your performance up until this point in the game.`;
+      code = "OPLM3NU2";
     }
     // Only for dev
     if (!game && Meteor.isDevelopment) {
@@ -54,12 +61,7 @@ export default class Sorry extends Component {
         <div className="w-1/2 prose">
           <h4>Sorry!</h4>
           <p>Sorry, you were not able to play today! {msg}</p>
-          <p>
-            <strong>
-              Please contact the researcher to see if there are more games
-              available.
-            </strong>
-          </p>
+          {player.urlParams.source == "prolific" ? <p>Please submit the task with the code <strong>{code}</strong></p>:""}
         </div>
       </div>
     );

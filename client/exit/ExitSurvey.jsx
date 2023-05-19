@@ -39,6 +39,7 @@ export default class ExitSurvey extends React.Component {
       ),
       0
     );
+    
     const basePay = game.treatment.basePay;
     const totalPay = (parseFloat(basePay) + parseFloat(earnings)).toFixed(2);
     return (
@@ -50,6 +51,7 @@ export default class ExitSurvey extends React.Component {
             <strong>C2A8NL83</strong>
           </p> */}
           {/*<p>Earnings: {earnings}</p>*/}
+          {player.urlParams.source == "prolific" ? <p>Your completion code is <strong>C2A8NL83</strong></p> : <></>}
           <p>
             You will receive a participation bonus of <strong>${basePay}</strong>, in
             addition to a performance bonus of <strong>${earnings}</strong>, for
