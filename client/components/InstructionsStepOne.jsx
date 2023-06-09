@@ -48,13 +48,13 @@ export class InstructionsStepOne extends React.Component {
         content: (
           <div className="prose">
             {allOrNothing ?
-            <p>In the contribution stage, use the arrow buttons to decide whether to contribute all of the {endowment} coins given to you in a round, or withhold them all; intermediate amounts are not possible.
-              By default, you will contribute {defaultContribProp == 1 ? "all of" : "none of"} your coins. <strong>Try using the arrow buttons to change your contribution, and move coins between your pocket (below) and the shared pot (above).</strong></p>
+            <p>In the contribution stage, use the +/- buttons to decide whether to contribute all of the {endowment} coins given to you in a round, or withhold them all; intermediate amounts are not possible.
+              By default, you will contribute {defaultContribProp == 1 ? "all of" : "none of"} your coins. <strong>Try using the  +/- buttons to change your contribution, and move coins between your pocket (below) and the shared pot (above).</strong></p>
               :
             <p>
-              In the contribution stage, use the arrow buttons to decide how
+              In the contribution stage, use the  +/- buttons to decide how
               many of the {endowment} coins you are given in each round you want to
-              contribute to the public fund (the bowl); the default contribution is {parseInt(defaultContribProp*endowment)} coins. <strong>Try using the arrow buttons to change your contribution, and move coins between your pocket (below) and the shared pot (above).</strong>
+              contribute to the public fund (the bowl); the default contribution is {parseInt(defaultContribProp*endowment)} coins. <strong>Try using the  +/- buttons to change your contribution, and move coins between your pocket (below) and the shared pot (above).</strong>
             </p>
       }
             <p>
