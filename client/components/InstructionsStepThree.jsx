@@ -182,10 +182,11 @@ export class InstructionsStepThree extends React.Component {
           </div>
         ),
         nextText: "Great",
-      },
+      }      
     ];
 
-    this.steps.push({ modal: "quizz" });
+    this.steps.push({ modal: "quizz" }, { modal: "prolificCheck" });
+    
   }
 
   render() {
@@ -222,10 +223,13 @@ export class InstructionsStepThree extends React.Component {
         />
         {step?.modal ? (
           <div className="z-40 h-screen w-screen fixed top-0 left-0 bg-white/80 p-20 flex justify-center">
-            <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto max-w-prose overflow-auto">
+            <div className="relative bg-white rounded-lg shadow-lg border-8 border-orange-200 p-12 h-auto max-w-xl overflow-auto">
               <div className="prose prose-slate prose-p:text-gray-500 prose-p:font-['Inter'] prose-ul:font-['Inter'] prose-headings:text-orange-600">
                 {step.modal === "quizz" ?  (
-                  <Quizz treatment={treatment} next={() => onNext()} />
+                  <Quizz treatment={treatment} next={() => this.setState({ current: current + 1 })} />
+                ) : null}
+                {step.modal === "prolificCheck" ?  (
+                  <ProlificCheck treatment={treatment} next={() => onNext()} />
                 ) : null}
               </div>
             </div>
@@ -317,6 +321,72 @@ class Quizz extends React.Component {
             Submit
           </Button>
         </p>
+      </form>
+    );
+  }
+}
+
+class ProlificCheck extends React.Component {
+  state = { understanding: "", prolific: true, incorrect: [] };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const incorrect = [];
+
+
+    if (this.state.understanding.toLowerCase().trim() !== "agree") {
+      incorrect.push("understanding");
+    }
+
+    if (incorrect.length > 0) {
+      this.setState({ incorrect });
+      return;
+    }
+
+    this.props.next();
+  };
+
+  handleUpdate = (event) => {
+    const { value, name } = event.currentTarget;
+    this.setState({ [name]: value, incorrect: [] });
+  };
+
+  render() {
+    const { player } = this.props;
+    const { understanding, prolific, incorrect } = this.state;
+    
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h1>You will now enter a game lobby</h1>
+        <p>Before starting, please confirm you understand that <strong>the task may take between 5 - 50 minutes</strong> (game length is random), and that <strong>leaving the game before completing the game and reaching the exit survey forfeits any bonuses earned.</strong></p>
+        <p>Enter <strong>AGREE</strong> in the box below to proceed.</p>
+        <Input
+          name="understanding"
+          value={understanding}
+          handleUpdate={this.handleUpdate}
+          required
+          error={incorrect.includes("understanding")}
+          placeholder="Enter AGREE"
+        />
+        {incorrect.length > 0 ? (
+          <div className="text-red-500">
+            Please confirm that you agree to participate for the full duration of the game.
+          </div>
+        ) : null}
+        <h1>Submit your task on Prolific</h1>
+        <p>Before proceeding to the lobby, please use the code <strong>CIRL0864</strong> to submit the task on Prolific for automatic approval.</p>
+        <p>Submitting the task before beginning the game ensures that you will not time-out on the task, even if the game goes on for longer than expected.</p>
+        <p>Any rewards you earn during the game will be delivered to you as a bonus for the task.</p>
+        <input type="checkbox" name="prolificConfirm" onChange={() => this.setState({prolific:!prolific})}></input>
+        <label htmlFor="prolificConfirm">    Please check this box to <strong>confirm</strong> that you have submitted on Prolific.</label>
+
+        <p className="space-x-4 pt-8 pb-16">
+          <Button disabled={prolific} fullWidth type="submit">
+            Proceed to lobby
+          </Button>
+        </p>
+        
+        {/* <h1>{player._id}</h1> */}
       </form>
     );
   }
