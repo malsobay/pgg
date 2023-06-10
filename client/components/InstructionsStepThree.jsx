@@ -374,7 +374,7 @@ class ProlificCheck extends React.Component {
           </div>
         ) : null}
         <h1>Submit your task on Prolific</h1>
-        <p>Before proceeding to the lobby, please use the code <strong>CIRL0864</strong> to submit the task on Prolific for automatic approval.</p>
+        <p>Before proceeding to the lobby, please use the code <strong>C2A8NL83</strong> to submit the task on Prolific for automatic approval.</p>
         <p>Submitting the task before beginning the game ensures that you will not time-out on the task, even if the game goes on for longer than expected.</p>
         <p>Any rewards you earn during the game will be delivered to you as a bonus for the task.</p>
         <input type="checkbox" name="prolificConfirm" onChange={() => this.setState({prolific:!prolific})}></input>
