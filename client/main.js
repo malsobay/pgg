@@ -15,13 +15,15 @@ import About from "./game/About";
 import Round from "./game/Round";
 import { pickRandomNum } from "./utils";
 import TimedAccess from "./exit/TimedAccess.jsx"
+import NoBatchesAvailable from "./exit/NoBatchesAvailable.jsx"
+
 
 import CustomGameLobby from "./components/CustomLobby.jsx"
 Empirica.lobby(CustomGameLobby);
 
 Empirica.header(DevHelp);
 Empirica.breadcrumb(() => null);
-Empirica.noBatch(TimedAccess);
+Empirica.noBatch(NoBatchesAvailable);
 
 
 // Set the About Component you want to use for the About dialog (optional).
