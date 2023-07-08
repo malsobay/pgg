@@ -60,6 +60,7 @@ export const Label = ({
   shadow = false,
   tight = false,
   snug = false,
+  className: cn = "",
 }) => {
   let className = sizes[size];
 
@@ -81,5 +82,5 @@ export const Label = ({
     className = `${className} leading-tight`;
   }
 
-  return <div className={className}>{children}</div>;
+  return <div className={`${className} ${cn}`}>{children}</div>;
 };

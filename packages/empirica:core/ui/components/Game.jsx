@@ -100,6 +100,7 @@ export default class Game extends React.Component {
       return (
         <InstructionSteps
           {...rest}
+          gameLobby={gameLobby}
           introSteps={introSteps}
           treatment={treatment}
           player={player}

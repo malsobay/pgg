@@ -17,6 +17,7 @@ import { pickRandomNum } from "./utils";
 import TimedAccess from "./exit/TimedAccess.jsx"
 
 import CustomGameLobby from "./components/CustomLobby.jsx"
+import { ReadyCheck } from "./components/ReadyCheck";
 Empirica.lobby(CustomGameLobby);
 
 Empirica.header(DevHelp);
@@ -103,7 +104,7 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
-  const steps = [StepOne, StepTwo, StepThree];
+  const steps = [StepOne, StepTwo, StepThree, ReadyCheck];
 
   return steps;
 });

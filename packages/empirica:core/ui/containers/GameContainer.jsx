@@ -146,6 +146,9 @@ export default withTracker(({ player, gameLobby, game, ...rest }) => {
     gameLobby.players = Players.find({
       _id: { $in: gameLobby.playerIds }
     }).fetch();
+    gameLobby.queuedPlayers = Players.find({
+      _id: { $in: gameLobby.queuedPlayerIds }
+    }).fetch();
 
     gameLobby.players.forEach(p => augmentPlayerLobby(p, {}, {}, gameLobby));
 

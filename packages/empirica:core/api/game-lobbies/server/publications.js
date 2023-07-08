@@ -35,6 +35,11 @@ publishComposite("gameLobby", function({ playerId }) {
             find({ lobbyConfigId }) {
               return LobbyConfigs.find(lobbyConfigId);
             }
+          },
+          {
+            find({ queuedPlayerIds }) {
+              return Players.find(queuedPlayerIds);
+            }
           }
         ]
       }
