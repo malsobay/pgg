@@ -42,7 +42,7 @@ class ReadyCheckComposer extends React.Component {
 
     const playerIds = [];
 
-    for (let i = 0; i < props.renderNum; i++) {
+    for (let i = 0; i < props.playerCount; i++) {
       playerIds.push(i);
     }
 

@@ -27,7 +27,7 @@ export class ReadyCheck extends React.Component {
   constructor(props) {
     super(props);
 
-    this.debug = forceDebug || props.game.debug;
+    this.debug = forceDebug || props.debug;
     this.preReadyKey = preReadyKey(props.player._id);
     this.realReadyKey = realReadyKey(props.player._id);
     this.failedReadyKey = failedKey(props.player._id);
