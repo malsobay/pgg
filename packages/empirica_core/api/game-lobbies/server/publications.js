@@ -38,7 +38,7 @@ publishComposite("gameLobby", function({ playerId }) {
           },
           {
             find({ queuedPlayerIds }) {
-              return Players.find(queuedPlayerIds);
+              return Players.find({ _id: { $in: queuedPlayerIds } });
             }
           }
         ]
