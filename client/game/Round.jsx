@@ -5,6 +5,8 @@ import IdleToast from "../components/Idle.jsx";
 import Contribution from "./Contribution.jsx";
 import Outcome from "./Outcome.jsx";
 import Summary from "./Summary.jsx";
+import ReadyCheck from "../components/ReadyCheck.jsx"
+
 let timerID = null;
 
 const roundSound = new Audio("sounds/round-sound.mp3");
@@ -57,6 +59,7 @@ export default class Round extends React.Component {
         {stage.name === "contribution" && <Contribution {...this.props} />}
         {stage.name === "outcome" && <Outcome {...this.props} />}
         {stage.name === "summary" && <Summary {...this.props} />}
+        {stage.name === "readyCheck" && <ReadyCheck {...this.props} />}
         
       </div>
     );

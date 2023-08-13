@@ -120,6 +120,14 @@ Empirica.onStageEnd((game, round, stage) => {
     computeRewards(game, round);
     computeIndividualPayoff(game, round);
   }
+  if (stage.name == "readyCheck"){
+    _.reject(game.players, (p) => p.get("exited")).forEach((player) => {
+      if(!player.get("readyCheck")){
+        player.set("exited", true);
+        player.exit("failedReadyCheck");
+      }
+    });
+  }
 });
 
 // onRoundEnd is triggered after each round.
