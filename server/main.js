@@ -34,10 +34,18 @@ Empirica.gameInit((game) => {
   _.times(game.treatment.numRounds, (i) => {
     const round = game.addRound();
 
+    if (i == 0){
+      round.addStage({
+        name: "readyCheck",
+        displayName: "readyCheck",
+        durationInSeconds: dev ? 20 : 20,
+      });
+    }
+
     round.addStage({
       name: "contribution",
       displayName: "Contribution",
-      durationInSeconds: dev ? 300000 : game.treatment.contributionDuration,
+      durationInSeconds: dev ? 3600 : game.treatment.contributionDuration,
     });
 
     round.addStage({
@@ -45,13 +53,13 @@ Empirica.gameInit((game) => {
       displayName: game.treatment.punishmentExists
         ? "Outcome & Deductions"
         : "Outcome",
-      durationInSeconds: dev ? 300000 : game.treatment.outcomeDuration,
+      durationInSeconds: dev ? 3600 : game.treatment.outcomeDuration,
     });
 
     round.addStage({
       name: "summary",
       displayName: "Summary",
-      durationInSeconds: dev ? 300000 : game.treatment.summaryDuration,
+      durationInSeconds: dev ? 3600 : game.treatment.summaryDuration,
     });
   });
 });
