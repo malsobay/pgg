@@ -59,10 +59,12 @@ export default class CustomGameLobby extends React.Component {
             title="Lobby"
             description={
               <>
-                <p>The game will begin soon. <strong>Please do not navigate away from the page while other players join.</strong></p><br/>
-                <p>
-                  {exisiting} / {total} players ready.
-                </p>
+                <p>The game will begin soon. <strong>To avoid being detected as idle, please do not navigate away from the page while other players join.</strong></p><br/>
+                <h1>
+                  {exisiting} / {total} players joined
+                </h1>
+                <br/>
+                <p>After all players have joined, you will be asked to confirm that you're here and ready to start -- <strong>players who are not here for the ready check will be removed.</strong></p>
               </>
             }
           />
